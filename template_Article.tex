@@ -1,0 +1,184 @@
+\documentclass[]{article}
+
+\usepackage{color}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\usepackage{upquote}
+\usepackage{listings}
+\lstdefinelanguage{JavaScript}{
+	morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morestring=[b]",
+	morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+	language=html,
+	sensitive=true, 
+	alsoletter={<>=-},
+	otherkeywords={
+		% HTML tags
+		<html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+		<canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
+	},  
+	ndkeywords={
+		% General
+		=,
+		% HTML attributes
+		charset=, id=, width=, height=,
+		% CSS properties
+		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+	},  
+	morecomment=[s]{<!--}{-->},
+	tag=[s]
+}
+
+\lstset{%
+	% Basic design
+	backgroundcolor=\color{editorGray},
+	basicstyle={\small\ttfamily},   
+	frame=l,
+	% Line numbers
+	xleftmargin={0.75cm},
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberfirstline=true,
+	% Code design   
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{darkgray}\ttfamily,
+	ndkeywordstyle=\color{editorGreen}\bfseries,
+	stringstyle=\color{editorOcher},
+	% Code
+	language=HTML5,
+	alsolanguage=JavaScript,
+	alsodigit={.:;},
+	tabsize=2,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	extendedchars=true,
+	breaklines=true,        
+	% Support for German umlauts
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+%opening
+\title{HTML \& CSS}
+\author{Ben Gavan}
+
+\begin{document}
+\maketitle
+
+
+
+\section{Terminal Essentials}g
+\subsection{Basic Commands}
+\begin{itemize}
+	\item pwd: Print working directory 
+	\item ls: list
+	\item ls -la : list list all - shows more detail 
+	\item clear: clear current terminal
+	\item cat: Prints out the contents of a file into the termial 
+	\item mkdir dir-name: makes a new directory with the name as the string supplied after 'mkdir'  within the current dirrectory 
+	\item rm file-name: remove directory 
+	\item rm -rf dir-name: remove directory recursively (until complete)
+	\item touch txt-file-name: creates new blank txt file with with file name specified
+	\item open file-name: opens the file specified
+	
+\end{itemize}
+
+\subsection{Git}
+\begin{itemize}
+	\item git init: creates an emtpty git repo within current dir
+	\item git status: Gives info on what files haven't been added
+	\item git add 
+	\begin{itemize}
+		\item dir-name: adds only that dir to the staging index
+		\item . : add everything below current dir that's changed
+		\item  - -all : adds all files below and above the current dir 
+	\end{itemize}
+	\item git commit 
+	\begin{itemize}
+		\item -m "commit-message": commits everything in the staging index along with a commit message.
+	\end{itemize}
+	\item git remote add origin : connects the local repo to the cloud 
+	\item git push -u origin master : : pushes to the master 
+	\item git push: pushes to remote git 'origin/master' (on github)
+\end{itemize}
+
+\section{Key Board Shortcuts}
+	\begin{itemize}
+		\item 'cmnd + / ' comment current line 
+		\item 'p\{TEXT\_HERE\} + tab' creates p tag with text here as text 
+		\item 'lorem' creates some lorem text
+		\item 'control + space' when in element "" to bring up options of possible selections
+		\item 'option + click' to select curser on multiple lines
+	\end{itemize}
+
+\section{HTML Essentials}
+\subsection{File Naming conventions}
+	\begin{itemize}
+		\item all html files end with the extension '.html'
+		\item all css style sheets end with the extension '.css'
+		\item home/default/main page should be called 'index.html'
+		\item style sheet for main page should be called 'main.css'
+		\item only use lower case alphanumeric characters (a-z, 0-9) 
+		\item no spaces
+	\end{itemize}
+\subsection{Folder Naming Conventions}
+	\begin{itemize}
+		\item only use lower case alphanumeric characters (a-z, 0-9) 
+		\item no spaces
+		\item follow seperation of cencerns 
+
+	\end{itemize}
+
+\subsection{Emmet.io}
+	\begin{itemize}
+		\item 'cmnd + / ' comment current line 
+		\item 'p\{TEXT\_HERE\} + tab' creates p tag with text here as text 
+		\item 'lorem' creates some lorem text
+	\end{itemize}
+
+\subsection{Tag Attributes}
+	To link a CSS Style sheet to html page:
+	\begin{lstlisting}
+	<link rel="stylesheet" href="main.css">
+	\end{lstlisting}
+	Add a picture:
+	\begin{lstlisting}
+	<img src="puppy.jpg" alt="An image of cute puppy">
+	\end{lstlisting}
+	Link to other page
+	\begin{lstlisting}
+	<a href="http://www.google.com" target="_blank">go to google</a>
+	\end{lstlisting}
+	
+\subsection{Absolute vs Relative URLs}
+\paragraph{Absolute}
+
+	\begin{itemize}
+		\item Full URL
+	\end{itemize}
+
+\paragraph{Relative}
+
+	\begin{itemize}
+		\item Within one domain, sshows where one resource is relative to another
+		\item Examples:
+		\subitem pic/anatomy-of-an-html-element.png
+		\subitem ../pic/anatomy-of-an-html-element.png
+	\end{itemize}
+
+
+\end{document}
