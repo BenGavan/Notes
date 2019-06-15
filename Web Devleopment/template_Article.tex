@@ -1,0 +1,385 @@
+\documentclass[]{article}
+
+\usepackage{color}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\usepackage{upquote}
+\usepackage{listings}
+\lstdefinelanguage{JavaScript}{
+	morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morestring=[b]",
+	morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+	language=html,
+	sensitive=true, 
+	alsoletter={<>=-},
+	otherkeywords={
+		% HTML tags
+		<html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+		<canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
+	},  
+	ndkeywords={
+		% General
+		=,
+		% HTML attributes
+		charset=, id=, width=, height=,
+		% CSS properties
+		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+	},  
+	morecomment=[s]{<!--}{-->},
+	tag=[s]
+}
+
+\lstset{%
+	% Basic design
+	backgroundcolor=\color{editorGray},
+	basicstyle={\small\ttfamily},   
+	frame=l,
+	% Line numbers
+	xleftmargin={0.75cm},
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberfirstline=true,
+	% Code design   
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{darkgray}\ttfamily,
+	ndkeywordstyle=\color{editorGreen}\bfseries,
+	stringstyle=\color{editorOcher},
+	% Code
+	language=HTML5,
+	alsolanguage=JavaScript,
+	alsodigit={.:;},
+	tabsize=2,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	extendedchars=true,
+	breaklines=true,        
+	% Support for German umlauts
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+%opening
+\title{HTML \& CSS}
+\author{Ben Gavan}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Terminal Essentials}g
+\subsection{Basic Commands}
+\begin{itemize}
+	\item pwd: Print working directory 
+	\item ls: list
+	\item ls -la : list list all - shows more detail 
+	\item clear: clear current terminal
+	\item cat: Prints out the contents of a file into the termial 
+	\item mkdir dir-name: makes a new directory with the name as the string supplied after 'mkdir'  within the current dirrectory 
+	\item rm file-name: remove directory 
+	\item rm -rf dir-name: remove directory recursively (until complete)
+	\item touch txt-file-name: creates new blank txt file with with file name specified
+	\item open file-name: opens the file specified
+	
+\end{itemize}
+
+\subsection{Git}
+\begin{itemize}
+	\item git init: creates an emtpty git repo within current dir
+	\item git status: Gives info on what files haven't been added
+	\item git add 
+	\begin{itemize}
+		\item dir-name: adds only that dir to the staging index
+		\item . : add everything below current dir that's changed
+		\item  - -all : adds all files below and above the current dir 
+	\end{itemize}
+	\item git commit 
+	\begin{itemize}
+		\item -m "commit-message": commits everything in the staging index along with a commit message.
+	\end{itemize}
+	\item git remote add origin : connects the local repo to the cloud 
+	\item git push -u origin master : : pushes to the master 
+	\item git push: pushes to remote git 'origin/master' (on github)
+\end{itemize}
+
+\section{Key Board Shortcuts}
+	\begin{itemize}
+		\item 'cmnd + / ' comment current line 
+		\item 'p\{TEXT\_HERE\} + tab' creates p tag with text here as text 
+		\item 'lorem' creates some lorem text
+		\item 'control + space' when in element "" to bring up options of possible selections
+		\item 'option + click' to select curser on multiple lines
+	\end{itemize}
+
+\section{HTML Essentials}
+\subsection{File Naming conventions}
+	\begin{itemize}
+		\item all html files end with the extension '.html'
+		\item all css style sheets end with the extension '.css'
+		\item home/default/main page should be called 'index.html'
+		\item style sheet for main page should be called 'main.css'
+		\item only use lower case alphanumeric characters (a-z, 0-9) 
+		\item no spaces
+	\end{itemize}
+\subsection{Folder Naming Conventions}
+	\begin{itemize}
+		\item only use lower case alphanumeric characters (a-z, 0-9) 
+		\item no spaces
+		\item follow seperation of cencerns 
+		\item for folder holding css files, use 'css'
+
+	\end{itemize}
+
+\subsection{Emmet.io}
+	\begin{itemize}
+		\item 'cmnd + / ' comment current line 
+		\item 'p\{TEXT\_HERE\} + tab' creates p tag with text here as text 
+		\item 'lorem' creates some lorem text
+	\end{itemize}
+
+\subsection{Tag Attributes}
+	To link a CSS Style sheet to html page:
+	\begin{lstlisting}
+	<link rel="stylesheet" href="main.css">
+	\end{lstlisting}
+	Add a picture:
+	\begin{lstlisting}
+	<img src="puppy.jpg" alt="An image of cute puppy">
+	\end{lstlisting}
+	Link to other page
+	\begin{lstlisting}
+	<a href="http://www.google.com" target="_blank">go to google</a>
+	\end{lstlisting}
+	
+\subsection{Absolute vs Relative URLs}
+\paragraph{Absolute}
+
+	\begin{itemize}
+		\item Full URL
+		\item Examples:
+		\subitem '<img src="https://pbs.twimg.com/media/DLUDtXlX0AEiCnG.jpg">'
+	\end{itemize}
+
+\paragraph{Relative}
+
+	\begin{itemize}
+		\item Within one domain, sshows where one resource is relative to another
+		\item Examples:
+		\subitem pic/anatomy-of-an-html-element.png
+		\subitem ../pic/anatomy-of-an-html-element.png (goes up one level first by using '../'))
+	\end{itemize}
+
+\section{Block vs Inline}
+\subsection{Block}
+\begin{itemize}
+	\item Will take up the width of the parrent (so will stack verticlly)
+\end{itemize}
+\subsection{Inline} 
+\begin{itemize}
+	\item Will take up only the size/space required - so will stack horizontally; hence inline.
+\end{itemize}
+
+\section{HTML Tags}
+\subsection{div}
+\begin{itemize}
+	\item "block" level element = takes up the width of the parrent (so will stack verticlly)
+\end{itemize}
+
+\subsection{a}
+\paragraph{Attributes}
+\begin{itemize}
+	\item 'href' urlm to open when clicked
+	\item 'target' how to do it when clicked
+	\subitem '\_blank' opens url in new tab 
+\end{itemize}
+
+
+\section{CSS Attributes}
+\subsubsection{background-size}
+\begin{itemize}
+	\item 'cover': covers all of the background - avoids repeates
+\end{itemize}
+\subsubsection{background-repeat}
+\begin{itemize}
+	\item 'no-repeat': prevents repeates
+\end{itemize}
+
+\subsubsection{display}
+\begin{itemize}
+	\item 'inline' - Will take up only the size/space required - so will stack horizontally; hence inline.
+	\item 'block' - Will take up the width of the parrent (so will stack verticlly)
+	\item 'inline-block' - displays items inline, but leaves enogh room for each element
+	\item 'none' - will not be displayed
+\end{itemize}
+
+\subsubsection{Dimensions}
+\begin{itemize}
+	\item 'width: ....' - sets the width 
+	\item 'height: ....' - sets the height 
+\end{itemize}
+\begin{lstlisting}
+div {
+	width: 100px;
+	height: 100px;
+}
+\end{lstlisting}
+
+\subsubsection{text-align}
+Sets how text should be aligned within the element.
+
+\subsubsection{Content - Padding - Border - Margin}
+\begin{itemize}
+	\item Content - the content itself
+	\item Padding - The Amount of padding around the content before the border
+	\item Border - Around the padding of the content
+	\item Margin - The margin/padding around the border before another element can be displayed.
+\end{itemize}
+
+\subsubsection{border}
+\begin{itemize}
+	\item
+	\item ''border-radius: ..." - sets the radius of border
+	\subitem "...\%" - sets the radius as a percentage of the width/height
+\end{itemize}
+\begin{lstlisting}
+border: 1px solid red;
+border-width: 1px;
+border-style: solid;
+border-color: red;
+\end{lstlisting}
+
+\subsubsection{margin}
+\begin{itemize}
+	\item TRBL
+	\item TB RL
+	\item T R B L
+	\item "margin: 0 auto" - no padding on top or bottom, then auto set left/right so that element is on the centre.
+\end{itemize}
+
+\subsubsection{box-sizing}
+\begin{itemize}
+	\item "box-sizing: border-box" - sets the max size of the box/div (up-to the outside of the border) to the set dimensions via width/height.  So the border outside will stay as it is, but the content will shrink if padding is added.  If the border is width increased - it will increase inwards, shrinking the content.  The Element will not grow outwardly (grows inwards) 
+\end{itemize}
+
+\subsection{CSS Reset}
+Brings the CSS formatting down to a uniform base line.
+\subsubsection{Motivation}
+Each browser has its own base CSS ('user agent style sheet'  for chrome).  So if we want to have our website uniform across all browsers, we need to apply our own.
+\subsubsection{Aim}
+To provide uniformity across browsers.
+\subsubsection{Requirements}
+\begin{itemize}
+	\item Light weight
+	\item is applied to all used elements
+\end{itemize}
+\subsubsection{Solution}
+Create our own style sheet to override what the browser (agent) applies.
+\subsubsection{Alternatives}
+There are some standards, e.g. meyer css reset (oldest), normalize.css (newer), sanitize.css (newest).  
+\\
+However, some of these don't bring the formatting down to zero.  Instead they provide their own baseline formatting - overriding what the browser's baseline is.
+
+\section{CSS Selectors}
+Different ways to select HTML elements.
+\subsection{element}
+Formats that HTML element.
+\subsection{class}
+Adds the 'class' attribute' to a HTML element.
+\\
+Can add them wherever and as many times as we want.
+\\
+A period before the selector is used to denote that the selector is for a class. ".example \{\}"
+
+\subsection{id}
+\begin{itemize}
+	\item Can only be used once.
+	\item Notation to denote id selector is "\#example \{\}" 
+\end{itemize}
+\begin{lstlisting}
+<p id="example"></p>
+\end{lstlisting}
+\begin{lstlisting}
+#example {
+}
+\end{lstlisting}
+
+\subsection{Attributes}
+\begin{itemize}
+	\item Only applies that selector to HTML tags which have that attribute
+\end{itemize}
+\begin{lstlisting}
+<p example="something"></p>
+\end{lstlisting}
+\begin{lstlisting}
+[example] {
+}
+\end{lstlisting}
+\begin{itemize}
+	\item Only applies that selector to HTML tags that have the exact attribute and set to that specific value 
+\end{itemize}
+\begin{lstlisting}
+<p example="something"></p>
+\end{lstlisting}
+\begin{lstlisting}
+[example=something] {
+}
+\end{lstlisting}
+
+\subsection{Pseudo Class}
+\subsubsection{Link}
+\begin{lstlisting}
+	/\* order matters */
+	/\* LVHA */
+	/\* Link Visited Hover Active */
+	a:link {
+		color: green;
+	}
+	
+	a:visited {
+		color: blue;
+	}
+	
+	a:hover {
+		color: red;
+	}
+	
+	a:active {
+		color: yellow;
+	}
+\end{lstlisting}
+
+\begin{lstlisting}
+	div:hover {
+		background-color: green;
+		cursor: pointer;
+	}
+\end{lstlisting}
+Use 'active' for links and focus for other elements such as forms.
+
+\subsubsection{Focus}
+Used for other elements such as forms.
+
+\section{Forms}
+\begin{lstlisting}
+<input type="text" id="fname" name="first-name">
+\end{lstlisting}
+\begin{itemize}
+	\item 'id' is what is used on the website, e.g. for targeting that specific element with CSS or JavaScript.
+	\item 'name' is the name that is given to the variable that contains the data from that element which is sent off to the server.
+\end{itemize}
+
+\end{document}

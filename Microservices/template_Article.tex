@@ -1,0 +1,32 @@
+\documentclass[]{article}
+
+%opening
+\title{Microservices}
+\author{Ben Gavan}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+SOA = Service-Oriented Architecture
+\end{abstract}
+
+\section{}
+\subsubsection{Autonomous}
+All communication between services are made via network calls.  This helps avoid tight coupling between them.
+\begin{itemize}
+	\item Avoids tight coupling
+	\item Helps keep/enforce the separation of services
+	\item Services should be able to independently to each other
+	\item Services are exposed by/provide an API
+	\subitem Collaborating services communicate via these APIs
+\end{itemize}
+As they are separate to one another, we can use different technology stacks best suited for that service (e.g. by using different languages/frameworks).
+\\
+Instead of scaling the whole thing, we can instead allocate different amounts of resources to each microservice, therefore, saves cost/resources.  (e.g. One instance for A and 2 for B).
+\\
+As each microservice is small, can easily be re-written/detached for something better (only a few hundred lines long (should be able to be written in one day)).
+
+
+\end{document}
