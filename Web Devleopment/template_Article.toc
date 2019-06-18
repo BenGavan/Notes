@@ -2,14 +2,14 @@
 \contentsline {subsection}{\numberline {1.1}Basic Commands}{2}
 \contentsline {subsection}{\numberline {1.2}Git}{3}
 \contentsline {section}{\numberline {2}Key Board Shortcuts}{3}
-\contentsline {section}{\numberline {3}HTML Essentials}{3}
-\contentsline {subsection}{\numberline {3.1}File Naming conventions}{3}
+\contentsline {section}{\numberline {3}HTML Essentials}{4}
+\contentsline {subsection}{\numberline {3.1}File Naming conventions}{4}
 \contentsline {subsection}{\numberline {3.2}Folder Naming Conventions}{4}
 \contentsline {subsection}{\numberline {3.3}Emmet.io}{4}
 \contentsline {subsection}{\numberline {3.4}Tag Attributes}{4}
-\contentsline {subsection}{\numberline {3.5}Absolute vs Relative URLs}{4}
-\contentsline {paragraph}{Absolute}{4}
-\contentsline {paragraph}{Relative}{4}
+\contentsline {subsection}{\numberline {3.5}Absolute vs Relative URLs}{5}
+\contentsline {paragraph}{Absolute}{5}
+\contentsline {paragraph}{Relative}{5}
 \contentsline {section}{\numberline {4}Block vs Inline}{5}
 \contentsline {subsection}{\numberline {4.1}Block}{5}
 \contentsline {subsection}{\numberline {4.2}Inline}{5}
@@ -17,28 +17,44 @@
 \contentsline {subsection}{\numberline {5.1}div}{5}
 \contentsline {subsection}{\numberline {5.2}a}{5}
 \contentsline {paragraph}{Attributes}{5}
-\contentsline {section}{\numberline {6}CSS Attributes}{5}
-\contentsline {subsubsection}{\numberline {6.0.1}background-size}{5}
-\contentsline {subsubsection}{\numberline {6.0.2}background-repeat}{5}
-\contentsline {subsubsection}{\numberline {6.0.3}display}{5}
+\contentsline {section}{\numberline {6}CSS Attributes}{6}
+\contentsline {subsubsection}{\numberline {6.0.1}background-size}{6}
+\contentsline {subsubsection}{\numberline {6.0.2}background-repeat}{6}
+\contentsline {subsubsection}{\numberline {6.0.3}display}{6}
 \contentsline {subsubsection}{\numberline {6.0.4}Dimensions}{6}
 \contentsline {subsubsection}{\numberline {6.0.5}text-align}{6}
 \contentsline {subsubsection}{\numberline {6.0.6}Content - Padding - Border - Margin}{6}
-\contentsline {subsubsection}{\numberline {6.0.7}border}{6}
-\contentsline {subsubsection}{\numberline {6.0.8}margin}{6}
+\contentsline {subsubsection}{\numberline {6.0.7}border}{7}
+\contentsline {subsubsection}{\numberline {6.0.8}margin}{7}
 \contentsline {subsubsection}{\numberline {6.0.9}box-sizing}{7}
 \contentsline {subsection}{\numberline {6.1}CSS Reset}{7}
 \contentsline {subsubsection}{\numberline {6.1.1}Motivation}{7}
 \contentsline {subsubsection}{\numberline {6.1.2}Aim}{7}
 \contentsline {subsubsection}{\numberline {6.1.3}Requirements}{7}
-\contentsline {subsubsection}{\numberline {6.1.4}Solution}{7}
-\contentsline {subsubsection}{\numberline {6.1.5}Alternatives}{7}
-\contentsline {section}{\numberline {7}CSS Selectors}{7}
-\contentsline {subsection}{\numberline {7.1}element}{7}
+\contentsline {subsubsection}{\numberline {6.1.4}Solution}{8}
+\contentsline {subsubsection}{\numberline {6.1.5}Alternatives}{8}
+\contentsline {section}{\numberline {7}CSS Selectors}{8}
+\contentsline {subsection}{\numberline {7.1}element}{8}
 \contentsline {subsection}{\numberline {7.2}class}{8}
 \contentsline {subsection}{\numberline {7.3}id}{8}
 \contentsline {subsection}{\numberline {7.4}Attributes}{8}
-\contentsline {subsection}{\numberline {7.5}Pseudo Class}{8}
-\contentsline {subsubsection}{\numberline {7.5.1}Link}{8}
+\contentsline {subsection}{\numberline {7.5}Pseudo Class}{9}
+\contentsline {subsubsection}{\numberline {7.5.1}Link}{9}
 \contentsline {subsubsection}{\numberline {7.5.2}Focus}{9}
-\contentsline {section}{\numberline {8}Forms}{9}
+\contentsline {subsubsection}{\numberline {7.5.3}$n^{th}$ child}{9}
+\contentsline {subsection}{\numberline {7.6}Pseudo Element}{11}
+\contentsline {subsubsection}{\numberline {7.6.1}First-letter}{11}
+\contentsline {subsubsection}{\numberline {7.6.2}First-line}{11}
+\contentsline {subsection}{\numberline {7.7}Nested Selectors}{11}
+\contentsline {subsubsection}{\numberline {7.7.1}all-children}{11}
+\contentsline {subsubsection}{\numberline {7.7.2}immediate}{12}
+\contentsline {subsubsection}{\numberline {7.7.3}all-siblings}{12}
+\contentsline {subsubsection}{\numberline {7.7.4}Immediate Siblings}{13}
+\contentsline {subsection}{\numberline {7.8}Compound Selectors}{13}
+\contentsline {subsection}{\numberline {7.9}CSS Specificity}{13}
+\contentsline {subsubsection}{\numberline {7.9.1}Example}{14}
+\contentsline {section}{\numberline {8}Formatting Text}{14}
+\contentsline {subsection}{\numberline {8.1}Font property}{14}
+\contentsline {subsubsection}{\numberline {8.1.1}Font-family}{14}
+\contentsline {paragraph}{Sans-serif}{14}
+\contentsline {section}{\numberline {9}Forms}{14}

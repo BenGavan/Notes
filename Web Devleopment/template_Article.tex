@@ -340,6 +340,7 @@ A period before the selector is used to denote that the selector is for a class.
 \end{lstlisting}
 
 \subsection{Pseudo Class}
+Denoted by ":" (single :) 
 \subsubsection{Link}
 \begin{lstlisting}
 	/\* order matters */
@@ -373,6 +374,251 @@ Use 'active' for links and focus for other elements such as forms.
 \subsubsection{Focus}
 Used for other elements such as forms.
 
+\subsubsection{$n^{th}$ child}
+Used to select and format the nth child of a parent in HTML.
+\\
+First-Child:
+\begin{lstlisting}
+li:first-child {
+}
+\end{lstlisting}
+Last Child:
+\begin{lstlisting}
+li:last-child {
+}
+\end{lstlisting}
+To select every even child of the parent:
+\begin{lstlisting}
+li:nth-child(even) {
+}
+\end{lstlisting}
+To select every odd child of the parent:
+\begin{lstlisting}
+li:nth-child(odd) {
+}
+\end{lstlisting}
+Zebra-striping:
+\begin{lstlisting}
+table, tr, td {
+	width: 100%;
+	border: 1px solid black;
+}
+
+tr:nth-child(even) {
+	background-color: rgba(128, 128, 128, 0.49);
+}
+
+tr:nth-child(odd) {
+	background-color: rgba(128, 128, 128, 0.19)
+}
+\end{lstlisting}
+To select a specific child:
+\begin{lstlisting}
+li:nth-child(3) {
+}
+\end{lstlisting}
+To select the nth child from the bottom:
+\begin{lstlisting}
+li:nth-last-child(10) {
+}
+\end{lstlisting}
+To Select more complex pattern, use a linear line (mx+c)
+\begin{lstlisting}
+li:nth-child(3n+2) {
+	color: red;
+}
+
+/\*
+Try changing the selector to select each of the following:
+8, 18, 28, 38, ... 10n+8
+9, 12, 15, ..., 39, ... 3n+9
+3, 12, 21, 30, 39, ... 9n+3
+\*/
+\end{lstlisting}
+To Select the a child of a parent where it is the only child: 
+\\
+(To Select the a HTML element of a parent where the element is the only child: )
+\begin{lstlisting}
+article:only-child {
+}
+\end{lstlisting}
+
+\subsection{Pseudo Element}
+Denoted by "::" (Double :)
+\\
+Typography:
+\subsubsection{First-letter}
+Selects the first letter
+\begin{lstlisting}
+p::first-letter {
+	font-family: cursive;
+	font-size: 36px;
+	line-height: .5;
+}
+\end{lstlisting}
+
+\subsubsection{First-line}
+Dynamically selects the first line (dynamically adapts/reforms depending on width of view port)
+\begin{lstlisting}
+p::first-line {
+	color: red;
+	font-weight: 900;
+}
+\end{lstlisting}
+
+\subsection{Nested Selectors}
+\subsubsection{all-children}
+Selects all children of a parent = "parent child \{\}".  No matter how nested 
+\begin{lstlisting}
+parent child {
+}
+\end{lstlisting}
+To select all children of a 'div' which are 'p' elements 
+\begin{lstlisting}
+div p {
+}
+\end{lstlisting}
+will select all 'p' tags in the following case
+\begin{lstlisting}
+<!--div>p*2+section>p^^p-->
+<div>
+	<p>first p</p>   <- selected 
+	<p>second p</p>  <- selected 
+	<section>
+		<p>third p</p> <- selected 
+	</section>
+</div>
+<p>fourth p</p>
+<p>fifth p</p>
+<p>sixth p</p>
+\end{lstlisting}
+
+\subsubsection{immediate}
+To select all the immediate children of a 'div' which are 'p' elements 
+\begin{lstlisting}
+div > p {
+}
+\end{lstlisting}
+will select all 'p' tags except the ones that are not immediate descendants of a 'div' so only 'first p' and 'second p' will be selected in the following case
+\begin{lstlisting}
+<!--div>p*2+section>p^^p-->
+<div>
+	<p>first p</p>      <- selected 
+	<p>second p</p>     <- selected
+	<section>
+		<p>third p</p>
+	</section>
+</div>
+<p>fourth p</p>
+<p>fifth p</p>
+<p>sixth p</p>
+\end{lstlisting}
+
+\subsubsection{all-siblings}
+All 'p' tags that are siblings of a 'div'
+\begin{lstlisting}
+div ~ p {
+}
+\end{lstlisting}
+will select ....... 'p' tags in the following case
+\begin{lstlisting}
+<!--div>p*2+section>p^^p-->
+<div>
+	<p>first p</p> 
+	<p>second p</p>  
+	<section>
+		<p>third p</p> 
+	</section>
+</div>
+<p>fourth p</p> <- selected 
+<p>fifth p</p>  <- selected 
+<p>sixth p</p>  <- selected 
+\end{lstlisting}
+
+\subsubsection{Immediate Siblings}
+will select the tag that is immediately after the tag - only the immediate sibling.
+\begin{lstlisting}
+div + p {
+}
+\end{lstlisting}
+will select only the 'fourth p' 'p' tag in the following case
+\begin{lstlisting}
+<!--div>p*2+section>p^^p-->
+<div>
+	<p>first p</p> 
+	<p>second p</p>  
+	<section>
+		<p>third p</p> 
+	</section>
+</div>
+<p>fourth p</p> <- selected 
+<p>fifth p</p>  
+<p>sixth p</p>  
+\end{lstlisting}
+
+\subsection{Compound Selectors}
+\begin{lstlisting}
+ul#some-id li.some-class {
+}
+\end{lstlisting}
+Will select an 'li' with the class 'some-class' which is a child of a 'ul' with an id 'some-id'.
+
+\subsection{CSS Specificity}
+\begin{itemize}
+	\item Element selector = 1 
+	\item Class = 10
+	\item ID = 100
+	\item Inline = 1000 
+\end{itemize}
+If same specificity, go to the order that rule sets are declared in the CSS.  Last = More powerful.
+
+\begin{center}
+	\begin{tabular}{| c | c | c |} 
+		\hline
+		Selector Type  & Value & Place  \\ [0.5ex] 
+		\hline
+		Element  & 1 & 0-0-1 \\ 
+		
+		Class/attribute &  10 & 0-1-0 \\
+		
+		ID & 100 & 1-0-0 \\
+		
+		Inline & 1000 &1-0-0-0 \\[1ex] 
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsubsection{Example}
+\begin{lstlisting}
+ul#some-id li.some-class {
+}
+\end{lstlisting}
+The first section
+\begin{lstlisting}
+ul#some-id
+\end{lstlisting}
+has a specificity of 101 (1 from ul (element selector) 100 from '\#some-id' (id selector)) 
+\\
+The Second section
+\begin{lstlisting}
+li.some-class
+\end{lstlisting}
+has a specificity of 11
+\\
+So the total specificity is 112.
+
+%%%%%%%%%%%%%%%%% Formatting Text %%%%%%%%%%%%%%%%%%%%
+\section{Formatting Text}
+
+\subsection{Font property}
+A short-hand property.
+\\
+Best not to use the short hand property version when starting off.  Ensure you understand the individual properties, then use the short hand property.
+
+\subsubsection{Font-family}
+\paragraph{Sans-serif} is as the best font to use on the web. (the de-facto standard).  It's the most readable on the web.
+
+%%%%%%%%%%%%%%%%%%%%% Forms %%%%%%%%%%%%%%%%%%%%%%
 \section{Forms}
 \begin{lstlisting}
 <input type="text" id="fname" name="first-name">
@@ -381,5 +627,7 @@ Used for other elements such as forms.
 	\item 'id' is what is used on the website, e.g. for targeting that specific element with CSS or JavaScript.
 	\item 'name' is the name that is given to the variable that contains the data from that element which is sent off to the server.
 \end{itemize}
+
+
 
 \end{document}
