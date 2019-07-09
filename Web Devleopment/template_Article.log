@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.12.17)  18 JUN 2019 13:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.12.17)  9 JUL 2019 23:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -274,7 +274,8 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 2.
  [1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+)
 \tf@toc=\write3
 \openout3 = `template_Article.toc'.
 
@@ -282,7 +283,7 @@ LaTeX Font Info:    Try loading font information for TS1+cmr on input line 87.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [2]
+) [4]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 122.
 
 
@@ -291,41 +292,140 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
- [3]
+ [5]
 Overfull \hbox (8.0424pt too wide) in paragraph at lines 174--175
 []| \OT1/cmr/m/n/10 '<img src="https://pbs.twimg.com/media/DLUDtXlX0AEiCnG.jpg"
 >' 
  []
 
-[4] [5] [6]
+[6] [7]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 259.
- [7] [8] [9] [10] [11] [12] [13] [14] (./template_Article.aux) ) 
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 275.
+ [8] [9] [10] [11] [12] [13] [14] [15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 697--702
+
+ []
+
+[17] [18]
+Underfull \hbox (badness 10000) in paragraph at lines 768--773
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 768--773
+
+ []
+
+[19] [20] [21]
+Underfull \hbox (badness 10000) in paragraph at lines 919--926
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 919--926
+
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 936--941
+
+ []
+
+[23]
+Overfull \hbox (27.16612pt too wide) in paragraph at lines 980--987
+\OT1/cmr/m/n/10 Search CSS tricks flexbox for the best re-source - https://css-
+tricks.com/snippets/css/a-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 980--987
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 988--993
+
+ []
+
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1029
+
+ []
+
+[25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 1126--1134
+
+ []
+
+[27]
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 115
+5.
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+Underfull \hbox (badness 10000) in paragraph at lines 1166--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1166--1171
+
+ []
+
+[28] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 1232--1246
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1232--1246
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1232--1246
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1232--1246
+
+ []
+
+[30]
+Overfull \hbox (34.36192pt too wide) in paragraph at lines 1258--1259
+\OT1/cmr/m/n/10 - https://developers.google.com/web/fundamentals/design-and-ux/
+responsive/patterns 
+ []
+
+[31] (./template_Article.aux) ) 
 Here is how much of TeX's memory you used:
- 3335 strings out of 492649
- 43857 string characters out of 6129621
- 178880 words of memory out of 5000000
- 7231 multiletter control sequences out of 15000+600000
- 8696 words of font info for 31 fonts, out of 8000000 for 9000
+ 3419 strings out of 492649
+ 45138 string characters out of 6129621
+ 173880 words of memory out of 5000000
+ 7311 multiletter control sequences out of 15000+600000
+ 8993 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,6n,58p,408b,1655s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/tex
-live/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texl
-ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texli
-ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texliv
-e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive
-/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2
-018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/201
-8/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2018/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2018/texmf-di
-st/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on template_Article.pdf (14 pages, 155164 bytes).
+ 33i,6n,58p,520b,1655s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dv
+ips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmtt9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfrm1
+000.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sftt090
+0.pfb>
+Output written on template_Article.pdf (31 pages, 214290 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 158 PDF objects out of 1000 (max. 8388607)
+ 110 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

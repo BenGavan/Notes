@@ -197,6 +197,15 @@
 \subsection{div}
 \begin{itemize}
 	\item "block" level element = takes up the width of the parrent (so will stack verticlly)
+	\item Generic Element
+	\item Non-semantic
+\end{itemize}
+
+\subsection{span}
+\begin{itemize}
+	\item "inline" element (stacked horizontally next to each other)
+	\item Generic Element
+	\item Non-semantic
 \end{itemize}
 
 \subsection{a}
@@ -221,8 +230,15 @@
 \subsubsection{display}
 \begin{itemize}
 	\item 'inline' - Will take up only the size/space required - so will stack horizontally; hence inline.
-	\item 'block' - Will take up the width of the parrent (so will stack verticlly)
-	\item 'inline-block' - displays items inline, but leaves enogh room for each element
+	\subitem If width is set, it will have no effect (It will only take up the space required (for the content inside it))
+	\subitem so since 'block' level elements take up the width of a parent, they cannot be nested inside 'inline' elements.  (only can have children of 'inline')
+	
+	\item 'block' - Will take up the width of the parent (so will stack vertically)
+	
+	\item 'inline-block' - displays items inline, but leaves enough room for each element
+	\subitem can set the width and height.
+	\subitem Acts like a block as well in inline (acts like an inline block).
+	
 	\item 'none' - will not be displayed
 \end{itemize}
 
@@ -616,7 +632,635 @@ A short-hand property.
 Best not to use the short hand property version when starting off.  Ensure you understand the individual properties, then use the short hand property.
 
 \subsubsection{Font-family}
+\begin{itemize}
+	\item set specific fonts first, but may fail if they are not installed or cannot be installed.  So best to state a generic font family, such as sans-serif, at the end to select any font that the person has of that family.  This is called fallback.
+\end{itemize}
 \paragraph{Sans-serif} is as the best font to use on the web. (the de-facto standard).  It's the most readable on the web.
+
+\subsubsection{font-size}
+Default is usually set to 16px.
+\\
+Font size values:
+\begin{itemize}
+	\item xx-small, x-small, small, medium, large, x-large, xx-large
+	\subitem relative to default font size ( root font size ).
+	\subitem default font size is usually medium.
+	
+	\item larger, smaller 
+	\subitem relative to the parent's font size.
+	
+	\item rem 
+	\subitem relative to default font size ( root font size ).
+	\subitem will scale fonts proportionally to the default font size (usually 16px but normally adjusted for accessibility issues).
+	\subitem originates from how wide the letter 'm' is on a printing press.
+	
+	\item vw - viewport width 
+	\subitem 1/100th of the width of the viewport.
+	\subitem Useful if you want to have a banner across the page 
+	\subitem Will scale dynamically as the width of the page changes.
+	
+	\item vh - viewport height
+	\subitem 1/100th of the height of the viewport.
+\end{itemize}
+
+\subsubsection{font-weight}
+Can take the values:
+\begin{itemize}
+	\item normal
+	\subitem same as 400
+	
+	\item bold
+	\subitem same as 700
+	
+	\item lighter
+	\item bolder
+	\item 100, 200, 300, 400, 500, 600, 700, 800, 900
+\end{itemize}
+
+\subsubsection{font-style}
+
+\subsubsection{font-variant}
+Is a sort hand for five longhand font related properties:
+\begin{itemize}
+	\item font-variant-caps
+	\item font-variant-numeric
+	\item font-variant-alternates
+	\item font-variant-ligatures
+	\item font-variant-east-asian
+\end{itemize}
+Values:
+\begin{itemize}
+	\item 'small-caps' - kind of looks good
+\end{itemize}
+
+\subsubsection{line-height}
+Letting
+\\
+Adjusts the vertical distance between each line box.  Each line of text is contained within a box.  This property adjusts the vertical distance between each of these line boxes.
+\\\\
+Can be used to centre things, however, it is more of a hack method.  This is completed by setting the line-height to the same value of the height of the div that the text is a child of.
+
+\subsubsection{letting-spacing}
+Kerning
+\\
+Can take the values:
+\begin{itemize}
+	\item normal
+	
+	\item $<$length$>$  CSS Data type 
+	\subitem Should really just stick to 'rem'.  Can use 'px' if you really want to.
+\end{itemize}
+
+\subsubsection{word-spacing}
+Can take the values:
+\begin{itemize}
+	\item normal
+	
+	\item $<$length$>$  CSS Data type 
+	\subitem Should really just stick to 'rem'.  Can use 'px' if you really want to.
+	
+	\item percentage (not a CSS length data type)
+\end{itemize}
+
+\subsubsection{color}
+Is a CSS Data type. Can either be a keyword with a hexadecimal number associated with it.  Or a pure hexadecimal number can be used - a RGB value (RGBA).  Each of the red, green, and blue (and alpha) values are represented by two digits (up to 255).
+
+\subsubsection{Google Fonts}
+Recommended to choose/sort by popularity so that there will be a high chance that that font is already been downloaded onto the user's/client's machine.  This will reduce the data needed to be transferred, so will speed up the web page load time.
+\\
+Should monitor the weight (the size of the files that you are sending/using)
+
+\subsection{text} 
+Now we have got the font, let us now form the text.  Such as indenting, underlining, and applying shadow effects.
+
+\subsubsection{text-transform}
+\begin{itemize}
+	\item 'uppercase' - sets all selected text to uppercase.
+	\item 'capitalise' - sets the first letter of each word to a capital/uppercase.
+\end{itemize}
+
+\subsubsection{text-align}
+Describes how  content like text is aligned in its parent block element.
+\\
+Does not control the alignment of block elements, only their inline content.
+
+\subsubsection{text-shadow}
+\begin{itemize}
+	\item accepts a comma-separated list: x, y, blur radius, color 
+	\subitem offset-x | offset-y | blur-radius | color
+	\subitem text-shadow: 1px 1px 2px black;
+	
+\end{itemize}
+
+\subsubsection{text-decoration}
+\paragraph{text-decoration-line}
+Adds/removes underline, overline, and strike through.
+\\
+Therefore, is commonly used to remove the underline from hyperlinks (anchor tags).
+\\
+Takes the values which any number of them can be used at once:
+\begin{itemize}
+	\item none
+	\item underline
+	\item overline
+	\item line-through
+\end{itemize}
+But use text-decoration instead - does not work otherwise??????????
+\\\\
+Do NOT use '$<$s$>$' tag in HTML, use the text-decoration-line element in CSS to achieve the same effect.
+\\\\
+Do NOT use '$<$del$>$' tag in HTML.  Used to be used to denote that that text had been deleted.  If you want something deleted, just delete it from the page.  Or if you still want to have the same effect use the CSS property, 'text-decoration-line'.
+
+\subsubsection{text-indentation}
+Sets how indented e.g. the first line is of a 'p' tag.
+\\
+recommended to use 'rem' length units.  
+\begin{itemize}
+	\item $<$length$>$ CSS data type
+	\item percentage
+\end{itemize}
+The text-indent property specifies the amount of indentation (empty space) should be left before lines of text in a block. By default, this controls the indentation of only the first formatted line of the block, but the hanging and each-line keywords can be used to change this behaviour
+
+\subsubsection{max-width}
+Sets the maximum width an element can be.  Enables it to be smaller than that, so can be useful for adaptations for smaller screens.
+
+%%%%%%%%%%%%%%%%% Document Structure %%%%%%%%%%%%%%%%%%
+\section{Document Structure}
+Importance of Good document structure:
+\begin{itemize}
+	\item maintainability
+\end{itemize}
+Important terms:
+\begin{itemize}
+	\item Document Object Model (DOM)
+	
+	\item Document Flow
+	\subitem Since every element is a box, this is how these boxes naturally stack/flow.
+	\subitem So Block level elements will stack taking up the entire width/row from top to bottom.
+	\subitem So inline elements will stack next to each other.
+\end{itemize}
+
+\subsection{HTML5 Outline Algorithm}
+DO NOT use
+\\
+Even though it is in the specification, no one has implemented it since it was too complicated.
+\\
+However, do outline your documents using the heading tags (h1 through h6).
+
+\subsection{Semantic HTML}
+Non-semantic:
+\begin{itemize}
+	\item div
+	\item span
+\end{itemize}
+Semantic:
+\begin{itemize}
+	\item header
+	\item nav
+	\item main
+	\item article
+	\item section
+	\item aside
+	\item footer
+	\item h1 - h6
+	\item figure
+	\item figcaption
+	\item address
+\end{itemize}
+
+\subsection{article}
+Needs to be self contained.  
+\\
+Should be able to cut it out and it would still make sense.
+\\
+On the other hand, each part????? of the article will not stand on its own - needs the rest of the article to make sense.
+\\
+An article has sections.
+
+\subsection{Section}
+Like an article but does not need to be able to stand on its own.
+\\
+See article for good example on MDN
+\begin{lstlisting}
+<article class="film_review">
+	<header>
+		<h2>Jurassic Park</h2>
+	</header>
+	<section class="main_review">
+		<p>Dinos were great!</p>
+	</section>
+	<section class="user_reviews">
+		<article class="user_review">
+			<p>Way too scary for me.</p>
+			<footer>
+				<p>
+					Posted on
+					<time datetime="2015-05-16 19:00">May 16</time>
+					by Lisa.
+				</p>
+			</footer>
+		</article>
+		<article class="user_review">
+			<p>I agree, dinos are my favorite.</p>
+			<footer>
+				<p>
+					Posted on
+					<time datetime="2015-05-17 19:00">May 17</time>
+					by Tom.
+				</p>
+			</footer>
+		</article>
+	</section>
+	<footer>
+		<p>
+			Posted on
+			<time datetime="2015-05-15 19:00">May 15</time>
+			by Staff.
+		</p>
+	</footer>
+</article>
+\end{lstlisting}
+
+\subsection{header}
+\begin{itemize}
+	\item a group of “introductory content” or “navigational aids”
+	\subitem may contain some heading elements but also other elements like a logo
+	
+	\item commonly has a heading (hn tag)
+	
+	\item must not be a descendent of 
+	\subitem header
+	\subitem footer
+	\subitem address
+\end{itemize}
+
+\subsection{nav}
+Is a section with navigation links
+\begin{itemize}
+	\item not all links within a document must be in a nav element
+	
+	\item It is intended for the major block of links
+	\subitem such as the main navigation of the page/website
+	\subitem Helps to be categorized by search engines
+	
+	\item “it is common for footers to have a list of links to various key parts of a site, but the footer element is more appropriate in such cases, and no nav element is necessary for those links.” (src: W3)
+	
+	\item a document may have several nav elements, for example, one for site navigation and one for intra-page navigation.
+\end{itemize}
+
+\subsection{main}
+the main content of the <body> of a document or application.
+\\
+Should be unique to that page.
+\\
+There should only be one main tag per page.
+
+\subsection{aside}
+Content related to something.
+\\\\
+Description:
+\\
+The HTML $<$aside$>$ element represents a section of the page with content connected tangentially to the rest, which could be considered separate from that content. These sections are often represented as sidebars or inserts. They often contain the definitions on the sidebars, such as definitions from the glossary; there may also be other types of information, such as related advertisements; the biography of the author; web applications; profile information or related links on the blog. (MDN)
+\\\\
+Examples:
+\begin{itemize}
+	\item sidebars
+	\item inserts
+	\item advertisements
+	\item biography of the author
+	\item related links on the blog
+\end{itemize}
+
+
+\subsection{footer}
+Description:
+\\
+The HTML $<$footer$>$ element represents a footer for its nearest sectioning content or sectioning root element. A footer typically contains information about the author of the section, copyright data or links to related documents.
+\\\\
+Usage notes:
+\begin{itemize}
+	\item Enclose information about the author in an <address> element that can be included into the <footer> element 
+\end{itemize}
+Examples:
+\begin{itemize}
+	\item information about the author of the section
+	\item copyright data
+	\item links to related documents
+\end{itemize}
+
+\subsection{figure and figcaption}
+\subsubsection{figure}
+Self-contained content, frequently with a <figcaption>
+\\
+While it is related to the main flow, its position is independent of the main flow; it could be moved to another page or an appendix without affecting the main flow. 
+\\
+Typically referenced as a single unit
+\\
+Examples:
+\begin{itemize}
+	\item image
+	\item illustration
+	\item diagram
+	\item code snippet
+\end{itemize}
+\subsubsection{figcaption}
+Used as the caption within a figure.
+\\
+It can only be the first or last element in the $<$figure$>$ block.
+\\
+It is optional.  A $<$figure$>$ does not a caption.  However, a $<$figcaption$>$ requires a $<$figure$>$.
+
+\subsection{Address}
+Wraps the contact information of that element.
+\\
+Includes at the end of a body 
+
+%%%%%%%%%%%%%%%%%%%%% Flexbox %%%%%%%%%%%%%%%%%%%%%
+\section{Flexbox}
+Search CSS tricks flexbox for the best resource - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+\\
+The standard currently, with ~94\% compatibility.
+\\
+There is a flex container.  The immediate children of this element, are called flex items.
+\\\\
+Check out: https://flexboxfroggy.com/
+\subsection{The Thought behind Flexbox}
+You should think in terms of containers to layout the page.  Once the page has been separated into containers, you can start to make containers 'flex containers' as necessary, and arrange the children as 'flex items'.  
+\\
+This opens another whole world of layout opportunities.
+\\\\
+Flex items can only be immediate children of the flex container.
+
+\subsection{Container Properties}
+\subsubsection{display}
+\begin{itemize}
+	\item flex
+	\item inline-flex
+\end{itemize}
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsubsection{flex-wrap}
+\begin{itemize}
+	\item Nowrap (default)
+	\item Wrap
+	\item Wrap-reverse
+\end{itemize}
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsubsection{flex-direction}
+Allows us to dictate which direction the flex items are laid out.
+\\
+Possible values:
+\begin{itemize}
+	\item Row (default)
+	\item Row-reverse
+	\item Column
+	\item Column-reverse
+\end{itemize}
+Primary Axis:\\
+ - The axis which is parallel to flex-direction’s value.\\
+ - Whatever your flex-direction is set to, that is your primary axis.
+ \\
+Cross axis:\\
+ - The axis which is perpendicular to the primary axis
+\\
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsubsection{flex-flow}
+Is a short-hand property for 'flex-direction' and 'flex-wrap'.
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsubsection{justify-content}
+'justify-content' moves/aligns items along the main/primary axis (as discussed in 'flex-direction').
+\\
+Possible values:
+\begin{itemize}
+	\item Flex-start
+	\item Flex-end
+	\item Center
+	\item Space-between
+	\item Space-around
+\end{itemize}
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsubsection{align-content}
+Aligns content in the cross axis when there is space to do so. 
+\\
+Shifts all of the content items together (not with respect to each row (along the primary/main axis))
+\\
+Shifts the lines 
+\\
+e.g. flex-start = will shift all lines packed at the top of the container.
+\begin{lstlisting}
+.container {
+	align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+}
+\end{lstlisting}
+
+\subsubsection{align-items}
+Moves the items along the cross axis according to the possible values:
+\begin{itemize}
+	\item Flex-start
+	\item Flex-end
+	\item Center
+	\item Stretch
+	\item Baseline
+\end{itemize}
+Moves the items relative to their row (remains inside their row) whereas align-content aligns all of the content/items - also moves the lines/columns.
+\\
+align-content moves the entire group/line.
+\begin{lstlisting}
+.container {
+	align-items: stretch | flex-start | flex-end | center | baseline;
+}
+\end{lstlisting}
+
+%%% Item Properties
+\subsection{Item Properties}
+Flex properties that can be applied to individual items inside of the flex container.  
+\\
+CSS properties of the actual item.
+
+\subsubsection{align-self}
+Applies align properties solely on individual flex items, irrelevant to the alignment set by/on the flex container.
+\begin{lstlisting}
+.item {
+	align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+\end{lstlisting}
+
+\subsubsection{order}
+States what order that item will be displayed.
+\\
+If it does not have an order value, it will be displayed after the items that do.  
+\\
+Items with the 'order' property set, will be displayed first.
+\\
+Can use negatives.
+\\
+Items can have the same order value.  But will be ordered along with the other ordered items, but ones with the same will be displayed in the order that they are declared in.  (But will be ordered in the order that they are declared in the HTML source code).
+\begin{lstlisting}
+.item {
+	order: <integer>; (default is 0)
+}
+\end{lstlisting}
+
+\subsubsection{flex-grow}
+A value given to a flex item that decides what fraction of space it should occupy (Similar to how potential difference is split according resistance).
+\\
+Default value 0 - should will not grow to fill the space.
+\\
+Negative values are not valid.
+\begin{lstlisting}
+.item {
+	flex-grow: <number>;  (default 0) 
+}
+\end{lstlisting}
+
+\subsubsection{flex-shrink}
+A value which dictates/enables how the item shrinks when required.
+\\
+Value is the fraction of the shrinkage that that item will experience.
+\\
+So 3 items, 2 with value 1 and 1 with value 2 - The value 2 will receive $\frac{1}{2}$ of the shrinkage and the other 2 will receive $\frac{1}{4}$.  So value 2 will shrink twice as fast as the other two.
+\\\\
+0 if it doesn't shrink, \\
+not 0 if it does shrink and by how much compared to the other items.
+\begin{lstlisting}
+.item {
+	flex-shrink: <number>; (default 1)
+}
+\end{lstlisting}
+
+\subsubsection{flex-basis}
+The value that 'flex-shrink' and 'flex-grow' kicks in.
+\\
+If set at a percentage, since the basis will always change along with the value of the parent, shrink and grow will never kick in.
+
+\subsubsection{flex}
+A short-hand property for:
+\begin{itemize}
+	\item flex-basis
+	\item flex-shrink
+	\item flex-grow
+\end{itemize}
+with the second and third parameters optional.
+\begin{lstlisting}
+.item {
+	flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+}
+\end{lstlisting}
+Recommended to use instead of individual properties.
+\\
+Will set the other values, that are not set, intelligently.
+
+%%%%%%%%%%%%%%%%%% Media Queries %%%%%%%%%%%%%%%%%%%%
+\section{Media Queries}
+Allows us to apply different CSS depending on the viewport size. e.g. for phone, tablet, desktop...
+\subsubsection{Considerations}
+ - Best to use separate files for different media queries.
+\\
+ - Start by developing for mobile size first to keep it as light weight as possible.   Then we can scale up to desktop and add more to the page (will take up more data) aka - Mobile First Design.  \\
+ The majority of users are on mobile.
+\\\\
+\subsubsection{Consists of}
+Media Type:
+\begin{itemize}
+	\item optional
+	\item can only have one value / can't try to have multiple media declarations = although can use 'all'
+	
+	\item can be:
+	\subitem All
+	\subitem screen
+	\subitem print - how things appear when it is printed out.
+	\subitem Speech
+\end{itemize}
+
+Media Feature / Expression:
+\begin{itemize}
+	\item can have as many as required.
+	\item Default value = 'screen'
+	\item Values excepted
+	\subitem min-width 
+	\subitem max-width
+	\subitem and more...
+\end{itemize}
+
+\begin{lstlisting}
+<!-- this doesn't work - you can't have multiple media types -->
+<link rel="stylesheet" href="multiple.css" media="screen and print" >
+
+<!-- this does work -->
+<link rel="stylesheet" href="multiple.css" media="all">
+\end{lstlisting}
+
+\subsubsection{Use}
+\begin{itemize}
+	\item min-width
+	\item max-width
+	\item min-height
+	\item max-height
+\end{itemize}
+
+\subsubsection{DON'T Use}
+The following can have some issues - DON'T use them!  Everything can be achieved with the parameters above.
+\begin{itemize}
+	\item min-device-width
+	\item max-device-width
+	\item min-device-height
+	\item max-device-height
+\end{itemize}
+
+\subsubsection{min-width}
+Apply this CSS from this width onwards.
+\begin{lstlisting}
+<link rel="stylesheet" href="mq_900-plus.css" media="(min-width: 900px)">
+\end{lstlisting}
+surround parameters with parenthesis. 
+
+\subsubsection{Example}
+If we want the navigation horizontally along the top of the page, set that element to a width of 100\% with the flex container being 'row wrap'.  
+\\
+When the page width increases and we want the navigation to be on the left-hand side, use a min-width media query so that above a certain fresh-hold, this width of the items will change.  For example, 15\% and 85\% so they will appear in a row next to each other, occupying one full row across the page.
+
+\subsection{Buzz-words}
+Responsive Design\\
+ - Your web page responds to the size of the viewport\\
+ \\
+Mobile First\\
+ - Build your pages to look good on mobile first\\
+ - Then add in break-points so that your pages work at larger resolutions\\
+ \\
+Breakpoints based upon content\\
+ - Create your breakpoints based upon your content\\
+ - Have your content look good, and be readable, at different sizes\\
+ \\
+70 - 80 characters of text per line\\
+ - Classic readability theory suggests that an ideal column should contain 70 to 80 characters per line (about 8 to 10 words in English)\\
+ - When the width of a text block grows past about 10 words, a breakpoint should be considered\\
+ 
+\section{Google's Flexbox Design Patterns}
+\subsection{Main take-aways}
+\begin{itemize}
+	\item Build mobile first 
+	\item Use: 
+	\subitem display: flex; 
+	\subitem flex-flow: row wrap; 
+	\item Each row: 
+	\subitem What you want on each row adds up to 100%
+\end{itemize}
+\subsection{Useful links}
+ - https://developers.google.com/web/fundamentals/design-and-ux/responsive/patterns
+ 
+ \subsubsection{Recommended layout}
+ A few 'div's with the central one being a flex container.  Divs will span the full width and can adjust the width ratios of the elements inside the flex container at break points.
+
+
 
 %%%%%%%%%%%%%%%%%%%%% Forms %%%%%%%%%%%%%%%%%%%%%%
 \section{Forms}
@@ -628,6 +1272,11 @@ Best not to use the short hand property version when starting off.  Ensure you u
 	\item 'name' is the name that is given to the variable that contains the data from that element which is sent off to the server.
 \end{itemize}
 
+
+\section{Random Bits}
+At the start of the semester, ask students to ask two people their names.  Then, start by doing a quiz and ask what those two people's names were.  Should get a funny response and more importantly demonstrate that the brain is bad at remembering things and effort is needed to succeed.
+
+\paragraph{Average page size} is 2.4mb 
 
 
 \end{document}
