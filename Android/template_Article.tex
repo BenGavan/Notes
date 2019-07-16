@@ -1,0 +1,228 @@
+\documentclass[]{article}
+
+% imports
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstset{
+	language=JavaScript,
+	backgroundcolor=\color{lightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b
+}
+
+%opening
+\title{Android}
+\author{Ben Gavan}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%% Dialogs %%%%%%%%%%%%%%%%%%%%%%
+\section{Dialogs}
+\subsection{Setting a Target Fragment}
+When displaying a dialog view from a fragment, we need to create a relationship between them se we can send data back from the dialog to the fragment.  
+\\
+We need to pass a reference to the dialog of the fragment, as well as a request code to identify the payload when it is sent back/ so the fragment can 'listen' out for it.
+\\
+We do this by setting the target fragment on the dialog object:
+\begin{lstlisting}
+dialog.setTargetFragment(FragmentClass.this, REQUEST_CODE);
+\end{lstlisting}
+
+\subsection{Sending data back to the Target Fragment from the Dialog}
+We should also check that the target fragment has been set before we do anything
+\\
+First, we need to get a reference to the target fragment (set by the fragment requesting the display of the dialog via using setTargetFragment on the dialog).
+\\
+We then call 'onActivityResult' on the target fragment.
+\\
+So if we want to do something in the fragment i.e. get the data back, we have to override this method in the target fragment.
+\\
+The data we pass back from the dialog is contained within an intent by putExtra.
+\begin{lstlisting}
+private void sendResult(int resultCode, Date date) {
+	if (getTargetFragment() == null) {
+		return;
+	}
+
+	Intent intent = new Intent();
+	intent.putExtra(EXTRA_DATE, date);
+
+	this.getTargetFragment().onActivityResult(this.getTargetRequestCode(), resultCode, intent);
+}
+\end{lstlisting}
+
+\subsubsection{Receiving the Data from the intent}
+\begin{lstlisting}
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	if (resultCode != Activity.RESULT_OK) {
+		return;
+	}
+
+	if (requestCode == REQUEST_DATE) {
+		Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+		mCrime.setDate(date);
+		mDateButton.setText(mCrime.getDate().toString());
+	}
+}
+\end{lstlisting}
+We override the 'onActivityResult' within the target fragment we are sending data back to.
+\\
+First we check what the result code is (what button the user pressed on the dialog)
+\begin{lstlisting}
+if (resultCode != Activity.RESULT_OK) {
+	return;
+}
+\end{lstlisting}
+We then check what the request code is (which was set by the fragment creating the dialog) so we know that we are responding to the correct result (A fragment can display and react to multiple dialogs). 
+\\
+After this, we get the data sent back in the form of an extra from the dialog inside an intent by 'getSerializableExtra(...)'.
+\\
+In this case, we cast this data back to a date so it can be used.
+\begin{lstlisting}
+if (requestCode == REQUEST_DATE) {
+	Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+	mCrime.setDate(date);
+	mDateButton.setText(mCrime.getDate().toString());
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%% Toolbar %%%%%%%%%%%%%%%%%%%%%%
+\section{The Toolbar}
+The Toolbar provides additional mechanisms for navigation, nd also provides design consistency and branding.
+\subsubsection{History}
+The toolbar component was added to android 5.0 (Lollipop).
+\\
+Prior to this, the action bar was the recommended component for navigation and actions within an app.
+\\
+The toolbar and action bar are very similar.
+\\
+The toolbar builds on top of the action bar .
+\\
+It has a tweaked UI
+\\ 
+It's more flexible in the ways you can use it.
+\subsubsection{Supported by}
+Since the toolbar has been added to the AppCompat library, it is available back to API 9 (Android 2.3)
+
+\subsection{Menus}
+The top-right portion of the toolbar is reserved for the toolbar's menu.
+\\
+The menu consists of action items (sometimes referred to as menu items).
+\\
+These can perform an action on the current screen or on the app as a whole.
+
+\subsubsection{Defining a menu in XML}
+Need to create an XML description of a menu, just like how you have to for layouts, with the resource file inside the res/menu directory.
+\\
+To create a new menu resource file:
+\begin{enumerate}
+	\item Right-click on the res directory
+	\item Select New $\rightarrow$ Android resource file
+	\item Change the Resource type to Menu 
+	\item Name the resource (normally 'fragment\_...' - the same naming convention as layout files)
+	\item Click OK
+\end{enumerate}
+In this file, the XML should be:
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto">
+</menu>
+\end{lstlisting}
+
+\subsubsection{Defining an item}
+\begin{lstlisting}
+<item
+	android:id="@+id/new_crime"
+	android:icon="@android:drawable/ic_menu_add"
+	android:title="@string/new_crime"
+	app:showAsAction="ifRoom|withText"/>
+\end{lstlisting}
+The line 
+\begin{lstlisting}
+app:showAsAction="ifRoom|withText"
+\end{lstlisting}
+makes the item be displayed inline/on the toolbar (where the menu icon should be) instead of having the item as a drop down item below the toolbar/menu button.
+\\
+The showAsAction attribute refers to whether the item will appear in the toolbar itself or in the overflow menu.
+\\\\
+In this case "ifRoom$|$withText" will make the items icon and text appear in the toolbar if there is room.  
+\\If there is room for the icon but not the text, then only the icon will be visible. 
+\\If there is no room for either, the item will be relegated to the overflow menu.
+\\\\
+If there are items in the overflow menu, the three dots will appear and when these are pressed, the overflow menu will be shown below.
+\\\\
+Multiple menu items can be displayed as Actions on the Toolbar.
+\\\\
+\paragraph{Possible values for showAsAction}
+\begin{itemize}
+	\item always 
+	\subitem not recommended 
+	\subitem Better to use ifRoom and let the OS decide.
+	
+	\item ifRoom
+	\subitem Only displays the item as an Action if there is room
+	
+	\item never
+	\subitem never displayed as an action
+	\subitem will always appear in the overflow menu
+	\subitem so good for items that are not used very often - its good practice to avoid having to many items on the toolbar to help the screen keep decluttered 
+\end{itemize}
+The AppCompat library defines its own custom showAsAction attribute and does not look for the native showAsAction attribute.
+
+%%%%%%%%%%%%%%%%%%%%% AppCompat Library %%%%%%%%%%%%%%%%%%%%%%
+\section{AppCompat Library}
+\subsection{Requirements}
+The AppCompat requires that you:
+\begin{itemize}
+	\item add the AppCompat dependency
+	\item use one of the AppCompat themes 
+	\item ensure that all activities are a subclass of AppCompatActivity
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%% Refactoring Techniques and Tools %%%%%%%%%%%%%%%%%%%
+\section{Refactoring Techniques and Tools}
+There are many techniques and tools that can be used to make refactoring code easier.
+\subsection{Extracting a method with Android Studio}
+\begin{enumerate}
+	\item  Highlight the code that you want to be extracted
+	\item Right-click and select Refactor $\rightarrow$ Extract $\rightarrow$ Method
+	\item Set the Visibility and method Name 
+	\item Press Refractor or Preview to preview the changes
+	\item If there are multiple occurrences of the highlighted text being extracted, android studio will ask if you want to replace these as well 
+	\subitem You can either replace each occurrence one by one, or by choosing all.
+\end{enumerate}
+
+\end{document}

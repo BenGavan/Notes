@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Dialogs}{1}
+\contentsline {subsection}{\numberline {1.1}Setting a Target Fragment}{1}
+\contentsline {subsection}{\numberline {1.2}Sending data back to the Target Fragment from the Dialog}{2}
+\contentsline {subsubsection}{\numberline {1.2.1}Receiving the Data from the intent}{2}
+\contentsline {section}{\numberline {2}The Toolbar}{3}
+\contentsline {subsubsection}{\numberline {2.0.1}History}{3}
+\contentsline {subsubsection}{\numberline {2.0.2}Supported by}{3}
+\contentsline {subsection}{\numberline {2.1}Menus}{3}
+\contentsline {subsubsection}{\numberline {2.1.1}Defining a menu in XML}{3}
+\contentsline {subsubsection}{\numberline {2.1.2}Defining an item}{4}
+\contentsline {paragraph}{Possible values for showAsAction}{4}
+\contentsline {section}{\numberline {3}AppCompat Library}{5}
+\contentsline {subsection}{\numberline {3.1}Requirements}{5}
+\contentsline {section}{\numberline {4}Refactoring Techniques and Tools}{5}
+\contentsline {subsection}{\numberline {4.1}Extracting a method with Android Studio}{5}
