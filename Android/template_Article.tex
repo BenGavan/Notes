@@ -202,6 +202,88 @@ Multiple menu items can be displayed as Actions on the Toolbar.
 \end{itemize}
 The AppCompat library defines its own custom showAsAction attribute and does not look for the native showAsAction attribute.
 
+\subsubsection{Creating the Menu}
+Override the function onCreateOptionsMenu(...) inside the Activity/Fragment.
+\\
+To actually create/inflate the menu:  (Inside the Fragment:)
+\begin{lstlisting}
+@Override
+public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	super.onCreateOptionsMenu(menu, inflater);
+	inflater.inflate(R.menu.fragment_crime_list, menu);
+}
+\end{lstlisting}
+This populates the menu with the items defined in the menu/fragment\_crime\_list.xml file.
+\\
+The super call is only convention since the superclass, Fragment, does nothing.  (Good to do so the superclass functionality is still applied - can now change the superclass and will still work if we do something in that implementation of this function).
+\\\\
+We then need to call setHasOptionsMenu(boolean hasMenu) to tell the FragmentManager that this fragment has a menu and should receive a call to onCreateOptionsMenu(...).
+\\
+Inside the Fragment:
+\begin{lstlisting}
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setHasOptionsMenu(true);
+}
+\end{lstlisting}
+
+\subsubsection{Responding to Menu Selection}
+Override onOptionsItemSected(...) in the fragment that you have called 'setHasOptionsMenu(true)'.
+\\
+The MenuItem.getItemId() corresponds to the id of the $<$item$>$ which you set in the xml file for the menu.
+\\
+This means that we can perform a switch case for each possible id in the menu.
+\\
+Include a default case to let the super implementation to handle the section of any item that you have not declared.
+\\
+You should return true you you have handled the item section and that no further processing is necessary.
+\begin{lstlisting}
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+	switch (item.getItemId()) {
+		case R.id.new_crime:
+			.... Do some logic here ....
+			return true;   // Return true to say that the selection has been handled.
+		default:
+			return super.onOptionsItemSelected(item);
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Reload/update the menu}
+\begin{lstlisting}
+getActivity().invalidateOptionsMenu();
+\end{lstlisting}
+This will cause the menu to be redrawn/reloaded (just like if the device is rotated).
+\subsection{Subtitle}
+\begin{lstlisting}
+private void setSubtitle(String subtitle) {
+	AppCompatActivity activity = (AppCompatActivity) getActivity();
+	activity.getSupportActionBar().setSubtitle(subtitle);
+}
+\end{lstlisting}
+\begin{itemize}
+	\item Get the current activity
+	\subitem (We are using AppCompat for backwards compatibility)
+	
+	\item Get the Toolbar from that activity via getSupportActionBar()
+	\subitem Still called/referred to as an Action Bar due to legacy reasons.
+	
+	\item Set the subtitle of that the toolbar we just received.
+\end{itemize}
+
+\subsection{Hierarchical Navigation}
+Add parentActivityName to the activity the the manifests so when you press the back arrow on the toolbar, it will go back to the activity you stated.
+\begin{lstlisting}
+<activity
+	android:name=".CrimePagerActivity"
+	android:parentActivityName=".CrimeListActivity"/>
+\end{lstlisting}
+
+\subsubsection{How Hierarchical Navigation works}
+Page 261
+
 %%%%%%%%%%%%%%%%%%%%% AppCompat Library %%%%%%%%%%%%%%%%%%%%%%
 \section{AppCompat Library}
 \subsection{Requirements}
@@ -211,6 +293,96 @@ The AppCompat requires that you:
 	\item use one of the AppCompat themes 
 	\item ensure that all activities are a subclass of AppCompatActivity
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%% SQLite Database %%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SQLite Database}
+\subsection{Defining a Schema}
+\begin{lstlisting}
+public class CrimeDbSchema {
+
+	public static final class CrimeTable {
+		public static final String NAME = "crimes";
+
+		public static final class Cols {
+			public static final String UUID = "uuid";
+			public static final String TITLE = "title";
+			public static final String DATA = "date";
+			public static final String SOLVED = "solved";
+		}
+	}
+}
+\end{lstlisting}
+
+\subsection{Building the Initial Database}
+Always need to follow a few basic steps:
+\begin{itemize}
+	\item Check to see whether the database already exists.
+	\item If it does not, create it and create the tables and initial data it needs.
+	\item If id does, open it and see what version of the schema it has.
+	\item If it is an old version, upgrade it to a newer version.
+\end{itemize}
+SQLiteOpenHelper can be used to handle all of this.
+
+\subsection{Opening an SQLiteDatabase}
+By extending SQLiteOpenHelper, we give control over to it to do the heavy lifting in opening the database.
+\begin{lstlisting}
+public class CrimeBaseHelper extends SQLiteOpenHelper {
+
+	private static final int VERSION = 1;
+	private static final String DATABASE_NAME = "crimeBase.db";
+
+	public CrimeBaseHelper(@Nullable Context context) {
+		super(context, DATABASE_NAME, null, VERSION);
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+	}
+}
+\end{lstlisting}
+To access the database we can then call getWritableDatabase()
+\begin{lstlisting}
+private CrimeLab(Context context) {
+	this.mContext = context.getApplicationContext();
+	this.mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
+}
+\end{lstlisting}
+When we do this, SQLiteOpenHelper will:
+\begin{itemize}
+	\item open up /data/data/com....../databases/thedatabasebeingopened.db
+	\subitem it will create a new database file if it does not already exist.
+	
+	\item If it is the first time the database has been created, call onCreate(...), then save out the latest version number.
+	
+	\item If it is not the first time, check the version number.
+	\subitem If the version number in CrimeBaseHelper is higher, call onUpgrade(....) 
+\end{itemize}
+
+\subsection{Writing to the Database}
+\subsubsection{ContentValues}
+Writes and updates are done with ContentVales - a key-value store class, like Java's HashMap or Bundles.
+\\
+Example of a helper function to create the instance of ContentValues for a row:
+\begin{lstlisting}
+private static ContentValues getContentValues(@NonNull Crime crime) {
+	ContentValues values = new ContentValues();
+	values.put(CrimeTable.Cols.UUID, crime.getId().toString());
+	values.put(CrimeTable.Cols.TITLE, crime.getTitle());
+	values.put(CrimeTable.Cols.DATE, crime.getDate().getTime());
+	values.put(CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
+
+	return values;
+}
+\end{lstlisting}
+
+\subsubsection{Inserting and updating rows}
+
 
 %%%%%%%%%%%%%%%%%%% Refactoring Techniques and Tools %%%%%%%%%%%%%%%%%%%
 \section{Refactoring Techniques and Tools}
