@@ -381,10 +381,178 @@ private static ContentValues getContentValues(@NonNull Crime crime) {
 }
 \end{lstlisting}
 
-\subsubsection{Inserting and updating rows}
+\subsubsection{Inserting rows}
+Can insert a new row to the database by using the content values object, and using the insert(...,...,...) method on the SQLite database object.
 
+\begin{lstlisting}
+public void addCrime(Crime crime) {
+	ContentValues values = getContentValues(crime);
+	mDatabase.insert(CrimeTable.NAME, null, values);
+}
+\end{lstlisting}
 
-%%%%%%%%%%%%%%%%%%% Refactoring Techniques and Tools %%%%%%%%%%%%%%%%%%%
+\subsubsection{Updating Rows}
+
+\begin{lstlisting}
+public void updateCrime(Crime crime) {
+	String uuidString = crime.getId().toString();
+	ContentValues values = getContentValues(crime);
+	mDatabase.update(CrimeTable.NAME, values,
+		CrimeTable.Cols.UUID + " = ?",
+		new String[] { uuidString });
+}
+\end{lstlisting}
+To update a row, the same content values object is used from inserting; however, the update(...,...,...,...) method is called in the database object.
+\\
+The third parameter is the where clause string which specifies what rows are updated.  In this case, the UUID is used to identify the row.
+\\
+To do this, the '?' syntax is used which tells the database to treat whatever string is in the following parameter as a pure string - not as SQL code.  This prevents an SQL injection attack.
+
+\subsection{Reading from the Database}
+ Reading from the database is done by using the query(...) function. 
+ \\
+ This returns a 'Cursor' object.
+ \\
+ A cursor stores the retrieved data in key value pairs.
+ \subsubsection{Retrieving a Cursor }
+ \begin{lstlisting}
+public Cursor queryCrimes(String whereClause, String[] whereArgs) {
+	Cursor cursor  = mDatabase.query(
+		CrimeTable.NAME,
+		null,  // selects all columns
+		whereClause,
+		whereArgs,
+		null, // groupBy
+		null,  // having
+		null  // orderBy
+	);
+	return cursor;
+}
+ \end{lstlisting}
+ \subsubsection{Using a Cursor}
+ To actually retrieve the returned data/values, the get[Type]([Int]) function is used, where the Int is the key with the value of the column index, and the Type is the type of value which is stored.
+ \\
+ To get the column index from the column name/title, the getColumnIndex([String]) can be used.
+ \begin{lstlisting}
+String title = getString(getColumnIndex(CrimeTable.Cols.TITLE));
+long date = getLong(getColumnIndex(CrimeTable.Cols.DATE));
+int isSolved = getInt(getColumnIndex(CrimeTable.Cols.SOLVED));
+ \end{lstlisting} 
+ It is cleaning, however, to use a custom wrapper of a cursor to encapsulate the cursor and retrieving of data withing one object.
+ \\
+ Therefore create a class which extends Cursor
+ \begin{lstlisting}
+public class CrimeCursorWrapper extends CursorWrapper {
+
+	public CrimeCursorWrapper(Cursor cursor) {
+		super(cursor);
+	}
+
+	public Crime getCrime() {
+		String uuidString = this.getString(this.getColumnIndex(CrimeTable.Cols.UUID));
+		String title = getString(getColumnIndex(CrimeTable.Cols.TITLE));
+		long date = getLong(getColumnIndex(CrimeTable.Cols.DATE));
+		int isSolved = getInt(getColumnIndex(CrimeTable.Cols.SOLVED));
+
+		Crime crime = new Crime(UUID.fromString(uuidString));
+		crime.setTitle(title);
+		crime.setDate(new Date(date));
+		crime.setSolved(isSolved != 0);
+
+		return crime;
+	}
+}
+ \end{lstlisting}
+From this point, convert the retrieved data into model objects.
+\\
+To move the cursor along from one part of the query to the next, use the Cursor.moveToFirst() to move to the beginning of the query and Cursor.moveToNext() to move to the next position.
+\\
+To check is the cursor is still inside the data set, using Cursor.isAfterLast()
+\\
+Hence the name, cursor.
+\begin{lstlisting}
+public List<Crime> getCrimes() {
+	List<Crime> crimes = new ArrayList<>();
+	CrimeCursorWrapper cursorWrapper = queryCrimes(null, null);
+
+	try {
+		cursorWrapper.moveToFirst();
+		while (!cursorWrapper.isAfterLast()) {
+			crimes.add(cursorWrapper.getCrime());
+			cursorWrapper.moveToNext();
+		}
+	} finally {
+		cursorWrapper.close();
+	}
+	
+	return crimes;
+}
+\end{lstlisting}
+Remember to close the cursor.
+\\
+If you don't the app will run out of open file handlers and the app will crash.
+\\
+Example of retrieving specific row:
+\begin{lstlisting}
+public Crime getCrime(UUID id) {
+	CrimeCursorWrapper cursor = queryCrimes(
+		CrimeTable.Cols.UUID + "",
+		new String[] { id.toString() }
+	);
+
+	try {
+		if (cursor.getCount() == 0) {
+		return null;
+	}
+
+	cursor.moveToFirst();
+	return cursor.getCrime();
+	} finally {
+		cursor.close();
+	}
+}
+\end{lstlisting}
+
+\subsection{Deleting Rows}
+\begin{lstlisting}
+mDatabase.delete(CrimeTable.NAME, 
+					CrimeTable.Cols.UUID + " = ?",
+					new String[] { crime.getId().toString() });
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%% Implicit Intents  %%%%%%%%%%%%%%%%%%%
+\section{Implicit Intents}
+Implicit intents are used to start activities in another app.
+\\
+In an implicit intent, you describe the job you require to be completed, and the OS will open an appropriate activity.
+\\
+Compared to Explicit intents where you specify the class of the activity to start.
+\subsection{The Parts of an Implicit Intent}
+\begin{itemize}
+	\item action
+	\subitem Typically constants from the Intent class.
+	\subitem 
+	
+	\item location of any data
+	\item type of data that the action is for
+	\item optional categories
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%% Strings %%%%%%%%%%%%%%%%%%%
+\section{Strings}
+\subsection{Plurals}
+\begin{lstlisting}
+<plurals name="subtitle_plural">
+	<item quantity="one">%1$d crime</item>
+	<item quantity="other">%1$d crimes</item>
+</plurals>
+\end{lstlisting}
+To retrieve/use the string:
+\begin{lstlisting}
+getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
+\end{lstlisting}
+
+%%%%%%%%%%%%%% Refactoring Techniques and Tools %%%%%%%%%%%%%%%%
 \section{Refactoring Techniques and Tools}
 There are many techniques and tools that can be used to make refactoring code easier.
 \subsection{Extracting a method with Android Studio}
@@ -392,7 +560,7 @@ There are many techniques and tools that can be used to make refactoring code ea
 	\item  Highlight the code that you want to be extracted
 	\item Right-click and select Refactor $\rightarrow$ Extract $\rightarrow$ Method
 	\item Set the Visibility and method Name 
-	\item Press Refractor or Preview to preview the changes
+	\item Press Refactor or Preview to preview the changes
 	\item If there are multiple occurrences of the highlighted text being extracted, android studio will ask if you want to replace these as well 
 	\subitem You can either replace each occurrence one by one, or by choosing all.
 \end{enumerate}
