@@ -49,6 +49,117 @@
 
 %%%%%%%%%%%%%%%%%%%%% Dialogs %%%%%%%%%%%%%%%%%%%%%%
 \section{Dialogs}
+\subsection{Creating a Dialog View}
+A dialog is a type of fragment.
+\subsubsection{XML}
+To create the Dialog View, it is just like creating any other view.
+\\
+Create a normal layout xml file and create the layout that is required for the dialog.
+\paragraph{Example: DatePicker}:
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<DatePicker xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/dialog_date_picker"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:calendarViewShown="false">
+</DatePicker>
+\end{lstlisting}
+
+\subsubsection{The Class}
+A Dialog Fragment extends the class $DialogFragment$
+\begin{lstlisting}
+public class DatePickerFragment extends DialogFragment {
+	...
+}
+\end{lstlisting}
+
+\paragraph{Example: DatePicker}:
+\begin{lstlisting}
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.DatePicker;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+/**
+* Created by ben on 26/10/2017.
+*/
+
+public class DatePickerFragment extends DialogFragment {
+
+	public static final String EXTRA_DATE = "com.bgsoftwarestudios.criminalintent.date";
+
+	private static final String ARG_DATE = "date";
+
+	private DatePicker mDatePicker;
+
+	public static DatePickerFragment newInstance(Date date) {
+		Bundle args = new Bundle();
+		args.putSerializable(ARG_DATE, date);
+
+		DatePickerFragment fragment = new DatePickerFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		Date date = (Date) getArguments().getSerializable(ARG_DATE);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_date, null);
+
+		mDatePicker = (DatePicker) view.findViewById(R.id.dialog_date_picker);
+		mDatePicker.init(year, month, day, null);
+
+		return new AlertDialog.Builder(getActivity())
+						.setView(view)
+						.setTitle(R.string.date_picker_title)
+						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								int year = mDatePicker.getYear();
+								int month = mDatePicker.getMonth();
+								int day = mDatePicker.getDayOfMonth();
+								Date date = new GregorianCalendar(year, month, day).getTime();
+								sendResult(Activity.RESULT_OK, date);
+							}
+						})
+						.create();
+	}
+
+	private void sendResult(int resultCode, Date date) {
+			if (getTargetFragment() == null) {
+				return;
+			}
+
+			Intent intent = new Intent();
+			intent.putExtra(EXTRA_DATE, date);
+
+			this.getTargetFragment().onActivityResult(this.getTargetRequestCode(), resultCode, intent);
+	}
+}
+
+\end{lstlisting}
+
 \subsection{Setting a Target Fragment}
 When displaying a dialog view from a fragment, we need to create a relationship between them se we can send data back from the dialog to the fragment.  
 \\
@@ -537,6 +648,247 @@ Compared to Explicit intents where you specify the class of the activity to star
 	\item type of data that the action is for
 	\item optional categories
 \end{itemize}
+They can also include extras.  However, there are not used by the OS to find the most appropait 
+
+\subsection{Advertising an Activity to Accept Implicit Intents}
+For example, to advertise an activity's capability to handle an implicit intent to open a web page, the following has the be declared within the AppManifest file.
+\begin{lstlisting}
+<activity android:name=".BrowserActivity">
+	<intent-filter>
+		<action android:name="android.intent.action.VIEW"/>
+		<category android:name="android.intent.category.DEFAULT"/>
+		<data android:scheme="http" android:host="www.somewhere.com"/>
+	</intent-filter>
+</activity>
+\end{lstlisting}
+
+\subsection{Sending Text}
+\subsubsection{With option of send}
+\begin{lstlisting}
+Intent intent = new Intent(Intent.ACTION_SEND);
+intent.setType("text/plain");
+intent.putExtra(Intent.EXTRA_TEXT, getCrimeReport());
+intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.crime_report_subject));
+intent = Intent.createChooser(intent, getString(R.string.send_report));
+startActivity(intent);
+\end{lstlisting}
+
+\subsection{Requesting Android for a Contact}
+\subsubsection{The Request of Data}
+The implicit intent action will be Intent.ACTION\_PICK.
+\\
+Since we are expecting data to be sent back, the activity will be started with $startActivityForResult(...)$ along with a request code to be able to identify the sent back response/result.
+\begin{lstlisting}
+final Intent pickContactIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+startActivityForResult(pickContactIntent, REQUST_CONTACT);
+\end{lstlisting}
+
+\subsubsection{The Receival of Data}
+Inside $onActivityResult(...,...,...)$
+\begin{lstlisting}
+if (data == null) {
+	break;
+}
+
+Uri contactUri = data.getData();
+String[] queryFields = new String[] {
+	ContactsContract.Contacts.DISPLAY_NAME
+};
+Cursor cursor = getActivity().getContentResolver().query(contactUri, queryFields, null, null, null);
+try {
+	if (cursor.getCount() == 0) {
+		return;
+	}
+
+	cursor.moveToFirst();
+	String suspect = cursor.getString(0);
+	mCrime.setSuspect(suspect);
+	mSuspectButton.setText(suspect);
+} finally {
+		cursor.close();
+}
+\end{lstlisting}
+
+\subsubsection{Checking if the Device has a Contacts App}
+Use the OS Package manager to check if the device has a contacts app.
+\\
+If it does not, and you request data from the contacts app, the app will crash.  It is therefore recommended to deactivate the functionality that uses requires this.
+\begin{lstlisting}
+PackageManager packageManager = getActivity().getPackageManager();
+if (packageManager.resolveActivity(pickContactIntent, PackageManager.MATCH_DEFAULT_ONLY) == null) {
+	mSuspectButton.setEnabled(false);
+}
+\end{lstlisting}
+This request returns an instance of $ResolveInfo$ telling all about what the activity it found.
+
+\subsection{Taking Pictures with intents}
+All things Media related is defined in $MediaStore$.  It defines the public interfaces used in Android for interacting with common media.
+\\
+The camera intent is defined in here as $MediaStore.ACTION\_IMAGE\_CAPTURE$.
+\\\\
+By default $ACTION\_IMAGE\_CAPTURE$ will take a thumb-nail picture and return it inside the $Intent$ object returned in $onActivityResult(...)$
+\\
+For a full-resolution picture, you need to tell it where to store the file on the file system. 
+\\
+This can be completed by passing a Uri pointing to where you want to save the file in $MediaStore.EXTRA\_OUTPUT$.  This Uri will point to a location serviced by $FileProvider$.
+\begin{lstlisting}
+PackageManager packageManager = getActivity().getPackageManager();
+mPhotoButton = (ImageButton) view.findViewById(R.id.crime_camera);
+final Intent captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+boolean canTakePhoto = (mPhotoFile != null) && (captureImageIntent.resolveActivity(packageManager) != null);
+mPhotoButton.setEnabled(canTakePhoto);
+mPhotoButton.setOnClickListener(new View.OnClickListener() {
+	@Override
+	public void onClick(View view) {
+		Uri uri = FileProvider.getUriForFile(getActivity(), "", mPhotoFile);
+		captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+		List<ResolveInfo> cameraActivities = getActivity().getPackageManager().queryIntentActivities(captureImageIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+		for (ResolveInfo activity : cameraActivities) {
+			getActivity().grantUriPermission(activity.activityInfo.packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+		}
+
+		startActivityForResult(captureImageIntent, REQUEST_PHOTO);
+	}
+});
+\end{lstlisting}
+\subsubsection{Declaring the Camera Feature}
+To declare that the app uses the camera, add the following into $AndroidManifest.xml$:
+\begin{lstlisting}
+<uses-feature android:name="android.hardware.camera"
+			android:required="false"/>
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%% File Storage %%%%%%%%%%%%%%%%%%%
+\section{File Storage}
+Can store files in out own private storage for the app.  This is the same location where the SQLite database is stored.  So your app is the only one able to access them.
+\\
+These files are access using the $Context$ class.
+\\
+The primary methods in the $Context$ class:
+\begin{itemize}
+	\item  $getFilesDir()$
+\end{itemize}
+To let other apps access files stored in this location, we can use a $ContentProvider$.
+\\
+This allows us to expose content URIs to other apps; which intern, allows us those apps to read and write to that specific URI.
+
+\subsection{FileProvider}
+When all that is required is to be able to receive a file from another application, a $FileProvider$ can be used instead of implementing an entire $ContentProvider$; which in this case would be classed as overkill.
+\\
+The first step is to declare a $FileProvider$ as a $ContentProvider$ hooked up to a specific authority.  This is done by adding a content provider declaration to $AndroidManifest.xml$
+\\
+The authority is a location where files can be saved to.
+\\
+This gives other apps a target to write to.
+\begin{lstlisting}
+<provider
+	android:authorities="com.bgsoftwarestudios.criminalintent.fileprovider"
+	android:name="android.support.v4.content.FileProvider"
+	android:exported="false"
+	android:grantUriPermissions="true" />
+\end{lstlisting}
+The $android:exported="false"$ attribute stops any app from using this provider except you and apps that you grant permission to.
+\\
+And the $android:grantUriPermissions="true" $ attribute allows us to give other apps permission to write to this URI when we send out an intent.
+\subsubsection{Exposing/Telling the $FileProvider$ what files it is exposing}
+To tell the $FileProvider$ what files to expose, create a new resource file $xml/files.xml$.
+\\
+You can create this initially by:
+\begin{enumerate}
+	\item Right-click on the $app/res$ directory.
+	\item Select new $\rightarrow$ Android resource file.
+	\item For Resource type select XML.
+	\item Enter $files$ for the file name.
+	\item Enter the flowing into the the xml file
+\end{enumerate}
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+	<files-path
+		name="crime_photos"
+		path="."/>
+</paths>
+\end{lstlisting}
+This declares the file paths that $FileProvider$ will use/expose internally.
+\\
+We then need to hook up the $files.xml$ to the $FileProvider$ by using a $meta-data$ tag in $AndroidManifest.xml$.
+\subsubsection{Hooking up the paths description to the $FileProvider$ within $AndroidManifest.xml$}
+Add a $meta-data$ element inside the provider:
+\begin{lstlisting}
+<provider
+	android:authorities="com.bgsoftwarestudios.criminalintent.fileprovider"
+	android:name="android.support.v4.content.FileProvider"
+	android:exported="false"
+	android:grantUriPermissions="true">
+	<meta-data
+		android:name="android.support.FILE_PROVIDER_PATHS"
+		android:resource="@xml/files"/>
+</provider>
+\end{lstlisting}
+
+\subsubsection{Revoking File write $FileProvider$ permissions}
+When the picture is taken, the method $onActivityResult(...,...,...)$ is called.  So when the request comes back we can remove the file write permissions to that Uri for that external activity.
+\begin{lstlisting}
+Uri uri = FileProvider.getUriForFile(getActivity(), FILE_PROVIDER_AUTHORITY, mPhotoFile);
+getActivity().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+updatePhotoView();
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%% Bitmaps %%%%%%%%%%%%%%%%%%%
+\section{Bitmaps}
+Bitmaps store image data as literal pixel data
+\subsection{Scaling Bitmaps}
+A 16-megapixel, 24-bit camera image compressed as a JPG with a size of 5 MB, would be 48 MB as a bitmap.
+\\
+To shrink a bit map:
+\begin{enumerate}
+	\item scan the file to determine the size
+	\item figure out how much it needs to be scaled for the desired dimensions.
+	\item reread the file and construct the new bitmap.
+\end{enumerate}
+\begin{lstlisting}
+public class PictureUtils {
+
+	public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
+		// Read in the dimentions of the image on disk
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(path, options);
+
+		float srcWidth = options.outWidth;
+		float srcHeight = options.outHeight;
+
+		// Calculate how much to scale down by
+		int inSampleSize = 1;
+		if (srcHeight > destHeight || srcWidth > destWidth) {
+			float heightScale = srcHeight / destHeight;
+			float widthScale = srcWidth / destWidth;
+			float scale = heightScale > widthScale ? heightScale : widthScale;
+			inSampleSize = Math.round(scale);
+		}
+
+		options = new BitmapFactory.Options();
+		options.inSampleSize = inSampleSize;
+
+		// Read in and create final bitmap
+		return BitmapFactory.decodeFile(path, options);
+	}
+}
+\end{lstlisting}
+The $inSampleSize$ determines how big each new pixel is relative to each old pixel.
+\\
+E.g. for a sample size of 2, one new pixel horizontally is equivalent to 2 old pixels horizontally; therefore, shrinking the bitmap horizontally by 2 (so the overall size will the one fourth).
+\subsubsection{Very conservative scaling}
+A very conservative scaling of bit map is to shrink it down to the size of an activity.  This ensures that the image will never be too small for the size of the activity; therefore, keeping a high enough quality/resolution.
+\begin{lstlisting}
+public static Bitmap getScaledBitmap(String path, @NonNull Activity activity) {
+	Point size = new Point();
+	activity.getWindowManager().getDefaultDisplay().getSize(size);
+	return getScaledBitmap(path, size.x, size.y);
+}
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%% Strings %%%%%%%%%%%%%%%%%%%
 \section{Strings}
@@ -551,6 +903,105 @@ To retrieve/use the string:
 \begin{lstlisting}
 getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
 \end{lstlisting}
+
+%%%%%%%%%%%%%%%%%% Two-Pane Master-Detail %%%%%%%%%%%%%%%%%
+\section{Two-Pane Master-Detail}
+This is most commonly used for tablets.  
+\\
+However, you swill commonly require different layout for on phone vs tablet.
+\\
+To do this, use a alias resource.
+\subsection{Alias Resource}
+In $res/values$, create a resource file for the default (phone) and list the layout to be used.  Call this file $refs.xml$.
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item name="activity_masterdetail" type="layout">@layout/activity_fragment</item>
+</resources>
+\end{lstlisting}
+Then for the layouts that are needed to be used for larger screen sizes include the Smallest Screen Width qualifier with a value of 600.
+\\
+Call this file $refs.xml$ also.
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item name="activity_masterdetail" type="layout">@layout/activity_twopane</item>
+</resources>
+\end{lstlisting}
+This will display the later when the minimum screen dimension is 600dp.
+\\
+To use this in code, refer to the layout you want using the name of the item.
+\\
+The file/layout that is then displayed/used is declared as the string in the $item$ element.
+
+\subsection{Determining Device size}
+page 335.
+
+%%%%%%%%%%%%%%%%%%% Localization %%%%%%%%%%%%%%%%%%%
+\section{Localization}
+See chapter 18
+
+%%%%%%%%%%%%%%%%%%% Accessibility %%%%%%%%%%%%%%%%%%%
+\section{Accessibility}
+\subsection{TalkBack}
+TalkBack if an Android screen reader made by Google.
+\\\\
+See Chapter 19.
+
+%%%%%%%%%%%%%%%%%%% Assets %%%%%%%%%%%%%%%%%%%
+\section{Assets}
+\subsection{Why Assets over Dependencies}
+More basic/less overhead.
+\\
+For sound files, we can store them in the 'res/raw' folder withing 
+\\
+The resource system is limited to a flat hierarchy, unlike assets which can implement its own custom file structure.  This therefore is more organized when there are large amounts of assets.
+\\
+Resources do not allow you to read in multiple files at once - you have to refer to each file independently (unlike assets where we can get the file list for a folder and then  loop through each asset, retrieving each one at a time).  Resources are given ids such as R.raw.file.
+
+
+\subsection{Creating an Assets Folder}
+To create an assets folder for your app:
+\begin{itemize}
+	\item Go to the Android option for the folder/files layout 
+	\item Right-click $\rightarrow$ New $\rightarrow$ Folder (Last section of the menu with the android guy as the symbol to the left of the options)$\rightarrow$ Assets Folder.
+	\item Keep 'Change Folder Location' unchecked.
+	\item select 'main' for 'Target Source Set'
+	\item Press finish.
+	\item Proceed to create sub directories for organization of your assets.
+\end{itemize}
+
+\subsection{Accessing Assets}
+Assets are accessed using the $AssetsManager$ class.
+\subsubsection{Getting an $AssetsManager$}
+You get get at $AssetsManager$ from any context.
+
+\subsubsection{Getting assets files names}
+\begin{lstlisting}
+private void loadSounds() {
+	String[] soundNames;
+	try {
+		soundNames = assetManager.list(SOUNDS_FOLDER);
+		Log.i(TAG, "Found " + soundNames.length + " sounds");
+	} catch (IOException ioe) {
+		Log.e(TAG, "Could not list assets", ioe);
+		return;
+	}
+}
+\end{lstlisting}
+where $SOUNDS\_FOLDER$ the directory within the Assets folder that you want to access.
+
+\subsection{SoundPool}
+$SoundPool$ can load lots of sound files into memory and control the maximum number of sounds that are playing back at one time.
+\subsubsection{Creating a SoundPool}
+
+\subsubsection{Loading Sounds}
+
+\subsubsection{Playing Sounds}
+
+
+%%%%%%%%%%%%%%%%%%% Unit Testing %%%%%%%%%%%%%%%%%%%%%
+\section{Unit Testing}
 
 %%%%%%%%%%%%%% Refactoring Techniques and Tools %%%%%%%%%%%%%%%%
 \section{Refactoring Techniques and Tools}
