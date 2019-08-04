@@ -8,7 +8,7 @@
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 
 \lstdefinelanguage{JavaScript}{
-	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, public, class, static, private, void, int, boolean, final, abstract, for, super, this, extends, implements},
 	keywordstyle=\color{blue}\bfseries,
 	ndkeywords={class, export, boolean, throw, implements, import, this},
 	ndkeywordstyle=\color{darkgray}\bfseries,
@@ -904,6 +904,11 @@ To retrieve/use the string:
 getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
 \end{lstlisting}
 
+\subsection{Percentages}
+\begin{lstlisting}
+<string name="playback_speed_percentage">PlayBack Speed: %d%%</string>
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%% Two-Pane Master-Detail %%%%%%%%%%%%%%%%%
 \section{Two-Pane Master-Detail}
 This is most commonly used for tablets.  
@@ -947,6 +952,31 @@ See chapter 18
 TalkBack if an Android screen reader made by Google.
 \\\\
 See Chapter 19.
+
+%%%%%%%%%%%%%%%%%%% Assets %%%%%%%%%%%%%%%%%%%
+\section{Styles and Themes}
+\subsection{Styles}
+Declared inside the \textit{styles.xml} file
+\begin{lstlisting}
+<style name="BeatBoxButton">
+	<item name="android:background">@color/dark_blue</item>
+</style>
+\end{lstlisting}
+
+\subsection{Style Inheritance}
+The second style declaration of \textit{BeatBoxButton.Strong} will inherit all of the items declared in the style declared above it - \textit{BeatBoxButton}.
+\begin{lstlisting}
+<style name="BeatBoxButton">
+	<item name="android:background">@color/dark_blue</item>
+</style>
+
+<style name="BeatBoxButton.Strong">
+	<item name="android:textStyle">bold</item>
+</style>
+\end{lstlisting}
+
+\subsection{Themes}
+Are applied to all objects across the app.
 
 %%%%%%%%%%%%%%%%%%% Assets %%%%%%%%%%%%%%%%%%%
 \section{Assets}
@@ -993,15 +1023,64 @@ where $SOUNDS\_FOLDER$ the directory within the Assets folder that you want to a
 
 \subsection{SoundPool}
 $SoundPool$ can load lots of sound files into memory and control the maximum number of sounds that are playing back at one time.
+\\
+A benefit of $SoundPool$ over other methods of playing sounds is that you you ask it to play, there is very little lag and starts to play almost immediately.
+\\
+A trade off is that you are required to load the sound before it is played.
 \subsubsection{Creating a SoundPool}
+The $SoundPool$ constructor takes the maximum number of sounds that can be played at any one time, the type of $AudioManager$ you require (for music use $STREAM_MUSIC$), and the third is the sample rate converter (the documentation says it is ignored).
+\begin{lstlisting}
+soundPool = new SoundPool(MAX_SOUNDS, AudioManager.STREAM_MUSIC, 0);
+\end{lstlisting}
+If you are playing the maximum number of sounds and then you try to play another, the oldest sound will be stopped to make space for the new sound being added.
+\\
+The AudoManager.*** also specifies what audio volume is adjusted when it is playing (specifies what volume is used to play that sound).
 
 \subsubsection{Loading Sounds}
+Give each sound a unique ID - typically an integer value.  Use $Integer$ so that it can have an unspecified value of $null$.
+\begin{lstlisting}
+private void load(@NotNull Sound sound) throws IOException {
+	AssetFileDescriptor assetFileDescriptor = assetManager.openFd(sound.getAssetPath());
+	int soundId = soundPool.load(assetFileDescriptor, 1); // Loads a file into soundPool for later play back.
+	sound.setSoundId(soundId);
+}
+\end{lstlisting}
+$soundPool.load(...)$ loads a file into $soundPool$ for later playback.  It also returns an ID to keep track of it so it is able to play it or unload it at a later time.
+\\\\
+$assetManager.openFd(...)$ throws the $IOException$.
 
 \subsubsection{Playing Sounds}
-
+\begin{lstlisting}
+soundPool.play(soundId, 1f, 1f, 1, 0, 1f);
+\end{lstlisting}
+'priority' is ignored.
+\\
+For 'loop', '-1' causes it to loop forever.  0 = do not loop.
 
 %%%%%%%%%%%%%%%%%%% Unit Testing %%%%%%%%%%%%%%%%%%%%%
 \section{Unit Testing}
+\subsection{Creating a Test Class}
+\begin{enumerate}
+	\item Go to the class you want to test.
+	\item 'command + shift + T' to navigate to the test class
+	\item if there is no test class, select 'Create New Test...'
+	\item Select 'JUnit4'
+	\item set 'setUp/@Before' checked
+	\item Keep everything else unchecked.
+	\item Press OK.
+	\item Choose between 'androidTest' and 'test'
+\end{enumerate}
+\subsubsection{\textit{androidTest} vs \textit{test}}
+\paragraph{andoridTests} are run at run-time on a device or emulator withing the android environment.
+\paragraph{tests} are run the the development machine outside of the android environment.
+\\\\
+\textit{test}s tend to be faster
+
+\subsection{Setting Up the Test}
+
+\subsubsection{Using Mocked Dependencies}
+
+\subsection{Writing Tests}
 
 %%%%%%%%%%%%%% Refactoring Techniques and Tools %%%%%%%%%%%%%%%%
 \section{Refactoring Techniques and Tools}
