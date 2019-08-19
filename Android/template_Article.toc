@@ -65,23 +65,27 @@
 \contentsline {section}{\numberline {12}Styles and Themes}{22}% 
 \contentsline {subsection}{\numberline {12.1}Styles}{22}% 
 \contentsline {subsection}{\numberline {12.2}Style Inheritance}{23}% 
+\contentsline {subsection}{\numberline {12.3}Themes}{23}% 
+\contentsline {subsubsection}{\numberline {12.3.1}android:windowBackground}{23}% 
+\contentsline {subsubsection}{\numberline {12.3.2}Overriding themes}{23}% 
+\contentsline {subsubsection}{\numberline {12.3.3}Accessing Theme Attributes}{23}% 
 \contentsline {section}{\numberline {13}Assets}{23}% 
 \contentsline {subsection}{\numberline {13.1}Why Assets over Dependencies}{23}% 
-\contentsline {subsection}{\numberline {13.2}Creating an Assets Folder}{23}% 
-\contentsline {subsection}{\numberline {13.3}Accessing Assets}{23}% 
-\contentsline {subsubsection}{\numberline {13.3.1}Getting an $AssetsManager$}{23}% 
+\contentsline {subsection}{\numberline {13.2}Creating an Assets Folder}{24}% 
+\contentsline {subsection}{\numberline {13.3}Accessing Assets}{24}% 
+\contentsline {subsubsection}{\numberline {13.3.1}Getting an $AssetsManager$}{24}% 
 \contentsline {subsubsection}{\numberline {13.3.2}Getting assets files names}{24}% 
 \contentsline {subsection}{\numberline {13.4}SoundPool}{24}% 
-\contentsline {subsubsection}{\numberline {13.4.1}Creating a SoundPool}{24}% 
-\contentsline {subsubsection}{\numberline {13.4.2}Loading Sounds}{24}% 
+\contentsline {subsubsection}{\numberline {13.4.1}Creating a SoundPool}{25}% 
+\contentsline {subsubsection}{\numberline {13.4.2}Loading Sounds}{25}% 
 \contentsline {subsubsection}{\numberline {13.4.3}Playing Sounds}{25}% 
 \contentsline {section}{\numberline {14}Unit Testing}{25}% 
 \contentsline {subsection}{\numberline {14.1}Creating a Test Class}{25}% 
-\contentsline {subsubsection}{\numberline {14.1.1}\textit {androidTest} vs \textit {test}}{25}% 
-\contentsline {paragraph}{andoridTests}{25}% 
-\contentsline {paragraph}{tests}{25}% 
-\contentsline {subsection}{\numberline {14.2}Setting Up the Test}{25}% 
-\contentsline {subsubsection}{\numberline {14.2.1}Using Mocked Dependencies}{25}% 
-\contentsline {subsection}{\numberline {14.3}Writing Tests}{25}% 
-\contentsline {section}{\numberline {15}Refactoring Techniques and Tools}{25}% 
+\contentsline {subsubsection}{\numberline {14.1.1}\textit {androidTest} vs \textit {test}}{26}% 
+\contentsline {paragraph}{andoridTests}{26}% 
+\contentsline {paragraph}{tests}{26}% 
+\contentsline {subsection}{\numberline {14.2}Setting Up the Test}{26}% 
+\contentsline {subsubsection}{\numberline {14.2.1}Using Mocked Dependencies}{26}% 
+\contentsline {subsection}{\numberline {14.3}Writing Tests}{26}% 
+\contentsline {section}{\numberline {15}Refactoring Techniques and Tools}{26}% 
 \contentsline {subsection}{\numberline {15.1}Extracting a method with Android Studio}{26}% 

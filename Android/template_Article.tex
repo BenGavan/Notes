@@ -978,6 +978,23 @@ The second style declaration of \textit{BeatBoxButton.Strong} will inherit all o
 \subsection{Themes}
 Are applied to all objects across the app.
 
+\subsubsection{android:windowBackground}
+Changes the color of the background.
+\\
+Need to use the android name space since the 'windowBackground' attribute that we are overriding, is declared in the Android OS.
+
+\subsubsection{Overriding themes}
+Specifying the parent in the style name only works when the parent theme exists in the same package.
+\\
+So specify the parent in the name when it exists in the same package (one of your own).  But when it crosses over to a different package (e.g. Android OS, AppCompat), use the explicit $ parent="" $ attribute.
+
+\subsubsection{Accessing Theme Attributes}
+To access attributes declared in a theme, e.g. to access a color declared in a them, use the $ ? $ syntax:
+\begin{lstlisting}
+	android:background="?attr/colorAccent"
+\end{lstlisting}
+This retreivenes the color that the attribute 'colorAccent' in the theme points to.
+
 %%%%%%%%%%%%%%%%%%% Assets %%%%%%%%%%%%%%%%%%%
 \section{Assets}
 \subsection{Why Assets over Dependencies}
