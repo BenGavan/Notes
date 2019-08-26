@@ -7,10 +7,11 @@
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 
+%%% lstlisting
 \lstdefinelanguage{JavaScript}{
-	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, public, class, static, private, void, int, boolean, final, abstract, for, super, this, extends, implements},
+	keywords={typeof, new, true, false, catch, function, return, null, try, catch, switch, var, if, in, while, do, else, case, default, break, class, static, public, private, protected, void, int, boolean, final, abstract, for, super, this, extends, implements},
 	keywordstyle=\color{blue}\bfseries,
-	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywords={class, export, boolean, throw, implements, import, this, @Override, @NonNull},
 	ndkeywordstyle=\color{darkgray}\bfseries,
 	identifierstyle=\color{black},
 	sensitive=false,
@@ -37,6 +38,10 @@
 	showtabs=false,
 	captionpos=b
 }
+%%%
+
+% New Commands
+\renewcommand{\it}[1]{\textit{#1}}
 
 %opening
 \title{Android}
@@ -46,6 +51,11 @@
 
 \maketitle
 \tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%% Fragments %%%%%%%%%%%%%%%%%%%%%%
+\section{Fragments}
+\subsubsection{isAdded()}
+Checks whether the fragment has been attached to an activity, therefore \textit{getActivity()} will not be \textit{null}.
 
 %%%%%%%%%%%%%%%%%%%%% Dialogs %%%%%%%%%%%%%%%%%%%%%%
 \section{Dialogs}
@@ -909,6 +919,17 @@ getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize
 <string name="playback_speed_percentage">PlayBack Speed: %d%%</string>
 \end{lstlisting}
 
+%%%%%%%%%%%%%%%%%%% Intents %%%%%%%%%%%%%%%%%%%
+\section{Intents}
+\subsection{Starting n activity in a new task}
+\begin{lstlisting}
+ActivityInfo activityInfo = resolveInfo.activityInfo;
+Intent intent = new Intent(Intent.ACTION_MAIN)
+				.setClassName(activityInfo.applicationInfo.packageName, activityInfo.name)
+				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+startActivity(intent);
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%% Two-Pane Master-Detail %%%%%%%%%%%%%%%%%
 \section{Two-Pane Master-Detail}
 This is most commonly used for tablets.  
@@ -1074,6 +1095,447 @@ soundPool.play(soundId, 1f, 1f, 1, 0, 1f);
 \\
 For 'loop', '-1' causes it to loop forever.  0 = do not loop.
 
+%%%%%%%%%%%%%%%%%%% XML Drawables %%%%%%%%%%%%%%%%%%%%%
+\section{XML Drawables}
+\begin{itemize}
+	\item not density specific, so are placed/stored in the default drawable folder instead of a density-specific one.
+\end{itemize}
+\subsection{What is a Drawable}
+Android calls anything that is intended to be drawn on the screen a drawable.
+
+\subsection{State List Drawables}
+Is a drawable reasource file that points to other drawable resource files for different states.  This file if set as the resource on the object.
+\\\\
+For example, a button with two states - pressed and normal (not pressed):
+\\
+In the resource file that is allocated to the object is a selector with 2 items - one for each of the states:
+\begin{lstlisting}
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item android:drawable="@drawable/button_beat_box_pressed"
+		android:state_pressed="true"/>
+	<item android:drawable="@drawable/button_beat_box_normal"/>
+
+</selector>
+\end{lstlisting}
+Then in the first file that is pointed to:
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="oval">
+
+	<solid
+		android:color="@color/red"/>
+
+</shape>
+\end{lstlisting}
+and in the second:
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="oval">
+
+	<solid
+		android:color="@color/dark_blue"/>
+
+</shape>
+\end{lstlisting}
+For the button, there are different states, including disabled, focused, and activated.
+
+\subsection{shape drawables}
+
+\subsection{layer list drawables}
+Allows two XML drawables to be combined into one.
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item>
+		<shape
+			android:shape="oval">
+
+			<solid
+				android:color="@color/red"/>
+
+		</shape>
+	</item>
+
+	<item>
+		<shape
+			android:shape="oval">
+
+			<stroke
+				android:width="4dp"
+				android:color="@color/dark_red"/>
+		</shape>
+	</item>
+
+</layer-list>
+
+
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%% 9-Patch Images %%%%%%%%%%%%%%%%%%%%%
+\section{9-Patch Images}
+See Page 450 
+
+%%%%%%%%%%%%%%%%%%% AsyncTasks %%%%%%%%%%%%%%%%%%%%%
+\section{AsyncTasks}
+\subsection{\it{AsyncTasks.cancel(boolean)}}
+\subsubsection{\it{.cancel(true)}}
+\textit{.cancel(true)} is the more severe way of stopping the task.
+\\
+Will just interrupt the thread.
+\\
+not advisable, should avoid it if you can
+\subsubsection{\it{.cancel(false)}}
+The better way of doing things.
+\\
+Just sets \textit{isCancelled()} to true.  So the \textit{AsyncTask} can then check \textit{isCancelled()} inside \textit{doInBackground(...)} and elect to finish prematurely.
+
+\subsection{message queue}
+A \it{message loop} consists of a \it{thread} and a \it{looper}
+
+\subsection{Looper}
+The \it{looper} is the object that manages a thread's message queue.
+\\
+Multiple \it{handlers}  can be attached to one \it{looper}.	
+
+\subsection{Handler}
+
+\subsection{Background Thread}
+\subsubsection{Assembling a Background Thread}
+
+\subsection{\it{ConcurrentHashMap}}
+\it{ConcurrentHashMap} is a thread-safe version of \it{HashMap}.
+
+
+%%%%%%%%%%%%%%%%%%% HTTP %%%%%%%%%%%%%%%%%%%%%
+\section{HTTP}
+\subsection{Make get requests}
+\begin{lstlisting}
+public byte[] getUrlBytes(String urlString) throws IOException {
+	URL url = new URL(urlString);
+	HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+	try {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		InputStream inputStream = connection.getInputStream();
+
+		if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+			throw new IOException(connection.getResponseMessage() + ": with " + urlString);
+		}
+
+		int bytesRead = 0;
+		byte[] buffer = new byte[1024];
+		while ((bytesRead = inputStream.read(buffer)) > 0) {
+			outputStream.write(buffer, 0, bytesRead);
+		}
+		outputStream.close();
+		return outputStream.toByteArray();
+	} finally {
+		connection.disconnect();
+	}
+}
+
+public String getUrlString(String urlString) throws IOException {
+	return new String(getUrlBytes(urlString));
+}
+\end{lstlisting}
+
+\subsection{building a Url String}
+\begin{lstlisting}
+try {
+	String url = Uri.parse("https://www.flickr.com/services/rest/")
+		.buildUpon()
+		.appendQueryParameter("method", "flickr.photos.getRecent")
+		.appendQueryParameter("api_key", API_KEY)
+		.appendQueryParameter("format", "json")
+		.appendQueryParameter("nojsoncallback", "1")
+		.appendQueryParameter("extras", "url_s")
+		.build().toString();
+	String jsonString = getUrlString(url);
+	Log.i(TAG, "fetchItems: Retreived JSON: " + jsonString);
+} catch (IOException ioe) {
+	Log.e(TAG, "fetchItems: Failed to fetch items", ioe);
+}
+\end{lstlisting}
+
+\subsection{Parsing JSON}
+
+%%%%%%%%%%%%%%%%%%% LruCache  %%%%%%%%%%%%%%%%%%%%%
+\section{\it{LruCache}}
+A cache of a defined size of the format of a key-value map.
+\subsection{Creating a new Cache}
+\begin{lstlisting}
+private final LruCache<K, V> thumbnailCache;
+\end{lstlisting}
+of size 40MiB:
+\begin{lstlisting}
+int cacheSize = 40 * 1024 * 1024; // 40MiB
+thumbnailCache = new LruCache<String, Bitmap>(cacheSize) {
+	@Override
+	protected int sizeOf(String key, Bitmap value) {
+		return value.getByteCount();
+	}
+};
+\end{lstlisting}
+
+\subsection{Retrieval from the Cache}
+\begin{lstlisting}
+V value  = cache.get(key)
+\end{lstlisting}
+The object retrieved is already of the type that was \it{put} and therefore does not require casting.
+
+\subsection{Adding item to cache}
+\begin{lstlisting}
+private void addToCache(String key, Bitmap bitmap) {
+	synchronized (thumbnailCache) {
+		if (thumbnailCache.get(key) == null) {
+			thumbnailCache.put(key, bitmap);
+		}
+	}
+}
+\end{lstlisting}
+To be thread-safe, the cache object has to be declared as final with any putting/getting carried out within the scope of \it{synchronized}.
+\\
+Before adding, it will be advisable for most implementations to check that there is not a value already stored for that key; otherwise, it will be overridden.
+
+%%%%%%%%%%%%%%%%%%% SearchView %%%%%%%%%%%%%%%%%%%%%
+\section{\it{SearchView}}
+A \it{SeachView} is an \it{action view} class.
+\\
+It can be embedded into any \it{view} including a \it{ToolBar}.
+
+%%%%%%%%%%%%%%%%%% SharedPreferences %%%%%%%%%%%%%%%%%%%%%
+\section{SharedPreferences}
+Should use 
+\begin{lstlisting}
+PreferenceManager.getDefaultSharedPreferences(context)
+\end{lstlisting}
+from the \it{androidx} library instead of 
+\begin{lstlisting}
+	content...
+\end{lstlisting}
+This will use the default settings which include that the preferences are only accessible from within the app.
+\begin{lstlisting}
+public class QueryPreferences {
+	
+	private static final String TAG = "QueryPreferences";
+	private static final String PREF_SEARCH_QUERY = "searchQuery";
+	
+	public static String getStoredQuery(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context)
+		.getString(PREF_SEARCH_QUERY, null);
+	}
+	
+	public static void setStoredQuery(Context context, String query) {
+		PreferenceManager.getDefaultSharedPreferences(context)
+		.edit()
+		.putString(PREF_SEARCH_QUERY, query)
+		.apply();
+	}
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%% Background Services %%%%%%%%%%%%%%%%%%%%
+\section{Background Services}
+To be able to run code/do something in the background not requiring a view, a \it{service} is required.
+\\
+\it{Service} is a subclass of \it{Context}
+\subsection{\it{IntentService}}
+An \it{IntentService} is probably the most common service.
+\subsubsection{Basic Skeletal example}
+\begin{lstlisting}
+public class PollService extends IntentService {
+	private static final String TAG = "PollService";
+	
+	public static Intent newIntent(@NonNull Context context) {
+		return new Intent(context, PollService.class);
+	}
+	
+	public PollService() {
+		super(TAG);
+	}
+	
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		Log.i(TAG, "onHandleIntent: Recieved an Intent: " + intent);
+	}
+}
+\end{lstlisting}
+
+\subsection{\it{commands}}
+A service's intents and called \it{commands}.  
+\\
+Each \it{command} is an instruction for the service to do something.
+\\
+Since services respond to intents, they must declared in \it{AndroidManifest/xml}, just like activities do.
+Like activities
+
+\subsection{Safe background networking}
+Since you are carrying out networking in the background, android provides an option to disable background networking to save on power consumption and performance improvements.  
+\\
+As a consequence of this, you should always check with \it{ConnectivityManager} that the network is available.
+\subsubsection{Checking for background networking availability}
+\begin{lstlisting}
+//need to figure out undeprecated method
+private boolean isNetworkAvailableandConnected() {
+	ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+	// TODO: Use un-deprecated method then add to LATEX document
+	boolean isNetworkAvailable = (cm.getActiveNetworkInfo() != null);
+	boolean isNetworkConnected = (isNetworkAvailable && cm.getActiveNetworkInfo().isConnected());
+	
+	return isNetworkConnected;
+}
+\end{lstlisting}
+
+\subsection{\it{AlarmManager}}
+\it{AlarmManager} is a system service that can send intents for you.
+\\
+If you used \it{handler}s instead, if the user closes the app (i.e. navigates away from all activities of the app) the system will shutdown that process which also results in all of the \it{Handler}'s \it{messages} to go kaput with it.
+\\
+To request \it{AlarmPanager} to send an intent, a \it{PendingIntent} is used which is sent to other components of the system, such as \it{AlarmManager}. 
+\\
+You will want to turn the alarm on and off from the UI via an activity or a fragment.
+
+%%%%%%%%%%%%%%%%%%% Notifications %%%%%%%%%%%%%%%%%%%%%
+\section{Notifications}
+\subsection{Creating a notification}
+\begin{lstlisting}
+Resources resources = getResources();
+Intent photoGalleryIntent = PhotoGalleryActivity.newIntent(this);
+PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, photoGalleryIntent, 0);
+
+Notification notification = new NotificationCompat.Builder(this)
+		.setTicker(resources.getString(R.string.new_pictures_title))
+		.setSmallIcon(android.R.drawable.ic_menu_report_image)
+		.setContentTitle(resources.getString(R.string.new_pictures_title))
+		.setContentText(resources.getString(R.string.new_pictures_text))
+		.setContentIntent(pendingIntent)
+		.setAutoCancel(true)
+		.build();
+
+NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+notificationManager.notify(0, notification);
+\end{lstlisting}
+
+\section{Broadcast Intents}
+\subsection{Regular \it{Intents} vs \it{Broadcast Intents}}
+Broadcast intents are like regular intents; however, unlike regular intents, \it{Broadcast Intents} can be sent once and received by multiple components, called \it{broadcast receivers}.
+\\\\
+Even though \it{broadcast receivers} can receive explicit intents, they are very rarely used in this manner.  Instead, they are used to respond to \it{broadcast intents}.  This is put down to that \it{explicit intents} can only have one receiver.
+
+\subsection{Receiving a system Broadcast}
+\subsubsection{Waking Up on Boot}
+You can detect when a boot (turned on) is completed by listening for a broadcast intent with the \it{BOOT\_COMPLETED} action.
+\\
+This can be listened for by creating and registering a standalone \it{broadcast receiver} that filters for the appropriate action.
+
+\subsubsection{Creating and Registering a standalone receiver}
+A \it{standalone receiver} is declared in the \it{AndroidManifest.xml}.  This means that it can be activated, even if the app process is dead.  This is compared to a \it{dynamic receiver} where it is tied to the life-cycle of the app. 
+\\
+If a \it{standalone receiver} is not registered with the system (via \it{AndroidManifest.xml}), just like an activity or service, it will not be able to receive any intents.
+\\
+Basic Example of a \it{standalone receiver}:
+\begin{lstlisting}
+	content...
+\end{lstlisting}
+Registration of a \it{standalone receiver} inside the \it{application} tag:
+\begin{lstlisting}
+<receiver android:name=".StartupReceiver">
+	<intent-filter>
+		<action android:name="android.intent.action.BOOT_COMPLETED" />
+	</intent-filter>
+</receiver>
+\end{lstlisting}
+Also requires the permission:
+\begin{lstlisting}
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+\end{lstlisting}
+
+\subsection{Sending Broadcast Intents}
+\begin{lstlisting}
+private static final String ACTION_SHOW_NOTIFICATION = "com.bengavan.photogallery.SHOW_NOTIFICATION";
+\end{lstlisting}
+\begin{lstlisting}
+sendBroadcast(new Intent(ACTION_SHOW_NOTIFICATION));
+\end{lstlisting}
+
+\subsection{\it{Dynamic Broadcast Receiver}}
+When you create a \it{dynamic receiver}, it should be registered on the fragment start and unregistered when the fragment is ended
+\subsubsection{Register}
+\it{Dynamic Broadcast Receiver}s are registered by calling \it{registerReceiver(BroadcastReceiver)}.
+
+\begin{lstlisting}
+public abstract class VisibleFragment extends Fragment {
+	
+	private static final String TAG = "VisibleFragment";
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		IntentFilter intentFilter = new IntentFilter(PollService.ACTION_SHOW_NOTIFICATION);
+		getActivity().registerReceiver(onShowNotification, intentFilter);
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		getActivity().unregisterReceiver(onShowNotification);
+	}
+	
+	private BroadcastReceiver onShowNotification = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Toast.makeText(getActivity(), "Got a broadcast: " + intent.getAction(), Toast.LENGTH_LONG).show();
+		}
+	};
+}
+\end{lstlisting}
+
+So that only your app can receive these broadcasts, create a permission and pass it to the broadcaster and receiver.
+\\\\
+To define a permission in \it{AndroidManifest.xml}
+\begin{lstlisting}
+<permission android:name="com.bengavan.photogallery.PRIVATE"
+		android:protectionLevel="signature" />
+\end{lstlisting}
+
+\begin{lstlisting}
+getActivity().registerReceiver(onShowNotification, intentFilter, PollService.PERM_PRIVATE, null);
+\end{lstlisting}
+
+\subsubsection{Un-Register}
+\it{Dynamic Broadcast Receiver} is unregistered by calling \it{unregisterReceiver(BroadcastReceiver)}.
+
+\subsection{\it{IntentFilter}}
+\it{IntentFilter} can be created in code as well as expressed in xml by using \it{addCategory(String)}, \it{addAction(String)}, \it{addDataPath(String)}, and so on.
+\begin{lstlisting}
+IntentFilter intentFilter = new IntentFilter(PollService.ACTION_SHOW_NOTIFICATION);
+\end{lstlisting}
+
+\subsection{For longer running tasks}
+For longer tasks, you can still use a broadcast receiver; however, in that small window of opportunity, start a service (which can run as long as required to complete the task) (it can also go off the main thread)
+\\\\
+Can use \it{BroadcastReceiver.goAsync()} to ...
+
+%%%%%%%%%%%%%%%%%%% StrictMode %%%%%%%%%%%%%%%%%%%%%
+\section{StrictMode}
+To activate \it{StrictMode}'s recommended policies, call:
+\begin{lstlisting}
+StrictMode.enableDefaults();
+\end{lstlisting}
+These include:
+\begin{itemize}
+	\item networking on the main thread.
+	\item disk reads and writes on the main thread
+	\item activities kept alive beyond their natural life-cycle 
+	\subitem Also known as an \it{activity leak}
+	\item un-closed SQLite database cursors
+	\item clear-text network traffic not wrapped in SSL/TLS
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%% Unit Testing %%%%%%%%%%%%%%%%%%%%%
 \section{Unit Testing}
 \subsection{Creating a Test Class}
@@ -1111,5 +1573,15 @@ There are many techniques and tools that can be used to make refactoring code ea
 	\item If there are multiple occurrences of the highlighted text being extracted, android studio will ask if you want to replace these as well 
 	\subitem You can either replace each occurrence one by one, or by choosing all.
 \end{enumerate}
+
+%%%%%%%%%%%%%% Building the APK %%%%%%%%%%%%%%%%
+\section{Building the APK}
+\subsection{Separate APK for Screen size}
+Since all the files in the Drawable directory is built into the final APK, it can provide ALOT of bloat to the final app size.\\
+Therefore, we can generate separate APKs for each screen denisity, containing only the necessary resources.  
+\\
+See configure-apk-splits
+\subsubsection{Exception}
+The only exception to this, every density of the launcher icon is maintained.
 
 \end{document}

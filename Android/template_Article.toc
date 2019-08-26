@@ -1,91 +1,144 @@
-\contentsline {section}{\numberline {1}Dialogs}{3}% 
-\contentsline {subsection}{\numberline {1.1}Creating a Dialog View}{3}% 
-\contentsline {subsubsection}{\numberline {1.1.1}XML}{3}% 
-\contentsline {paragraph}{Example: DatePicker}{3}% 
-\contentsline {subsubsection}{\numberline {1.1.2}The Class}{4}% 
-\contentsline {paragraph}{Example: DatePicker}{4}% 
-\contentsline {subsection}{\numberline {1.2}Setting a Target Fragment}{5}% 
-\contentsline {subsection}{\numberline {1.3}Sending data back to the Target Fragment from the Dialog}{6}% 
-\contentsline {subsubsection}{\numberline {1.3.1}Receiving the Data from the intent}{6}% 
-\contentsline {section}{\numberline {2}The Toolbar}{7}% 
-\contentsline {subsubsection}{\numberline {2.0.1}History}{7}% 
-\contentsline {subsubsection}{\numberline {2.0.2}Supported by}{7}% 
-\contentsline {subsection}{\numberline {2.1}Menus}{7}% 
-\contentsline {subsubsection}{\numberline {2.1.1}Defining a menu in XML}{7}% 
-\contentsline {subsubsection}{\numberline {2.1.2}Defining an item}{8}% 
-\contentsline {paragraph}{Possible values for showAsAction}{8}% 
-\contentsline {subsubsection}{\numberline {2.1.3}Creating the Menu}{9}% 
-\contentsline {subsubsection}{\numberline {2.1.4}Responding to Menu Selection}{9}% 
-\contentsline {subsubsection}{\numberline {2.1.5}Reload/update the menu}{10}% 
-\contentsline {subsection}{\numberline {2.2}Subtitle}{10}% 
-\contentsline {subsection}{\numberline {2.3}Hierarchical Navigation}{10}% 
-\contentsline {subsubsection}{\numberline {2.3.1}How Hierarchical Navigation works}{10}% 
-\contentsline {section}{\numberline {3}AppCompat Library}{11}% 
-\contentsline {subsection}{\numberline {3.1}Requirements}{11}% 
-\contentsline {section}{\numberline {4}SQLite Database}{11}% 
-\contentsline {subsection}{\numberline {4.1}Defining a Schema}{11}% 
-\contentsline {subsection}{\numberline {4.2}Building the Initial Database}{11}% 
-\contentsline {subsection}{\numberline {4.3}Opening an SQLiteDatabase}{11}% 
-\contentsline {subsection}{\numberline {4.4}Writing to the Database}{12}% 
-\contentsline {subsubsection}{\numberline {4.4.1}ContentValues}{12}% 
-\contentsline {subsubsection}{\numberline {4.4.2}Inserting rows}{13}% 
-\contentsline {subsubsection}{\numberline {4.4.3}Updating Rows}{13}% 
-\contentsline {subsection}{\numberline {4.5}Reading from the Database}{13}% 
-\contentsline {subsubsection}{\numberline {4.5.1}Retrieving a Cursor }{13}% 
-\contentsline {subsubsection}{\numberline {4.5.2}Using a Cursor}{13}% 
-\contentsline {subsection}{\numberline {4.6}Deleting Rows}{15}% 
-\contentsline {section}{\numberline {5}Implicit Intents}{15}% 
-\contentsline {subsection}{\numberline {5.1}The Parts of an Implicit Intent}{15}% 
-\contentsline {subsection}{\numberline {5.2}Advertising an Activity to Accept Implicit Intents}{16}% 
-\contentsline {subsection}{\numberline {5.3}Sending Text}{16}% 
-\contentsline {subsubsection}{\numberline {5.3.1}With option of send}{16}% 
-\contentsline {subsection}{\numberline {5.4}Requesting Android for a Contact}{16}% 
-\contentsline {subsubsection}{\numberline {5.4.1}The Request of Data}{16}% 
-\contentsline {subsubsection}{\numberline {5.4.2}The Receival of Data}{16}% 
-\contentsline {subsubsection}{\numberline {5.4.3}Checking if the Device has a Contacts App}{17}% 
-\contentsline {subsection}{\numberline {5.5}Taking Pictures with intents}{17}% 
-\contentsline {subsubsection}{\numberline {5.5.1}Declaring the Camera Feature}{18}% 
-\contentsline {section}{\numberline {6}File Storage}{18}% 
-\contentsline {subsection}{\numberline {6.1}FileProvider}{18}% 
-\contentsline {subsubsection}{\numberline {6.1.1}Exposing/Telling the $FileProvider$ what files it is exposing}{19}% 
-\contentsline {subsubsection}{\numberline {6.1.2}Hooking up the paths description to the $FileProvider$ within $AndroidManifest.xml$}{19}% 
-\contentsline {subsubsection}{\numberline {6.1.3}Revoking File write $FileProvider$ permissions}{20}% 
-\contentsline {section}{\numberline {7}Bitmaps}{20}% 
-\contentsline {subsection}{\numberline {7.1}Scaling Bitmaps}{20}% 
-\contentsline {subsubsection}{\numberline {7.1.1}Very conservative scaling}{21}% 
-\contentsline {section}{\numberline {8}Strings}{21}% 
-\contentsline {subsection}{\numberline {8.1}Plurals}{21}% 
-\contentsline {subsection}{\numberline {8.2}Percentages}{21}% 
-\contentsline {section}{\numberline {9}Two-Pane Master-Detail}{21}% 
-\contentsline {subsection}{\numberline {9.1}Alias Resource}{22}% 
-\contentsline {subsection}{\numberline {9.2}Determining Device size}{22}% 
-\contentsline {section}{\numberline {10}Localization}{22}% 
-\contentsline {section}{\numberline {11}Accessibility}{22}% 
-\contentsline {subsection}{\numberline {11.1}TalkBack}{22}% 
-\contentsline {section}{\numberline {12}Styles and Themes}{22}% 
-\contentsline {subsection}{\numberline {12.1}Styles}{22}% 
-\contentsline {subsection}{\numberline {12.2}Style Inheritance}{23}% 
-\contentsline {subsection}{\numberline {12.3}Themes}{23}% 
-\contentsline {subsubsection}{\numberline {12.3.1}android:windowBackground}{23}% 
-\contentsline {subsubsection}{\numberline {12.3.2}Overriding themes}{23}% 
-\contentsline {subsubsection}{\numberline {12.3.3}Accessing Theme Attributes}{23}% 
-\contentsline {section}{\numberline {13}Assets}{23}% 
-\contentsline {subsection}{\numberline {13.1}Why Assets over Dependencies}{23}% 
-\contentsline {subsection}{\numberline {13.2}Creating an Assets Folder}{24}% 
-\contentsline {subsection}{\numberline {13.3}Accessing Assets}{24}% 
-\contentsline {subsubsection}{\numberline {13.3.1}Getting an $AssetsManager$}{24}% 
-\contentsline {subsubsection}{\numberline {13.3.2}Getting assets files names}{24}% 
-\contentsline {subsection}{\numberline {13.4}SoundPool}{24}% 
-\contentsline {subsubsection}{\numberline {13.4.1}Creating a SoundPool}{25}% 
-\contentsline {subsubsection}{\numberline {13.4.2}Loading Sounds}{25}% 
-\contentsline {subsubsection}{\numberline {13.4.3}Playing Sounds}{25}% 
-\contentsline {section}{\numberline {14}Unit Testing}{25}% 
-\contentsline {subsection}{\numberline {14.1}Creating a Test Class}{25}% 
-\contentsline {subsubsection}{\numberline {14.1.1}\textit {androidTest} vs \textit {test}}{26}% 
-\contentsline {paragraph}{andoridTests}{26}% 
-\contentsline {paragraph}{tests}{26}% 
-\contentsline {subsection}{\numberline {14.2}Setting Up the Test}{26}% 
-\contentsline {subsubsection}{\numberline {14.2.1}Using Mocked Dependencies}{26}% 
-\contentsline {subsection}{\numberline {14.3}Writing Tests}{26}% 
-\contentsline {section}{\numberline {15}Refactoring Techniques and Tools}{26}% 
-\contentsline {subsection}{\numberline {15.1}Extracting a method with Android Studio}{26}% 
+\contentsline {section}{\numberline {1}Fragments}{5}% 
+\contentsline {subsubsection}{\numberline {1.0.1}isAdded()}{5}% 
+\contentsline {section}{\numberline {2}Dialogs}{5}% 
+\contentsline {subsection}{\numberline {2.1}Creating a Dialog View}{5}% 
+\contentsline {subsubsection}{\numberline {2.1.1}XML}{5}% 
+\contentsline {paragraph}{Example: DatePicker}{5}% 
+\contentsline {subsubsection}{\numberline {2.1.2}The Class}{5}% 
+\contentsline {paragraph}{Example: DatePicker}{5}% 
+\contentsline {subsection}{\numberline {2.2}Setting a Target Fragment}{7}% 
+\contentsline {subsection}{\numberline {2.3}Sending data back to the Target Fragment from the Dialog}{7}% 
+\contentsline {subsubsection}{\numberline {2.3.1}Receiving the Data from the intent}{8}% 
+\contentsline {section}{\numberline {3}The Toolbar}{8}% 
+\contentsline {subsubsection}{\numberline {3.0.1}History}{8}% 
+\contentsline {subsubsection}{\numberline {3.0.2}Supported by}{9}% 
+\contentsline {subsection}{\numberline {3.1}Menus}{9}% 
+\contentsline {subsubsection}{\numberline {3.1.1}Defining a menu in XML}{9}% 
+\contentsline {subsubsection}{\numberline {3.1.2}Defining an item}{9}% 
+\contentsline {paragraph}{Possible values for showAsAction}{10}% 
+\contentsline {subsubsection}{\numberline {3.1.3}Creating the Menu}{10}% 
+\contentsline {subsubsection}{\numberline {3.1.4}Responding to Menu Selection}{11}% 
+\contentsline {subsubsection}{\numberline {3.1.5}Reload/update the menu}{11}% 
+\contentsline {subsection}{\numberline {3.2}Subtitle}{11}% 
+\contentsline {subsection}{\numberline {3.3}Hierarchical Navigation}{12}% 
+\contentsline {subsubsection}{\numberline {3.3.1}How Hierarchical Navigation works}{12}% 
+\contentsline {section}{\numberline {4}AppCompat Library}{12}% 
+\contentsline {subsection}{\numberline {4.1}Requirements}{12}% 
+\contentsline {section}{\numberline {5}SQLite Database}{12}% 
+\contentsline {subsection}{\numberline {5.1}Defining a Schema}{12}% 
+\contentsline {subsection}{\numberline {5.2}Building the Initial Database}{13}% 
+\contentsline {subsection}{\numberline {5.3}Opening an SQLiteDatabase}{13}% 
+\contentsline {subsection}{\numberline {5.4}Writing to the Database}{14}% 
+\contentsline {subsubsection}{\numberline {5.4.1}ContentValues}{14}% 
+\contentsline {subsubsection}{\numberline {5.4.2}Inserting rows}{14}% 
+\contentsline {subsubsection}{\numberline {5.4.3}Updating Rows}{14}% 
+\contentsline {subsection}{\numberline {5.5}Reading from the Database}{15}% 
+\contentsline {subsubsection}{\numberline {5.5.1}Retrieving a Cursor }{15}% 
+\contentsline {subsubsection}{\numberline {5.5.2}Using a Cursor}{15}% 
+\contentsline {subsection}{\numberline {5.6}Deleting Rows}{17}% 
+\contentsline {section}{\numberline {6}Implicit Intents}{17}% 
+\contentsline {subsection}{\numberline {6.1}The Parts of an Implicit Intent}{17}% 
+\contentsline {subsection}{\numberline {6.2}Advertising an Activity to Accept Implicit Intents}{17}% 
+\contentsline {subsection}{\numberline {6.3}Sending Text}{17}% 
+\contentsline {subsubsection}{\numberline {6.3.1}With option of send}{17}% 
+\contentsline {subsection}{\numberline {6.4}Requesting Android for a Contact}{18}% 
+\contentsline {subsubsection}{\numberline {6.4.1}The Request of Data}{18}% 
+\contentsline {subsubsection}{\numberline {6.4.2}The Receival of Data}{18}% 
+\contentsline {subsubsection}{\numberline {6.4.3}Checking if the Device has a Contacts App}{18}% 
+\contentsline {subsection}{\numberline {6.5}Taking Pictures with intents}{19}% 
+\contentsline {subsubsection}{\numberline {6.5.1}Declaring the Camera Feature}{19}% 
+\contentsline {section}{\numberline {7}File Storage}{20}% 
+\contentsline {subsection}{\numberline {7.1}FileProvider}{20}% 
+\contentsline {subsubsection}{\numberline {7.1.1}Exposing/Telling the $FileProvider$ what files it is exposing}{20}% 
+\contentsline {subsubsection}{\numberline {7.1.2}Hooking up the paths description to the $FileProvider$ within $AndroidManifest.xml$}{21}% 
+\contentsline {subsubsection}{\numberline {7.1.3}Revoking File write $FileProvider$ permissions}{21}% 
+\contentsline {section}{\numberline {8}Bitmaps}{21}% 
+\contentsline {subsection}{\numberline {8.1}Scaling Bitmaps}{21}% 
+\contentsline {subsubsection}{\numberline {8.1.1}Very conservative scaling}{22}% 
+\contentsline {section}{\numberline {9}Strings}{23}% 
+\contentsline {subsection}{\numberline {9.1}Plurals}{23}% 
+\contentsline {subsection}{\numberline {9.2}Percentages}{23}% 
+\contentsline {section}{\numberline {10}Intents}{23}% 
+\contentsline {subsection}{\numberline {10.1}Starting n activity in a new task}{23}% 
+\contentsline {section}{\numberline {11}Two-Pane Master-Detail}{23}% 
+\contentsline {subsection}{\numberline {11.1}Alias Resource}{23}% 
+\contentsline {subsection}{\numberline {11.2}Determining Device size}{24}% 
+\contentsline {section}{\numberline {12}Localization}{24}% 
+\contentsline {section}{\numberline {13}Accessibility}{24}% 
+\contentsline {subsection}{\numberline {13.1}TalkBack}{24}% 
+\contentsline {section}{\numberline {14}Styles and Themes}{24}% 
+\contentsline {subsection}{\numberline {14.1}Styles}{24}% 
+\contentsline {subsection}{\numberline {14.2}Style Inheritance}{24}% 
+\contentsline {subsection}{\numberline {14.3}Themes}{25}% 
+\contentsline {subsubsection}{\numberline {14.3.1}android:windowBackground}{25}% 
+\contentsline {subsubsection}{\numberline {14.3.2}Overriding themes}{25}% 
+\contentsline {subsubsection}{\numberline {14.3.3}Accessing Theme Attributes}{25}% 
+\contentsline {section}{\numberline {15}Assets}{25}% 
+\contentsline {subsection}{\numberline {15.1}Why Assets over Dependencies}{25}% 
+\contentsline {subsection}{\numberline {15.2}Creating an Assets Folder}{25}% 
+\contentsline {subsection}{\numberline {15.3}Accessing Assets}{26}% 
+\contentsline {subsubsection}{\numberline {15.3.1}Getting an $AssetsManager$}{26}% 
+\contentsline {subsubsection}{\numberline {15.3.2}Getting assets files names}{26}% 
+\contentsline {subsection}{\numberline {15.4}SoundPool}{26}% 
+\contentsline {subsubsection}{\numberline {15.4.1}Creating a SoundPool}{26}% 
+\contentsline {subsubsection}{\numberline {15.4.2}Loading Sounds}{27}% 
+\contentsline {subsubsection}{\numberline {15.4.3}Playing Sounds}{27}% 
+\contentsline {section}{\numberline {16}XML Drawables}{27}% 
+\contentsline {subsection}{\numberline {16.1}What is a Drawable}{27}% 
+\contentsline {subsection}{\numberline {16.2}State List Drawables}{27}% 
+\contentsline {subsection}{\numberline {16.3}shape drawables}{28}% 
+\contentsline {subsection}{\numberline {16.4}layer list drawables}{28}% 
+\contentsline {section}{\numberline {17}9-Patch Images}{29}% 
+\contentsline {section}{\numberline {18}AsyncTasks}{29}% 
+\contentsline {subsection}{\numberline {18.1}\textit {AsyncTasks.cancel(boolean)}}{29}% 
+\contentsline {subsubsection}{\numberline {18.1.1}\textit {.cancel(true)}}{29}% 
+\contentsline {subsubsection}{\numberline {18.1.2}\textit {.cancel(false)}}{29}% 
+\contentsline {subsection}{\numberline {18.2}message queue}{29}% 
+\contentsline {subsection}{\numberline {18.3}Looper}{29}% 
+\contentsline {subsection}{\numberline {18.4}Handler}{29}% 
+\contentsline {subsection}{\numberline {18.5}Background Thread}{29}% 
+\contentsline {subsubsection}{\numberline {18.5.1}Assembling a Background Thread}{29}% 
+\contentsline {subsection}{\numberline {18.6}\textit {ConcurrentHashMap}}{29}% 
+\contentsline {section}{\numberline {19}HTTP}{30}% 
+\contentsline {subsection}{\numberline {19.1}Make get requests}{30}% 
+\contentsline {subsection}{\numberline {19.2}building a Url String}{30}% 
+\contentsline {subsection}{\numberline {19.3}Parsing JSON}{31}% 
+\contentsline {section}{\numberline {20}\textit {LruCache}}{31}% 
+\contentsline {subsection}{\numberline {20.1}Creating a new Cache}{31}% 
+\contentsline {subsection}{\numberline {20.2}Retrieval from the Cache}{31}% 
+\contentsline {subsection}{\numberline {20.3}Adding item to cache}{31}% 
+\contentsline {section}{\numberline {21}\textit {SearchView}}{31}% 
+\contentsline {section}{\numberline {22}SharedPreferences}{31}% 
+\contentsline {section}{\numberline {23}Background Services}{32}% 
+\contentsline {subsection}{\numberline {23.1}\textit {IntentService}}{32}% 
+\contentsline {subsubsection}{\numberline {23.1.1}Basic Skeletal example}{32}% 
+\contentsline {subsection}{\numberline {23.2}\textit {commands}}{33}% 
+\contentsline {subsection}{\numberline {23.3}Safe background networking}{33}% 
+\contentsline {subsubsection}{\numberline {23.3.1}Checking for background networking availability}{33}% 
+\contentsline {subsection}{\numberline {23.4}\textit {AlarmManager}}{33}% 
+\contentsline {section}{\numberline {24}Notifications}{33}% 
+\contentsline {subsection}{\numberline {24.1}Creating a notification}{33}% 
+\contentsline {section}{\numberline {25}Broadcast Intents}{34}% 
+\contentsline {subsection}{\numberline {25.1}Regular \textit {Intents} vs \textit {Broadcast Intents}}{34}% 
+\contentsline {subsection}{\numberline {25.2}Receiving a system Broadcast}{34}% 
+\contentsline {subsubsection}{\numberline {25.2.1}Waking Up on Boot}{34}% 
+\contentsline {subsubsection}{\numberline {25.2.2}Creating and Registering a standalone receiver}{34}% 
+\contentsline {subsection}{\numberline {25.3}Sending Broadcast Intents}{35}% 
+\contentsline {subsection}{\numberline {25.4}\textit {Dynamic Broadcast Receiver}}{35}% 
+\contentsline {subsubsection}{\numberline {25.4.1}Register}{35}% 
+\contentsline {subsubsection}{\numberline {25.4.2}Un-Register}{36}% 
+\contentsline {subsection}{\numberline {25.5}\textit {IntentFilter}}{36}% 
+\contentsline {section}{\numberline {26}StrictMode}{36}% 
+\contentsline {section}{\numberline {27}Unit Testing}{36}% 
+\contentsline {subsection}{\numberline {27.1}Creating a Test Class}{36}% 
+\contentsline {subsubsection}{\numberline {27.1.1}\textit {androidTest} vs \textit {test}}{37}% 
+\contentsline {paragraph}{andoridTests}{37}% 
+\contentsline {paragraph}{tests}{37}% 
+\contentsline {subsection}{\numberline {27.2}Setting Up the Test}{37}% 
+\contentsline {subsubsection}{\numberline {27.2.1}Using Mocked Dependencies}{37}% 
+\contentsline {subsection}{\numberline {27.3}Writing Tests}{37}% 
+\contentsline {section}{\numberline {28}Refactoring Techniques and Tools}{37}% 
+\contentsline {subsection}{\numberline {28.1}Extracting a method with Android Studio}{37}% 
+\contentsline {section}{\numberline {29}Building the APK}{37}% 
+\contentsline {subsection}{\numberline {29.1}Separate APK for Screen size}{37}% 
+\contentsline {subsubsection}{\numberline {29.1.1}Exception}{38}% 
