@@ -1175,6 +1175,131 @@ Allows two XML drawables to be combined into one.
 
 \end{lstlisting}
 
+%%%%%%%%%%%%%%%%%%% Custom Views %%%%%%%%%%%%%%%%%%%%%
+\section{Custom Views}
+Two broad categories:
+\begin{itemize}
+	\item Simple
+	\subitem Has no child sub-views (even though it may be complex in of it self).
+	\subitem Will almost always perform custom rendering.
+	\subitem Subclass \it{View}
+	 
+	\item Composite
+	\subitem Composed by other view objects.
+	\subitem Typically manage child views but do not perform custom rendering.
+	\subitem Rendering is delegated to each child view.
+	\subitem Subclass an appropriate layout class, such as \it{FrameLayout}
+\end{itemize}
+
+\subsection{Custom Simple View}
+A basic skeletal custom simple view:
+\begin{lstlisting}
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+
+public class BoxDrawingView extends View {
+	
+	// Used when inflating view in code
+	public BoxDrawingView(Context context) {
+		super(context);
+	}
+	
+	// Used when inflating view from xml
+	public BoxDrawingView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Background Color}
+To get the color for \it{resources}
+\begin{lstlisting}
+ResourcesCompat.getColor(getResources(), R.color.your_color, your_theme);
+\end{lstlisting}
+where \it{your\_theme} can be \it{null}.
+
+\subsection{Handling Touch Events}
+One way to implement touch listening is to implement the \it{View.OnTouchListener} interface by using the method:
+\begin{lstlisting}
+	public void setOnTouchListener(OnTouchListener l)
+\end{lstlisting}
+However, since the view is a subclass of \it{View}, we can override the \it{View} method:
+\begin{lstlisting}
+	public boolean onTouchEvent(MotionEvent event) 
+\end{lstlisting}
+
+\subsubsection{\it{MotionEvent}}
+The \it{MotionIntent} includes its location and its action.  The action describes the stage of the event and can have the following values:
+\begin{center}
+	\begin{tabular}{| c | c |} 
+		\hline
+		Action Constants  & Description  \\ [0.5ex] 
+		\hline 
+		ACTION\_DOWN & User's finger touches the screen   \\ [1ex]
+		ACTION\_MOVE & User' moves finger on the screen   \\ [1ex]
+		ACTION\_UP & User lifts finger off the screen  \\ [1ex]
+		ACTION\_CANCEL & A parent view has intercepted the touch event   \\  [1ex] 
+		\hline
+	\end{tabular}
+\end{center}
+This can be retrieved from the event by calling:
+\begin{lstlisting}
+	public final int getAction()
+\end{lstlisting}
+Basic touch event handling:
+\begin{lstlisting}
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+	PointF current = new PointF(event.getX(), event.getY());
+	String action = "";
+	
+	switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			action = "ACTION_DOWN";
+			break;
+		case MotionEvent.ACTION_MOVE:
+			action = "ACTION_MOVE";
+			break;
+		case MotionEvent.ACTION_UP:
+			action = "ACTION_UP";
+			break;
+		case MotionEvent.ACTION_CANCEL:
+			action = "ACTION_CANCEL";
+			break;
+	}
+	
+	Log.i(TAG, "onTouchEvent: " + action + " at: (" + current.x + ", " + current.y + ")");
+	return true;
+}
+\end{lstlisting}
+
+\subsection{Rendering inside \it{onDraw(Canvas)}}
+The two main classes are:
+\begin{itemize}
+	\item \it{Canvas}
+	\subitem Has all the drawing operations you can perform.
+	\subitem line, circle, word, or a rectangle
+	
+	\item \it{Paint} 
+	\subitem Determines how these operations are performed.
+	\subitem Whether shapes are filled, what fonts are used, and what.
+\end{itemize}
+
+\section{Animation}
+There are three properties:
+\begin{itemize}
+	\item View rotation
+	\item View scaling
+	\item View translation
+\end{itemize}
+
+\subsection{Interpolation}
+\subsubsection{Setting the interpolator}
+\begin{lstlisting}
+	heightAnimator.setInterpolator(new AccelerateInterpolator());
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%% 9-Patch Images %%%%%%%%%%%%%%%%%%%%%
 \section{9-Patch Images}
 See Page 450 
@@ -1519,6 +1644,179 @@ IntentFilter intentFilter = new IntentFilter(PollService.ACTION_SHOW_NOTIFICATIO
 For longer tasks, you can still use a broadcast receiver; however, in that small window of opportunity, start a service (which can run as long as required to complete the task) (it can also go off the main thread)
 \\\\
 Can use \it{BroadcastReceiver.goAsync()} to ...
+
+%%%%%%%%%%%%%%%%%%% Location %%%%%%%%%%%%%%%%%%%%%
+\section{Location}
+\subsection{Requirements}
+To use Google play services, you need to have the following dependency:
+\begin{lstlisting}
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+\end{lstlisting}
+Google play services are available/stored in the Google Play store app.  Therefore, Google Play Services can only work with apps that are installed on devices with the play store app installed.  Since most apps are installed through the play store, it is almost a guarantee that the app will be installed on those devices.  It is however, advisable to check that Play services are available.
+
+\subsubsection{Checking Play Services are Available} 
+\begin{lstlisting}
+private static final int REQUEST_ERROR = 0;
+
+@Override
+protected void onResume() {
+	super.onResume();
+	
+	GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+	int errorCode = apiAvailability.isGooglePlayServicesAvailable(this);
+	
+	if (errorCode != ConnectionResult.SUCCESS) {
+		Dialog errorDialog = apiAvailability.getErrorDialog(this, errorCode, REQUEST_ERROR, new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialogInterface) {
+				finish();
+			}
+		});
+		errorDialog.show();
+	}
+}
+\end{lstlisting}
+
+\subsubsection{Location Permissions}
+For location requests, there are two types: \it{FINE\_LOCATION} and \it{COARSE\_LOCATION}. 
+Fine location uses GPS and Coarse location uses Wi-Fi and cell towers.
+\\
+To access these, the following permissions are required:
+\begin{lstlisting}
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.INTERNET" />
+\end{lstlisting}
+Both \it{FINE\_LOCATION} and \it{COARSE\_LOCATION} are dangerous permissions; therefore, a run-time request is required.
+
+\subsubsection{\it{GoogleApiClient}}
+To get a client withing \it{onCreate(Bundle)}:
+\begin{lstlisting}
+client = new GoogleApiClient.Builder(getActivity())
+		.addApi(LocationServices.API)
+		.build();
+\end{lstlisting}
+You should connect and disconnect in \it{onStart()} and \it{onStop()} respectively.
+\begin{lstlisting}
+@Override
+public void onStart() {
+	super.onStart();
+	client.connect();
+}
+
+@Override
+public void onStop() {
+	super.onStop();	
+	client.disconnect();
+}
+\end{lstlisting}
+If the app is not connected to a client, it will not be able to do anything location related.
+\\
+If you want to get callbacks when the connection to the client is successful, suspended, or failed; add a \it{ConnectionCallBacks}:
+\begin{lstlisting}
+client = new GoogleApiClient.Builder(getActivity())
+		.addApi(LocationServices.API)
+		.addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+			@Override
+			public void onConnected(@Nullable Bundle bundle) {
+				getActivity().invalidateOptionsMenu();
+			}
+			
+			@Override
+			public void onConnectionSuspended(int i) {
+				
+			}
+		})
+		.addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+			@Override
+			public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+				Log.i(TAG, "onConnectionFailed: GoogleApiClient connection failed: " + connectionResult.toString());
+			}
+		})
+		.build();
+\end{lstlisting}
+
+\subsection{Getting a Location Fix}
+To get the location, a \it{LocationRequest} is used.  It has the following parameters:
+\begin{center}
+	\begin{tabular}{| c | c |} 
+		\hline
+		Parameters  & Description  \\ [0.5ex] 
+		\hline 
+		\it{interval} & how frequestly the location should be updated   \\ [1ex]
+		\it{number of updates} & how many times the location should be updated   \\ [1ex]
+		\it{priority} & How Android should priorities battery life against accuracy to satisfy yout request   \\ [1ex]
+		\it{expiration} & whether the request should expire, and if so, when  \\  [1ex] 		
+		\it{smallest displacement} & The smallest amount the devices should move (in meters) to trigger a location update  \\  [1ex] 
+		\hline
+	\end{tabular}
+\end{center}
+\begin{lstlisting}
+	content...
+\end{lstlisting}
+
+\subsubsection{Checking You have location permissions}
+Since  \it{FINE\_LOCATION} and \it{COARSE\_LOCATION} are both grouped under the location permission, you only have to check that you have permission for one.
+\begin{lstlisting}
+private boolean hasLocationPermission() {
+	int result = ContextCompat.checkSelfPermission(getActivity(), LOCATION_PERMISSIONS[0]);
+	return (result == PackageManager.PERMISSION_GRANTED);
+}
+\end{lstlisting}
+
+\subsubsection{Requesting location permissions}
+To request for location permissions at run-time, call the method:
+\begin{lstlisting}
+public final void requestPermissions(@NonNull String[] permissions, int requestCode)
+\end{lstlisting}
+where the string array is an array of permission strings.  All permissions that can be declared in \it{AndroidManifest.xml} can be accessed through \it{Manifest.permission.***}.  For example:
+\begin{lstlisting}
+private static final String[] LOCATION_PERMISSIONS = new String[] {
+		Manifest.permission.ACCESS_FINE_LOCATION,
+		Manifest.permission.ACCESS_COARSE_LOCATION
+};
+\end{lstlisting}
+This method call has a callback to the method:
+\begin{lstlisting}
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+@NonNull int[] grantResults)
+\end{lstlisting} 
+which can be overridden
+\begin{lstlisting}
+@Override
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+	switch (requestCode) {
+		case REQUEST_LOCATION_PERMISSIONS:
+		if (hasLocationPermission()) {
+			findImage();
+		}
+		default:
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+}
+\end{lstlisting}
+You should check the request code, and if it matches, check that you have location permission (shorter than checking the response).
+
+\subsection{Requesting Location}
+\begin{lstlisting}
+private void findImage() throws SecurityException {
+	LocationRequest request = LocationRequest.create();
+	request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+	request.setNumUpdates(1);
+	request.setInterval(0);
+	LocationServices.FusedLocationApi.requestLocationUpdates(client, request, new LocationListener() {
+		@Override
+		public void onLocationChanged(Location location) {
+			Log.i(TAG, "onLocationChanged: Got a fix: " + location);
+		}
+	});
+}
+\end{lstlisting}
+// NOTE: \it{LocationServices.FusedLocationApi} is deprecated.
+
+%%%%%%%%%%%%%%%%%%% Material Design %%%%%%%%%%%%%%%%%%%%%
+\section{Material Design}
+
 
 %%%%%%%%%%%%%%%%%%% StrictMode %%%%%%%%%%%%%%%%%%%%%
 \section{StrictMode}
