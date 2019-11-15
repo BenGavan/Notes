@@ -72,6 +72,26 @@
 	{ö}{{\"o}}1
 }
 
+% Packages
+%\usepackage{showframe}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage{wrapfig}
+
+% Auto-hyphen controlls
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% New Commands 
+\newcommand{\<}{\guilsinglleft}
+\renewcommand{\>}{\guilsinglright}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+
 %opening
 \title{HTML \& CSS}
 \author{Ben Gavan}
@@ -80,6 +100,17 @@
 \maketitle
 
 \tableofcontents
+
+\begin{abstract}
+Acronyms:
+\begin{itemize}
+	\item DOM = Document Object Model
+\end{itemize} 
+Useful reminders:
+\begin{itemize}
+	\item Content $\rightarrow$ Padding $\rightarrow$ Border $\rightarrow$ Margin 
+\end{itemize}
+\end{abstract}
 
 \section{Terminal Essentials}g
 \subsection{Basic Commands}
@@ -1266,7 +1297,163 @@ Breakpoints based upon content\\
 The position CSS property is good for positioning elements. A positioned element is an element whose computed position property is either relative, absolute, fixed or sticky. 
 
 \subsection{Fixed}
+No space reserved for the element - it is taken out of the  document flow (i.e. not block level where it takes up the entire row, nor it is an inline element where it takes up as little horizontal space as possible and stack with other elements along the same row)
+\\\\
+A fixed position element is positioned relative to the view-port (at a fixed position relative to the view-port), or the browser window itself. 
+\\\\
+Since the element is positioned relative to the view-port, and the view-port does not change when the page is scrolled, the element will remain in the same position/stay where it is.
+\\\\
+This is useful/can be used for:
+\begin{itemize}
+	\item Menus
+	\item Navigation
+	\item Cookie alerts...
+\end{itemize}
 
+\subsection{Relative}
+Positioned \bf{relative} to itself.
+\\\\
+The position is computed relative to where it should be (to itself).  Where the element should be is still blocked out in the DOM.
+
+\subsection{Absolute}
+An \it{absolute} positioned element is removed from the DOM and has it's position computed from relative to the next element up in the DOM (tree) which also has the position property set.  If there are non, the element is positioned in the normal document flow.
+
+\subsection{Static}
+Normal behavior - positioned within the document flow as per usual.
+
+\subsection{Accepted properties}
+\begin{itemize}
+	\item Top
+	\subitem \<length\>
+	\subitem percentage	
+	
+	\item Right
+	\subitem \<length\>
+	\subitem percentage
+	
+	\item Bottom
+	\subitem \<length\>
+	\subitem percentage
+	
+	\item Left	
+	\subitem \<length\>
+	\subitem percentage
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%% Float %%%%%%%%%%%%%%%%%%%%%%
+\section{Float}
+Old approach - use Flexbox instead. (Its a very hack-y way of positioning things on the page)
+\\
+The float CSS property takes the element out of the normal DOM and aligns it to the left or right relative to its \bf{container}.
+\\
+Other text or inline elements then position and wrap around this object.
+\\
+(Needs to be added in HTML before the elements that wrap around it are in the HTML)
+
+\subsection{Overflow}
+With overflow not set, the element's container does not take into consideration that element when it comes to sizing - it will only use the other elements which does not have the \it{float} property set for calculating it's size.
+\\
+So if the element with the float set is too large, it will not fit inside it's container (since it has been taken out of the DOM).
+\\\\
+The solution to this it to set the \it{overflow} CSS property on the container element. 
+\begin{itemize}
+	\item auto
+	\subitem will set it's size to accommodate/fit all of the child elements, with float set, inside it.
+\end{itemize}
+
+\subsection{\it{clear}}
+When the \it{clear} CSS property is set to an element, that element will ensure that it respects where elements with \it{float} set are - i.e. the element will not be positioned under an element with \it{float}.  
+\\
+\it{clear} has the following possible values:
+\begin{itemize}
+	\item both 
+	\subitem will not be positioned under elements with \it{float set}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%% Background %%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+\it{background} is a CSS shorthand property that is not recommended to be used - just causes confusion (little uniformity of implementation). (Be clear, not clever).
+\\
+It also sets other default values to other unset properties (relating to background) which could alter the expected outcome.
+
+\subsection{background-color}
+Sets the background color of the element.
+
+\subsection{background-image}
+Sets an image as the background of an element.
+
+\subsection{background-repeat}
+Refers to background-image property to define how the \it{background-image} is repeated.
+\\
+Has the possible values:
+\begin{itemize}
+	\item Row 
+	\subitem Repeats the background image along the x-axis
+	
+	\item Column
+	\subitem Repeats the background image along the column axis only
+	
+	\item Both
+	\subitem Repeats the background image along the x \bf{and} y axis.
+\end{itemize}
+
+\subsection{background-size}
+The \it{background-size} specifies the size of the \it{background-image} if set. 
+\\
+Does \bf{NOT} set the size of the background since this size is determined by the size of the element. 
+\\
+Can take the values:
+\begin{itemize}
+	\item length
+	
+	\item percentage 
+	
+	\item auto
+	
+	\item contain
+	\subitem sized so this it is \it{contained} within the element it is the background of 
+	\subitem will scale with the source ratio maintained.
+	
+	\item cover
+	\subitem The background image will be sized so that \it{covers} the element it is the background of.
+	\subitem Will scale so that the source ratio maintained.
+\end{itemize}
+
+\subsection{background-position}
+Refers to the background image.
+\\
+\it{background-position} is a CSS property that sets the position of the background image relative to the element it is the background of.
+
+\subsection{background-origin}
+Refers to the background image.
+\\
+\it{background-origin} is a CSS property that determines where the background image starts and ends.
+\\
+Can take the values of:
+\begin{itemize}
+	\item \it{content-box}
+	\subitem Sets the start and end to align with the content-box of the element.
+	
+	\item \it{padding-box}
+	
+	\item \it{border-box}
+\end{itemize}
+
+\subsection{background-attachment}
+Refers to the background-image.
+\\
+Can take the values of:
+\begin{itemize}
+	\item scroll (default)
+	\subitem the background image scrolls with the page/element
+	
+	\item fixed
+	\subitem Stays in the same place in the viewport 
+	\subitem the background image does not scroll so stays fixed in the background as the remaining page elements scrolls over it. 
+\end{itemize}
+
+\subsection{background-clip}
+Extends to both background-image and background-color.
 
 %%%%%%%%%%%%%%%%%%%%% Forms %%%%%%%%%%%%%%%%%%%%%%
 \section{Forms}
@@ -1283,6 +1470,9 @@ The position CSS property is good for positioning elements. A positioned element
 At the start of the semester, ask students to ask two people their names.  Then, start by doing a quiz and ask what those two people's names were.  Should get a funny response and more importantly demonstrate that the brain is bad at remembering things and effort is needed to succeed.
 
 \paragraph{Average page size} is 2.4mb 
+
+\subsection{Avoid random overrides in CSS}
+Set an id to the body tag, then when referring to another element on the same page, can then use a descendant (that element is a descendant of body). So when  you add additional things in, you don't get unintentional overrides.
 
 
 \end{document}

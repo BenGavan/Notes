@@ -1,126 +1,143 @@
-\contentsline {section}{\numberline {1}Terminal Essentials}{4}
-\contentsline {subsection}{\numberline {1.1}Basic Commands}{4}
-\contentsline {subsection}{\numberline {1.2}Git}{4}
-\contentsline {section}{\numberline {2}Key Board Shortcuts}{5}
-\contentsline {section}{\numberline {3}HTML Essentials}{5}
-\contentsline {subsection}{\numberline {3.1}File Naming conventions}{5}
-\contentsline {subsection}{\numberline {3.2}Folder Naming Conventions}{5}
-\contentsline {subsection}{\numberline {3.3}Emmet.io}{6}
-\contentsline {subsection}{\numberline {3.4}Tag Attributes}{6}
-\contentsline {subsection}{\numberline {3.5}Absolute vs Relative URLs}{6}
-\contentsline {paragraph}{Absolute}{6}
-\contentsline {paragraph}{Relative}{6}
-\contentsline {section}{\numberline {4}Block vs Inline}{6}
-\contentsline {subsection}{\numberline {4.1}Block}{6}
-\contentsline {subsection}{\numberline {4.2}Inline}{6}
-\contentsline {section}{\numberline {5}HTML Tags}{7}
-\contentsline {subsection}{\numberline {5.1}div}{7}
-\contentsline {subsection}{\numberline {5.2}span}{7}
-\contentsline {subsection}{\numberline {5.3}a}{7}
-\contentsline {paragraph}{Attributes}{7}
-\contentsline {section}{\numberline {6}CSS Attributes}{7}
-\contentsline {subsubsection}{\numberline {6.0.1}background-size}{7}
-\contentsline {subsubsection}{\numberline {6.0.2}background-repeat}{7}
-\contentsline {subsubsection}{\numberline {6.0.3}display}{7}
-\contentsline {subsubsection}{\numberline {6.0.4}Dimensions}{8}
-\contentsline {subsubsection}{\numberline {6.0.5}text-align}{8}
-\contentsline {subsubsection}{\numberline {6.0.6}Content - Padding - Border - Margin}{8}
-\contentsline {subsubsection}{\numberline {6.0.7}border}{8}
-\contentsline {subsubsection}{\numberline {6.0.8}margin}{9}
-\contentsline {subsubsection}{\numberline {6.0.9}box-sizing}{9}
-\contentsline {subsection}{\numberline {6.1}CSS Reset}{9}
-\contentsline {subsubsection}{\numberline {6.1.1}Motivation}{9}
-\contentsline {subsubsection}{\numberline {6.1.2}Aim}{9}
-\contentsline {subsubsection}{\numberline {6.1.3}Requirements}{9}
-\contentsline {subsubsection}{\numberline {6.1.4}Solution}{9}
-\contentsline {subsubsection}{\numberline {6.1.5}Alternatives}{9}
-\contentsline {section}{\numberline {7}CSS Selectors}{10}
-\contentsline {subsection}{\numberline {7.1}element}{10}
-\contentsline {subsection}{\numberline {7.2}class}{10}
-\contentsline {subsection}{\numberline {7.3}id}{10}
-\contentsline {subsection}{\numberline {7.4}Attributes}{10}
-\contentsline {subsection}{\numberline {7.5}Pseudo Class}{10}
-\contentsline {subsubsection}{\numberline {7.5.1}Link}{11}
-\contentsline {subsubsection}{\numberline {7.5.2}Focus}{11}
-\contentsline {subsubsection}{\numberline {7.5.3}$n^{th}$ child}{11}
-\contentsline {subsection}{\numberline {7.6}Pseudo Element}{12}
-\contentsline {subsubsection}{\numberline {7.6.1}First-letter}{13}
-\contentsline {subsubsection}{\numberline {7.6.2}First-line}{13}
-\contentsline {subsection}{\numberline {7.7}Nested Selectors}{13}
-\contentsline {subsubsection}{\numberline {7.7.1}all-children}{13}
-\contentsline {subsubsection}{\numberline {7.7.2}immediate}{14}
-\contentsline {subsubsection}{\numberline {7.7.3}all-siblings}{14}
-\contentsline {subsubsection}{\numberline {7.7.4}Immediate Siblings}{14}
-\contentsline {subsection}{\numberline {7.8}Compound Selectors}{15}
-\contentsline {subsection}{\numberline {7.9}CSS Specificity}{15}
-\contentsline {subsubsection}{\numberline {7.9.1}Example}{15}
-\contentsline {section}{\numberline {8}Formatting Text}{16}
-\contentsline {subsection}{\numberline {8.1}Font property}{16}
-\contentsline {subsubsection}{\numberline {8.1.1}Font-family}{16}
-\contentsline {paragraph}{Sans-serif}{16}
-\contentsline {subsubsection}{\numberline {8.1.2}font-size}{16}
-\contentsline {subsubsection}{\numberline {8.1.3}font-weight}{17}
-\contentsline {subsubsection}{\numberline {8.1.4}font-style}{17}
-\contentsline {subsubsection}{\numberline {8.1.5}font-variant}{17}
-\contentsline {subsubsection}{\numberline {8.1.6}line-height}{17}
-\contentsline {subsubsection}{\numberline {8.1.7}letting-spacing}{18}
-\contentsline {subsubsection}{\numberline {8.1.8}word-spacing}{18}
-\contentsline {subsubsection}{\numberline {8.1.9}color}{18}
-\contentsline {subsubsection}{\numberline {8.1.10}Google Fonts}{18}
-\contentsline {subsection}{\numberline {8.2}text}{18}
-\contentsline {subsubsection}{\numberline {8.2.1}text-transform}{18}
-\contentsline {subsubsection}{\numberline {8.2.2}text-align}{19}
-\contentsline {subsubsection}{\numberline {8.2.3}text-shadow}{19}
-\contentsline {subsubsection}{\numberline {8.2.4}text-decoration}{19}
-\contentsline {paragraph}{text-decoration-line}{19}
-\contentsline {subsubsection}{\numberline {8.2.5}text-indentation}{19}
-\contentsline {subsubsection}{\numberline {8.2.6}max-width}{20}
-\contentsline {section}{\numberline {9}Document Structure}{20}
-\contentsline {subsection}{\numberline {9.1}HTML5 Outline Algorithm}{20}
-\contentsline {subsection}{\numberline {9.2}Semantic HTML}{20}
-\contentsline {subsection}{\numberline {9.3}article}{21}
-\contentsline {subsection}{\numberline {9.4}Section}{21}
-\contentsline {subsection}{\numberline {9.5}header}{22}
-\contentsline {subsection}{\numberline {9.6}nav}{22}
-\contentsline {subsection}{\numberline {9.7}main}{22}
-\contentsline {subsection}{\numberline {9.8}aside}{23}
-\contentsline {subsection}{\numberline {9.9}footer}{23}
-\contentsline {subsection}{\numberline {9.10}figure and figcaption}{23}
-\contentsline {subsubsection}{\numberline {9.10.1}figure}{23}
-\contentsline {subsubsection}{\numberline {9.10.2}figcaption}{24}
-\contentsline {subsection}{\numberline {9.11}Address}{24}
-\contentsline {section}{\numberline {10}Flexbox}{24}
-\contentsline {subsection}{\numberline {10.1}The Thought behind Flexbox}{24}
-\contentsline {subsection}{\numberline {10.2}Container Properties}{25}
-\contentsline {subsubsection}{\numberline {10.2.1}display}{25}
-\contentsline {subsubsection}{\numberline {10.2.2}flex-wrap}{25}
-\contentsline {subsubsection}{\numberline {10.2.3}flex-direction}{25}
-\contentsline {subsubsection}{\numberline {10.2.4}flex-flow}{25}
-\contentsline {subsubsection}{\numberline {10.2.5}justify-content}{26}
-\contentsline {subsubsection}{\numberline {10.2.6}align-content}{26}
-\contentsline {subsubsection}{\numberline {10.2.7}align-items}{26}
-\contentsline {subsection}{\numberline {10.3}Item Properties}{27}
-\contentsline {subsubsection}{\numberline {10.3.1}align-self}{27}
-\contentsline {subsubsection}{\numberline {10.3.2}order}{27}
-\contentsline {subsubsection}{\numberline {10.3.3}flex-grow}{27}
-\contentsline {subsubsection}{\numberline {10.3.4}flex-shrink}{27}
-\contentsline {subsubsection}{\numberline {10.3.5}flex-basis}{28}
-\contentsline {subsubsection}{\numberline {10.3.6}flex}{28}
-\contentsline {section}{\numberline {11}Media Queries}{28}
-\contentsline {subsubsection}{\numberline {11.0.1}Considerations}{28}
-\contentsline {subsubsection}{\numberline {11.0.2}Consists of}{29}
-\contentsline {subsubsection}{\numberline {11.0.3}Use}{29}
-\contentsline {subsubsection}{\numberline {11.0.4}DON'T Use}{30}
-\contentsline {subsubsection}{\numberline {11.0.5}min-width}{30}
-\contentsline {subsubsection}{\numberline {11.0.6}Example}{30}
-\contentsline {subsection}{\numberline {11.1}Buzz-words}{30}
-\contentsline {section}{\numberline {12}Google's Flexbox Design Patterns}{31}
-\contentsline {subsection}{\numberline {12.1}Main take-aways}{31}
-\contentsline {subsection}{\numberline {12.2}Useful links}{31}
-\contentsline {subsubsection}{\numberline {12.2.1}Recommended layout}{31}
-\contentsline {section}{\numberline {13}Position}{31}
-\contentsline {subsection}{\numberline {13.1}Overview}{31}
-\contentsline {subsection}{\numberline {13.2}Fixed}{31}
-\contentsline {section}{\numberline {14}Forms}{31}
-\contentsline {section}{\numberline {15}Random Bits}{32}
-\contentsline {paragraph}{Average page size}{32}
+\contentsline {section}{\numberline {1}Terminal Essentials}{4}% 
+\contentsline {subsection}{\numberline {1.1}Basic Commands}{4}% 
+\contentsline {subsection}{\numberline {1.2}Git}{5}% 
+\contentsline {section}{\numberline {2}Key Board Shortcuts}{5}% 
+\contentsline {section}{\numberline {3}HTML Essentials}{6}% 
+\contentsline {subsection}{\numberline {3.1}File Naming conventions}{6}% 
+\contentsline {subsection}{\numberline {3.2}Folder Naming Conventions}{6}% 
+\contentsline {subsection}{\numberline {3.3}Emmet.io}{6}% 
+\contentsline {subsection}{\numberline {3.4}Tag Attributes}{6}% 
+\contentsline {subsection}{\numberline {3.5}Absolute vs Relative URLs}{7}% 
+\contentsline {paragraph}{Absolute}{7}% 
+\contentsline {paragraph}{Relative}{7}% 
+\contentsline {section}{\numberline {4}Block vs Inline}{7}% 
+\contentsline {subsection}{\numberline {4.1}Block}{7}% 
+\contentsline {subsection}{\numberline {4.2}Inline}{7}% 
+\contentsline {section}{\numberline {5}HTML Tags}{7}% 
+\contentsline {subsection}{\numberline {5.1}div}{7}% 
+\contentsline {subsection}{\numberline {5.2}span}{7}% 
+\contentsline {subsection}{\numberline {5.3}a}{8}% 
+\contentsline {paragraph}{Attributes}{8}% 
+\contentsline {section}{\numberline {6}CSS Attributes}{8}% 
+\contentsline {subsubsection}{\numberline {6.0.1}background-size}{8}% 
+\contentsline {subsubsection}{\numberline {6.0.2}background-repeat}{8}% 
+\contentsline {subsubsection}{\numberline {6.0.3}display}{8}% 
+\contentsline {subsubsection}{\numberline {6.0.4}Dimensions}{8}% 
+\contentsline {subsubsection}{\numberline {6.0.5}text-align}{9}% 
+\contentsline {subsubsection}{\numberline {6.0.6}Content - Padding - Border - Margin}{9}% 
+\contentsline {subsubsection}{\numberline {6.0.7}border}{9}% 
+\contentsline {subsubsection}{\numberline {6.0.8}margin}{9}% 
+\contentsline {subsubsection}{\numberline {6.0.9}box-sizing}{9}% 
+\contentsline {subsection}{\numberline {6.1}CSS Reset}{9}% 
+\contentsline {subsubsection}{\numberline {6.1.1}Motivation}{10}% 
+\contentsline {subsubsection}{\numberline {6.1.2}Aim}{10}% 
+\contentsline {subsubsection}{\numberline {6.1.3}Requirements}{10}% 
+\contentsline {subsubsection}{\numberline {6.1.4}Solution}{10}% 
+\contentsline {subsubsection}{\numberline {6.1.5}Alternatives}{10}% 
+\contentsline {section}{\numberline {7}CSS Selectors}{10}% 
+\contentsline {subsection}{\numberline {7.1}element}{10}% 
+\contentsline {subsection}{\numberline {7.2}class}{10}% 
+\contentsline {subsection}{\numberline {7.3}id}{11}% 
+\contentsline {subsection}{\numberline {7.4}Attributes}{11}% 
+\contentsline {subsection}{\numberline {7.5}Pseudo Class}{11}% 
+\contentsline {subsubsection}{\numberline {7.5.1}Link}{11}% 
+\contentsline {subsubsection}{\numberline {7.5.2}Focus}{12}% 
+\contentsline {subsubsection}{\numberline {7.5.3}$n^{th}$ child}{12}% 
+\contentsline {subsection}{\numberline {7.6}Pseudo Element}{13}% 
+\contentsline {subsubsection}{\numberline {7.6.1}First-letter}{13}% 
+\contentsline {subsubsection}{\numberline {7.6.2}First-line}{13}% 
+\contentsline {subsection}{\numberline {7.7}Nested Selectors}{14}% 
+\contentsline {subsubsection}{\numberline {7.7.1}all-children}{14}% 
+\contentsline {subsubsection}{\numberline {7.7.2}immediate}{14}% 
+\contentsline {subsubsection}{\numberline {7.7.3}all-siblings}{15}% 
+\contentsline {subsubsection}{\numberline {7.7.4}Immediate Siblings}{15}% 
+\contentsline {subsection}{\numberline {7.8}Compound Selectors}{15}% 
+\contentsline {subsection}{\numberline {7.9}CSS Specificity}{15}% 
+\contentsline {subsubsection}{\numberline {7.9.1}Example}{16}% 
+\contentsline {section}{\numberline {8}Formatting Text}{16}% 
+\contentsline {subsection}{\numberline {8.1}Font property}{16}% 
+\contentsline {subsubsection}{\numberline {8.1.1}Font-family}{16}% 
+\contentsline {paragraph}{Sans-serif}{16}% 
+\contentsline {subsubsection}{\numberline {8.1.2}font-size}{17}% 
+\contentsline {subsubsection}{\numberline {8.1.3}font-weight}{17}% 
+\contentsline {subsubsection}{\numberline {8.1.4}font-style}{18}% 
+\contentsline {subsubsection}{\numberline {8.1.5}font-variant}{18}% 
+\contentsline {subsubsection}{\numberline {8.1.6}line-height}{18}% 
+\contentsline {subsubsection}{\numberline {8.1.7}letting-spacing}{18}% 
+\contentsline {subsubsection}{\numberline {8.1.8}word-spacing}{18}% 
+\contentsline {subsubsection}{\numberline {8.1.9}color}{19}% 
+\contentsline {subsubsection}{\numberline {8.1.10}Google Fonts}{19}% 
+\contentsline {subsection}{\numberline {8.2}text}{19}% 
+\contentsline {subsubsection}{\numberline {8.2.1}text-transform}{19}% 
+\contentsline {subsubsection}{\numberline {8.2.2}text-align}{19}% 
+\contentsline {subsubsection}{\numberline {8.2.3}text-shadow}{19}% 
+\contentsline {subsubsection}{\numberline {8.2.4}text-decoration}{19}% 
+\contentsline {paragraph}{text-decoration-line}{19}% 
+\contentsline {subsubsection}{\numberline {8.2.5}text-indentation}{20}% 
+\contentsline {subsubsection}{\numberline {8.2.6}max-width}{20}% 
+\contentsline {section}{\numberline {9}Document Structure}{20}% 
+\contentsline {subsection}{\numberline {9.1}HTML5 Outline Algorithm}{21}% 
+\contentsline {subsection}{\numberline {9.2}Semantic HTML}{21}% 
+\contentsline {subsection}{\numberline {9.3}article}{21}% 
+\contentsline {subsection}{\numberline {9.4}Section}{22}% 
+\contentsline {subsection}{\numberline {9.5}header}{22}% 
+\contentsline {subsection}{\numberline {9.6}nav}{23}% 
+\contentsline {subsection}{\numberline {9.7}main}{23}% 
+\contentsline {subsection}{\numberline {9.8}aside}{23}% 
+\contentsline {subsection}{\numberline {9.9}footer}{24}% 
+\contentsline {subsection}{\numberline {9.10}figure and figcaption}{24}% 
+\contentsline {subsubsection}{\numberline {9.10.1}figure}{24}% 
+\contentsline {subsubsection}{\numberline {9.10.2}figcaption}{24}% 
+\contentsline {subsection}{\numberline {9.11}Address}{25}% 
+\contentsline {section}{\numberline {10}Flexbox}{25}% 
+\contentsline {subsection}{\numberline {10.1}The Thought behind Flexbox}{25}% 
+\contentsline {subsection}{\numberline {10.2}Container Properties}{25}% 
+\contentsline {subsubsection}{\numberline {10.2.1}display}{25}% 
+\contentsline {subsubsection}{\numberline {10.2.2}flex-wrap}{25}% 
+\contentsline {subsubsection}{\numberline {10.2.3}flex-direction}{26}% 
+\contentsline {subsubsection}{\numberline {10.2.4}flex-flow}{26}% 
+\contentsline {subsubsection}{\numberline {10.2.5}justify-content}{26}% 
+\contentsline {subsubsection}{\numberline {10.2.6}align-content}{27}% 
+\contentsline {subsubsection}{\numberline {10.2.7}align-items}{27}% 
+\contentsline {subsection}{\numberline {10.3}Item Properties}{27}% 
+\contentsline {subsubsection}{\numberline {10.3.1}align-self}{27}% 
+\contentsline {subsubsection}{\numberline {10.3.2}order}{28}% 
+\contentsline {subsubsection}{\numberline {10.3.3}flex-grow}{28}% 
+\contentsline {subsubsection}{\numberline {10.3.4}flex-shrink}{28}% 
+\contentsline {subsubsection}{\numberline {10.3.5}flex-basis}{28}% 
+\contentsline {subsubsection}{\numberline {10.3.6}flex}{29}% 
+\contentsline {section}{\numberline {11}Media Queries}{29}% 
+\contentsline {subsubsection}{\numberline {11.0.1}Considerations}{29}% 
+\contentsline {subsubsection}{\numberline {11.0.2}Consists of}{29}% 
+\contentsline {subsubsection}{\numberline {11.0.3}Use}{30}% 
+\contentsline {subsubsection}{\numberline {11.0.4}DON'T Use}{30}% 
+\contentsline {subsubsection}{\numberline {11.0.5}min-width}{30}% 
+\contentsline {subsubsection}{\numberline {11.0.6}Example}{31}% 
+\contentsline {subsection}{\numberline {11.1}Buzz-words}{31}% 
+\contentsline {section}{\numberline {12}Google's Flexbox Design Patterns}{31}% 
+\contentsline {subsection}{\numberline {12.1}Main take-aways}{31}% 
+\contentsline {subsection}{\numberline {12.2}Useful links}{31}% 
+\contentsline {subsubsection}{\numberline {12.2.1}Recommended layout}{32}% 
+\contentsline {section}{\numberline {13}Position}{32}% 
+\contentsline {subsection}{\numberline {13.1}Overview}{32}% 
+\contentsline {subsection}{\numberline {13.2}Fixed}{32}% 
+\contentsline {subsection}{\numberline {13.3}Relative}{32}% 
+\contentsline {subsection}{\numberline {13.4}Absolute}{32}% 
+\contentsline {subsection}{\numberline {13.5}Static}{33}% 
+\contentsline {subsection}{\numberline {13.6}Accepted properties}{33}% 
+\contentsline {section}{\numberline {14}Float}{33}% 
+\contentsline {subsection}{\numberline {14.1}Overflow}{33}% 
+\contentsline {subsection}{\numberline {14.2}\textit {clear}}{34}% 
+\contentsline {section}{\numberline {15}Background}{34}% 
+\contentsline {subsection}{\numberline {15.1}background-color}{34}% 
+\contentsline {subsection}{\numberline {15.2}background-image}{34}% 
+\contentsline {subsection}{\numberline {15.3}background-repeat}{34}% 
+\contentsline {subsection}{\numberline {15.4}background-size}{35}% 
+\contentsline {subsection}{\numberline {15.5}background-position}{35}% 
+\contentsline {subsection}{\numberline {15.6}background-origin}{35}% 
+\contentsline {subsection}{\numberline {15.7}background-attachment}{36}% 
+\contentsline {subsection}{\numberline {15.8}background-clip}{36}% 
+\contentsline {section}{\numberline {16}Forms}{36}% 
+\contentsline {section}{\numberline {17}Random Bits}{36}% 
+\contentsline {paragraph}{Average page size}{36}% 
+\contentsline {subsection}{\numberline {17.1}Avoid random overrides in CSS}{36}% 

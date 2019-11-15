@@ -919,6 +919,16 @@ getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize
 <string name="playback_speed_percentage">PlayBack Speed: %d%%</string>
 \end{lstlisting}
 
+\subsection{Formatted Strings}
+\subsubsection{Strings with values embedded}
+\begin{lstlisting}
+<string name="welcome_messages">Hello, %1$s! You have %2$d new messages.</string>
+\end{lstlisting}
+\begin{lstlisting}
+String text = getString(R.string.welcome_messages, username, mailCount);
+\end{lstlisting}
+Use \it{\%1\$s} for \it{strings} and \it{\%1\$d}  for decimals.
+
 %%%%%%%%%%%%%%%%%%% Intents %%%%%%%%%%%%%%%%%%%
 \section{Intents}
 \subsection{Starting n activity in a new task}
@@ -962,6 +972,156 @@ The file/layout that is then displayed/used is declared as the string in the $it
 
 \subsection{Determining Device size}
 page 335.
+
+
+\section{RecyclerView}
+\subsection{Item cell padding}
+\begin{lstlisting}
+package com.bengavan.android.recyclerviewtesting;
+
+import android.graphics.Rect;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class RecyclerViewItemSpacing extends RecyclerView.ItemDecoration {
+	
+	private int left = 0;
+	private int top = 0;
+	private int right = 0;
+	private int bottom = 0;
+	
+	public RecyclerViewItemSpacing(int spacing) {
+		new RecyclerViewItemSpacing(spacing, spacing, spacing, spacing);
+	}
+	
+	public RecyclerViewItemSpacing(int left, int top, int right, int bottom) {
+		this.left = left;
+		this.top = top;
+		this.right = right;
+		this.bottom = bottom;
+	}
+	
+	@Override
+	public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+		outRect.left = left;
+		outRect.top = top;
+		outRect.right = right;
+		outRect.bottom = bottom;
+	}
+}
+\end{lstlisting}
+
+\subsection{Swipe to delete}
+The main components to fulfill this:
+\begin{itemize}
+	\item \it{ItemTouchHelper}
+	\subitem This is attached to the \it{RecyclerView} and watches for swipes
+	
+	\item \it{ItemTouchHelper.SimpleCallback} 
+	\subitem This is passed into \it{ItemTouchHelper}'s constructor and contains the code that will run once the item is swiped.
+\end{itemize}
+
+\subsubsection{Creating \it{ItemTouchHelper.SimpleCallback}}
+Create a new class that extends \it{ItemTouchHelper.SimpleCallback}:
+\begin{lstlisting}
+public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+	
+	private Adapter adapter;
+	
+	public SwipeToDeleteCallback(Adapter adapter) {
+		super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+		this.adapter = adapter;
+	}
+}
+\end{lstlisting}
+The first parameter in the \it{super(...)} call adds support for dragging the item up or down; so leaving it \it{0} will prevent this.
+\\
+The send paramenter is for left and right, which we do want both; hence the or of both left and right.
+\\
+We also take in a reference to the adapter for the \it{RecyclerView}.
+\\\\
+We then need to override two methods:
+\begin{lstlisting}
+@Override
+public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+	return false;
+}
+
+@Override
+public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+	
+}
+\end{lstlisting}
+The \it{onMove(...)} override is not required; however, it is required to be overridden.
+\\
+The \it{onSwiped(...)} override is what we are going to use to implement swipe to delete.
+\\\\
+Creating a background for when the user swipes:
+\begin{lstlisting}
+@Override
+public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+	super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+	
+	View itemView = viewHolder.itemView;
+	
+	int backgroundCornerOffset = 20; // So the background is behind the rounded corners of itemView
+	
+	int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+	int iconTop = itemView.getTop() + iconMargin;
+	int iconBottom = iconTop + icon.getIntrinsicHeight();
+	
+	if (dX > 0) { // Swiping to the right
+		int iconLeft = itemView.getLeft() + iconMargin + icon.getIntrinsicWidth();
+		int iconRight = itemView.getLeft() + iconMargin;
+		
+		icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+		
+		background.setBounds(itemView.getLeft(), itemView.getTop(),
+		itemView.getLeft() + ((int) dX) + backgroundCornerOffset,
+		itemView.getBottom());
+		
+	} else if (dX < 0) { // Swiping to the left
+		int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
+		int iconRight = itemView.getRight() - iconMargin;
+		icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+		background.setBounds(itemView.getRight() + ((int) dX) + - backgroundCornerOffset,
+		itemView.getTop(), itemView.getRight(), itemView.getBottom());
+	} else { // View is un-swiped
+		background.setBounds(0,0,0,0);
+	}
+	
+	background.draw(c);
+	icon.draw(c);
+}
+\end{lstlisting}
+
+\subsection{Press and hold to change order}
+
+\subsection{Rounded Corners}
+Add a drawable resource (in \it{res/drawable/}):
+\begin{lstlisting}
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle">
+	
+	<corners android:radius="5dp"/>
+	
+	<solid android:color="@android:color/holo_blue_light" />
+
+</shape>
+\end{lstlisting}
+then set it as the background of the list item layout.
+
+%%%%%%%%%%%%%%%%%%% TextView %%%%%%%%%%%%%%%%%%%
+\section{TextView}
+
+\subsection{Horizontal Scroll (Automatically)}
+To make a \it{TextView}'s text scroll automatically (like spotify) the textView XML declaration is:
+\begin{lstlisting}
+	content...
+\end{lstlisting}
+and to activate we need to set ..... to true
 
 %%%%%%%%%%%%%%%%%%% Localization %%%%%%%%%%%%%%%%%%%
 \section{Localization}
@@ -1337,6 +1497,7 @@ Multiple \it{handlers}  can be attached to one \it{looper}.
 
 %%%%%%%%%%%%%%%%%%% HTTP %%%%%%%%%%%%%%%%%%%%%
 \section{HTTP}
+!!!!!!!!!!!!!!!!!!!!!!!!YOU NEED TO HAVE THE INTERNET PERMISSION!!!!!!!!!!!!!!!!!!!!!!!!
 \subsection{Make get requests}
 \begin{lstlisting}
 public byte[] getUrlBytes(String urlString) throws IOException {
@@ -1367,6 +1528,11 @@ public String getUrlString(String urlString) throws IOException {
 	return new String(getUrlBytes(urlString));
 }
 \end{lstlisting}
+
+\subsection{Connecting to local sever from emulator}
+Use the IP address of \it{10.0.2.2} instead of \it{localhost} 
+\\
+This is due to that when using \it{localhost}, it is trying to connect to a that address on the actual emulator. 
 
 \subsection{building a Url String}
 \begin{lstlisting}

@@ -38,6 +38,26 @@
 	captionpos=b
 }
 
+% Packages
+%\usepackage{showframe}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage{wrapfig}
+
+% Auto-hyphen controlls
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% New Commands 
+\newcommand{\<}{\guilsinglleft}
+\renewcommand{\>}{\guilsinglright}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+
 %opening
 \title{iOS}
 \author{Ben Gavan}
@@ -45,6 +65,88 @@
 \begin{document}
 
 \maketitle
+\tableofcontents
+
+\section{Programmatic Startup iOS 13 onward}
+\subsection{Motivation}
+From the introduction of iOS 13, there has been a splitting of \it{AppDelegate} into \it{AppDelegate} and \it{SceneDelegate}.  Since \it{SceneDelegate} has components only introduced and available for iOS13, all of \it{SceneDelegate} is no longer backwards compatible.  With $95\%$ using iOS 11 onward (and $5\%$ still using even earlier versions), it would be recommended to  still support these users.  To do so, we have to make alterations in three files; \it{AppDelegate}, \it{SceneDelegate}, and \it{Info.plist}.
+
+\subsection{Alterations to be made in \it{Info.plist}}
+Along with removing \it{Main.storyboard} from the project and setting the \it{Main interface} in the project settings page to nothing, we also need to remove the refernece to 'Main' in the \it{Info.plist} file.  To open the file:
+\begin{itemize}
+	\item Right-click on the \it{Info.plist} file
+	\item select \it{open as} $\rightarrow$ \it{Source Code}
+\end{itemize}
+Then change the \it{UIApplicationSceneManifest} section to something like this with the MainStoryboard not defined
+\begin{lstlisting} 
+<key>UIApplicationSceneManifest</key>
+<dict>
+	<key>UIApplicationSupportsMultipleScenes</key>
+	<false/>
+	<key>UISceneConfigurations</key>
+	<dict>
+		<key>UIWindowSceneSessionRoleApplication</key>
+		<array>
+			<dict>
+				<key>UILaunchStoryboardName</key>
+				<string>LaunchScreen</string>
+				<key>UISceneConfigurationName</key>
+				<string>Default Configuration</string>
+				<key>UISceneDelegateClassName</key>
+				<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+		</dict>
+		</array>
+	</dict>
+</dict>
+\end{lstlisting}
+
+\subsection{\it{AppDelegate}}
+No significant changes have to be made to \it{AppDelegate} since everything is compatible with iOS 11.  
+\\
+All that is needed is to add a new variable to hold the \it{UIWindow} and then to initialize it how you used to (i.e. setting the root view-controller and making the window make and visible) 
+\begin{lstlisting}
+var window: UIWindow?
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions 	launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+	// Override point for customization after application launch.
+	
+	window = window ?? UIWindow()
+	window?.rootViewController = ViewController()
+	window?.makeKeyAndVisible()
+	
+	return true
+}
+\end{lstlisting}
+
+\subsection{\it{SceneDelegate}}
+The first requirement is to add limit the \it{SceneDelegate} to only be used for iOS 13+.  To do this, add  
+\begin{lstlisting}
+@available(iOS 13.0, *)
+\end{lstlisting}
+on the line directly above the class declaration.
+\\
+The usual window setup is as per usual:
+\begin{lstlisting}
+import UIKit
+
+@available(iOS 13.0, *)
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+	
+	var window: UIWindow?
+	
+	
+	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+	
+		guard let windowScene = (scene as? UIWindowScene) else { return }
+		
+		window = window ?? UIWindow(windowScene: windowScene)
+		window?.rootViewController = ViewController()
+		window?.makeKeyAndVisible()
+	}
+	...
+	
+}
+\end{lstlisting}
 
 \section{AppDelegate}
 \subsection{UIWindow()}
@@ -60,6 +162,95 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 	return true
 }
 \end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%% // MARK: - %%%%%%%%%%%%%%%%%%%%%
+\section{// MARK: -}
+\subsection{Benefits of using MARKS}
+\begin{itemize}
+	\item consistency across files
+	\item consistency across projects
+	\item Keep code withing those files organized and easy to find.
+\end{itemize}
+\subsection{Example Snippets}
+\subsubsection{UIViewController}
+\begin{lstlisting}
+// MARK: - Properties
+
+// MARK: - IBOutlets
+
+// MARK: - Life cycle
+
+// MARK: - Set up
+
+// MARK: - IBActions
+
+// MARK: - Navigation
+
+// MARK: - Network Manager calls
+
+// MARK: - Extensions
+\end{lstlisting} \cite{medium-ios-code-snipets}
+
+\subsubsection{Models}
+\begin{lstlisting}
+	// MARK: - Attributes
+	
+	// MARK: - Initializers
+	
+	// MARK: - Parsers
+\end{lstlisting}
+\cite{medium-ios-code-snipets}
+
+%%%%%%%%%%%%%%%%%%%%%  Margin  %%%%%%%%%%%%%%%%%%%%%
+\section{View Margin}
+A margin specifies where a sub-view of its can be constrained up to.
+\\\\
+The following creates two square views with one inside the other.  The outer view has a margin of 20 top, 10 on the other 3 sides.  When the constraints for v2 are set, we need to use the \it{v1.layoutMarginsGuide.---} property to access the margins to be properly constrained. \cite[pp.42]{Programming-iOS10}
+\begin{lstlisting}
+ let v1 = UIView()
+v1.translatesAutoresizingMaskIntoConstraints = false
+v1.backgroundColor = .blue
+v1.layoutMargins = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+
+let v2 = UIView()
+v2.translatesAutoresizingMaskIntoConstraints = false
+v2.backgroundColor = .red
+
+view.addSubview(v1)
+
+v1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+v1.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+v1.heightAnchor.constraint(equalToConstant: 200).isActive = true
+v1.widthAnchor.constraint(equalToConstant: 200).isActive = true
+
+v1.addSubview(v2)
+
+v2.topAnchor.constraint(equalTo: v1.layoutMarginsGuide.topAnchor).isActive = true
+v2.leadingAnchor.constraint(equalTo: v1.layoutMarginsGuide.leadingAnchor).isActive = true
+v2.heightAnchor.constraint(equalToConstant: 100).isActive = true
+v2.widthAnchor.constraint(equalToConstant: 100).isActive = true
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%  iOS Versions  %%%%%%%%%%%%%%%%%%%%%
+\section{iOS Versions}
+$5\% \leftarrow$  iOS 11 $\rightarrow 95\%$
+\\
+with iOS 11 being released in 19/9/2017
+
+\begin{thebibliography}{99}
+	
+	\bibitem{medium-ios-code-snipets}
+	Helpful iOS and Xcode Code Snippets
+	\it{Matias Jurfest}.
+	Available from:
+	\<https://medium.com/better-programming/helpful-code-snippets-for-ios-21aa5ef894de\>
+	\\{[Accessed on 15th October 2019]}
+	
+	\bibitem{Programming-iOS-10}
+	Programming iOS 10: Dive deep into view, view controllers, and frameworks.
+	Matt Neuburg
+
+\end{thebibliography}
 
 
 \end{document}

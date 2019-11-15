@@ -1,5 +1,49 @@
 \documentclass[]{article}
 
+% New Commands
+\renewcommand{\it}[1]{\textit{#1}}
+
+
+% imports
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+%%% lstlisting
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, try, catch, switch, var, if, in, while, do, else, case, default, break, class, static, public, private, protected, void, int, uint8, boolean, final, abstract, for, super, this, extends, implements, type},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this, @Override, @NonNull},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstset{
+	language=JavaScript,
+	backgroundcolor=\color{lightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b
+}
+%%%
+
 %opening
 \title{Go}
 \author{}
@@ -12,10 +56,53 @@
 
 \end{abstract}
 
+\section{Goland Keyboard Short-cuts}
+\subsection{Format File}
+\it{sbift + option + command + f}
+\begin{itemize}
+	\item Format File
+	\subitem \it{sbift + option + command + f}
+\end{itemize}
+
 \section{fmt}
 \subsection{fmt.printf()}
 \begin{itemize}
 	\item \%T - prints the type of the data 
 \end{itemize}
+
+\subsection{fmt.Sprintf(...,...)}
+float to string with specifying the number of decimal places.
+\begin{lstlisting}
+s := fmt.Sprintf("%.2f", 12.3456) // s == "12.35"
+\end{lstlisting}
+
+
+\section{byte}
+The type of \it{byte} is 'an alias for \it{uint8} an is equivalent in all ways'. 'It is used, by convention, to distinguish byte values from 8-bit unsigned integer values'.
+\begin{lstlisting}
+// byte is an alias for uint8 and is equivalent to uint8 in all ways. It is
+// used, by convention, to distinguish byte values from 8-bit unsigned
+// integer values.
+type byte = uint8
+\end{lstlisting}\cite{byte-definition}
+
+\section{Networking}
+
+\subsection{Creating a HTTP Server}
+\begin{lstlisting}
+
+	content...
+\end{lstlisting}
+
+
+
+\section{Neo4j}
+
+\begin{thebibliography}{99}
+	
+	\bibitem{byte-definition}
+	\it{builtin.go} line 88
+	
+\end{thebibliography}
 
 \end{document}
