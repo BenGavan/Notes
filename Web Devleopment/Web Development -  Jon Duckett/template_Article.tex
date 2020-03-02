@@ -1,0 +1,246 @@
+\documentclass[]{article}
+
+\usepackage{color}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\usepackage{upquote}
+\usepackage{listings}
+\lstdefinelanguage{JavaScript}{
+	morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morestring=[b]",
+	morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+	language=html,
+	sensitive=true, 
+	alsoletter={<>=-},
+	otherkeywords={
+		% HTML tags
+		<html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+		<canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
+	},  
+	ndkeywords={
+		% General
+		=,
+		% HTML attributes
+		charset=, id=, width=, height=,
+		% CSS properties
+		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+	},  
+	morecomment=[s]{<!--}{-->},
+	tag=[s]
+}
+
+\lstset{%
+	% Basic design
+	backgroundcolor=\color{editorGray},
+	basicstyle={\small\ttfamily},   
+	frame=l,
+	% Line numbers
+	xleftmargin={0.75cm},
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberfirstline=true,
+	% Code design   
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{darkgray}\ttfamily,
+	ndkeywordstyle=\color{editorGreen}\bfseries,
+	stringstyle=\color{editorOcher},
+	% Code
+	language=HTML5,
+	alsolanguage=JavaScript,
+	alsodigit={.:;},
+	tabsize=2,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	extendedchars=true,
+	breaklines=true,        
+	% Support for German umlauts
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+% Packages
+%\usepackage{showframe}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage{wrapfig}
+
+% Auto-hyphen controlls
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% New Commands 
+\newcommand{\<}{\guilsinglleft}
+\renewcommand{\>}{\guilsinglright}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+%opening
+\title{HTML AND CSS \\ Jon Duckett}
+\author{Ben Gavan}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%% Structure %%%%%%%%%%%%%%%%%%%%%%
+\section{Structure}
+
+%%%%%%%%%%%%%%%%%%%%% Text %%%%%%%%%%%%%%%%%%%%%%
+\section{Text}
+
+%%%%%%%%%%%%%%%%%%%%% Lists %%%%%%%%%%%%%%%%%%%%%%
+\section{Lists}
+
+%%%%%%%%%%%%%%%%%%%%% Links %%%%%%%%%%%%%%%%%%%%%%
+\section{Links}
+
+%%%%%%%%%%%%%%%%%%%%% Images %%%%%%%%%%%%%%%%%%%%%%
+\section{Images}
+
+%%%%%%%%%%%%%%%%%%%%% Tables %%%%%%%%%%%%%%%%%%%%%%
+\section{Tables}
+
+\begin{itemize}
+	\item Table is drawn row by row
+\end{itemize}
+
+\subsection{Table Structure}
+\begin{lstlisting}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Table Structure</title>
+</head>
+<body>
+
+<table>
+	<tr>				  -- Table Row
+		<td>1</td>	-- Table Element in that row
+		<td>2</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>5</td>
+		<td>6</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>8</td>
+		<td>9</td>
+	</tr>
+</table>
+
+</body>
+</html>
+\end{lstlisting}
+
+\subsection{Table Headings}
+\begin{lstlisting}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+<table>
+	<tr>
+		<th></th>	-- Empty cell
+		<th scope="col">Saturday</th> -- Table Heading for the column.
+		<th scope="col">Sunday</th>
+	</tr>
+	<tr>
+		<th scope="row">Tickets sold:</th> -- Table Heading for the row.
+		<td>120</td>
+		<td>135</td>
+	</tr>
+	<tr>
+		<th scope="row">Total Sales:</th>
+		<td>$600</td>
+		<td>$675</td>
+	</tr>
+</table>
+
+</body>
+</html>
+\end{lstlisting}
+
+\subsection{Long tables - Semantic Separation}
+Can separate the main sections of the table semantically by using \it{<thead>}, \it{<tbody>}, and \it{<tfooter>} for longer tables.
+\begin{lstlisting}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Long Tables</title>
+</head>
+<body>
+
+<table>
+<thead>
+<tr>
+	<th>Date</th>
+	<th>Income</th>
+	<th>Expenditure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<th>01th January</th>
+	<td>250</td>
+	<td>36</td>
+</tr>
+<tr>
+	<th>02th January</th>
+	<td>250</td>
+	<td>36</td>
+</tr>
+<tr>
+	<th>03th January</th>
+	<td>250</td>
+	<td>36</td>
+</tr>
+<tr>
+</tbody>
+<tfoot>
+	<td></td>
+	<td>7824</td>
+	<td>1241</td>
+</tfoot>
+</table>
+
+</body>
+</html>
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%% Forms %%%%%%%%%%%%%%%%%%%%%%
+\section{Forms}
+
+\end{document}

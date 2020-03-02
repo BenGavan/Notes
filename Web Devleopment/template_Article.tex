@@ -112,6 +112,7 @@ Useful reminders:
 \end{itemize}
 \end{abstract}
 
+%%%%%%%%%%%%%%%%% Terminal Essentials %%%%%%%%%%%%%%%%%%%%
 \section{Terminal Essentials}g
 \subsection{Basic Commands}
 \begin{itemize}
@@ -147,6 +148,7 @@ Useful reminders:
 	\item git push: pushes to remote git 'origin/master' (on github)
 \end{itemize}
 
+%%%%%%%%%%%%%%%%% Key Board Shortcuts %%%%%%%%%%%%%%%%%%%%
 \section{Key Board Shortcuts}
 	\begin{itemize}
 		\item 'cmnd + / ' comment current line 
@@ -156,6 +158,7 @@ Useful reminders:
 		\item 'option + click' to select curser on multiple lines
 	\end{itemize}
 
+%%%%%%%%%%%%%%%%% HTML Essentials %%%%%%%%%%%%%%%%%%%%
 \section{HTML Essentials}
 \subsection{File Naming conventions}
 	\begin{itemize}
@@ -224,6 +227,7 @@ Useful reminders:
 	\item Will take up only the size/space required - so will stack horizontally; hence inline.
 \end{itemize}
 
+%%%%%%%%%%%%%%%%% HTML Tags %%%%%%%%%%%%%%%%%%%%
 \section{HTML Tags}
 \subsection{div}
 \begin{itemize}
@@ -247,7 +251,34 @@ Useful reminders:
 	\subitem '\_blank' opens url in new tab 
 \end{itemize}
 
+\subsection{\it{q} - Short quote}
+Short quotations that don't require paragraph breaks
+\\
+If has the cite attribute, it only appears in the source code - user can not see it.
 
+
+\subsection{\it{blockquote} - long quote}
+Used for long quotations.
+\\
+Usually rendered with the block of text indented.
+has the cite element.
+
+\subsection{\it{cite} - citing an author}
+ represents a reference to a creative work
+\\
+Must include:
+\begin{itemize}
+	\item Title of work  
+	\item or a url reference which may be in abbreviated form.
+\end{itemize}
+
+\subsection{\it{pre}}
+represents preformatted text - usually displayed in mono-space font as it is in the file.
+\\
+Need to escape \< and \> characters with \&lt and \&gt
+
+
+%%%%%%%%%%%%%%%%% CSS Attributes %%%%%%%%%%%%%%%%%%%%
 \section{CSS Attributes}
 \subsubsection{background-size}
 \begin{itemize}
@@ -1454,6 +1485,19 @@ Can take the values of:
 
 \subsection{background-clip}
 Extends to both background-image and background-color.
+
+\section{HTML Entities}
+To use stuff like <, use HTML entities:
+\begin{lstlisting}
+	&#60
+	&lt
+\end{lstlisting}
+\subsection{Non-breaking space (\&nbsp;)}
+Use 
+\begin{lstlisting}
+	&nbsp;
+\end{lstlisting}
+to force the text not to be put onto more than one line at that space.
 
 %%%%%%%%%%%%%%%%%%%%% Forms %%%%%%%%%%%%%%%%%%%%%%
 \section{Forms}

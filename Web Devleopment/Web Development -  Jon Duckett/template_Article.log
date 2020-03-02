@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.25)  2 MAR 2020 17:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.25)  27 JAN 2020 02:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -313,25 +313,25 @@ Package: wrapfig 2003/01/31  v 3.6
 (./template_Article.aux)
 \openout1 = `template_Article.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 99.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 99.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 98.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 98.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    ... okay on input line 98.
 
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -407,67 +407,51 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 (./template_Article.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 2.
+(Font)              <7> on input line 7.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 2.
- [1
-
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+(Font)              <5> on input line 7.
 )
 \tf@toc=\write3
 \openout3 = `template_Article.toc'.
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 111.
- [4] [5]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 190.
+ [1
+
+{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 131.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [6] [7] [8]
-[9]
+)
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 337.
- [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23]
-[24] [25] [26] [27] [28] [29]
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 121
-7.
-
-(/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [30] [31]
-[32] [33] [34] [35] [36] [37] [38] (./template_Article.aux) ) 
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 132.
+ [2] [3] [4]
+(./template_Article.aux) ) 
 Here is how much of TeX's memory you used:
- 4534 strings out of 492616
- 61503 string characters out of 6129481
- 350876 words of memory out of 5000000
- 8389 multiletter control sequences out of 15000+600000
- 16886 words of font info for 41 fonts, out of 8000000 for 9000
+ 4410 strings out of 492616
+ 59737 string characters out of 6129481
+ 349876 words of memory out of 5000000
+ 8274 multiletter control sequences out of 15000+600000
+ 14641 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,58p,520b,1653s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texliv
-e/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/local/texlive
-/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2
-019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/20
-19/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2019/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2019/texm
-f-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/local/texlive/2019/texmf-
-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/local/texlive/2019/texmf-di
-st/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2019/texmf-dist
-/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2019/texmf-dist/f
-onts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2019/texmf-dist/fon
-ts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2019/texmf-dist/fonts
-/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/t
-ype1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
-e1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1
-/public/cm-super/sfti1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/p
-ublic/cm-super/sftt0900.pfb>
-Output written on template_Article.pdf (38 pages, 322898 bytes).
+ 41i,6n,58p,283b,1653s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/c
+m-super/cm-super-t1.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-
+super/cm-super-ts1.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/c
+m-super/sfbx0900.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-
+super/sfbx1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-su
+per/sfbx1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-supe
+r/sfbx1440.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/
+sfrm0900.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sf
+rm1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm
+1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm17
+28.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1000
+.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0900.p
+fb>
+Output written on template_Article.pdf (4 pages, 173935 bytes).
 PDF statistics:
- 197 PDF objects out of 1000 (max. 8388607)
- 140 compressed objects within 2 object streams
+ 61 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

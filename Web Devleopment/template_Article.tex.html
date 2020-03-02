@@ -1,0 +1,1522 @@
+\documentclass[]{article} 
+
+\usepackage{color} 
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95} 
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0) 
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0) 
+\usepackage{upquote} 
+\usepackage{listings} 
+\lstdefinelanguage{JavaScript}{ 
+morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break}, 
+morecomment=[s]{/*}{*/}, 
+morecomment=[l]//, 
+morestring=[b]", 
+morestring=[b]' 
+} 
+
+\lstdefinelanguage{HTML5}{ 
+language=html, 
+sensitive=true,  
+alsoletter={<>=-}, 
+otherkeywords={ 
+% HTML tags 
+<html>, <head>, <title>, </title>, <meta, />, </head>, <body>, 
+			<canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, >< 
+		},   
+		ndkeywords={ 
+		% General 
+		=, 
+		% HTML attributes 
+		charset=, id=, width=, height=, 
+		% CSS properties 
+		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function: 
+		},   
+		morecomment=[s]{<!--}{-->}, 
+		tag=[s] 
+		} 
+		
+		\lstset{% 
+		% Basic design 
+		backgroundcolor=\color{editorGray}, 
+		basicstyle={\small\ttfamily},    
+		frame=l, 
+		% Line numbers 
+		xleftmargin={0.75cm}, 
+		numbers=left, 
+		stepnumber=1, 
+		firstnumber=1, 
+		numberfirstline=true, 
+		% Code design    
+		keywordstyle=\color{blue}\bfseries, 
+		commentstyle=\color{darkgray}\ttfamily, 
+		ndkeywordstyle=\color{editorGreen}\bfseries, 
+		stringstyle=\color{editorOcher}, 
+		% Code 
+		language=HTML5, 
+		alsolanguage=JavaScript, 
+		alsodigit={.:;}, 
+		tabsize=2, 
+		showtabs=false, 
+		showspaces=false, 
+		showstringspaces=false, 
+		extendedchars=true, 
+		breaklines=true,         
+		% Support for German umlauts 
+		literate=% 
+		{Ã–}{{\"O}}1 
+		{Ã„}{{\"A}}1 
+		{Ãœ}{{\"U}}1 
+		{ÃŸ}{{\ss}}1 
+		{Ã¼}{{\"u}}1 
+		{Ã¤}{{\"a}}1 
+		{Ã¶}{{\"o}}1 
+		} 
+		
+		% Packages 
+		%\usepackage{showframe} 
+		\usepackage{multicol} 
+		\usepackage{graphicx} 
+		\usepackage{textcomp} 
+		\usepackage[T1]{fontenc} 
+		\usepackage{wrapfig} 
+		
+		% Auto-hyphen controlls 
+		\tolerance=1 
+		\emergencystretch=\maxdimen 
+		\hyphenpenalty=10000 
+		\hbadness=10000 
+		
+		% New Commands  
+		\newcommand{\<}{\guilsinglleft} 
+		\renewcommand{\>}{\guilsinglright} 
+		\renewcommand{\it}[1]{\textit{#1}} 
+		\renewcommand{\bf}[1]{\textbf{#1}} 
+		
+		%opening 
+		\title{HTML \& CSS} 
+		\author{Ben Gavan} 
+		
+		\begin{document} 
+		\maketitle 
+		
+		\tableofcontents 
+		
+		\begin{abstract} 
+		Acronyms: 
+		\begin{itemize} 
+		\item DOM = Document Object Model 
+		\end{itemize}  
+		Useful reminders: 
+		\begin{itemize} 
+		\item Content $\rightarrow$ Padding $\rightarrow$ Border $\rightarrow$ Margin  
+		\end{itemize} 
+		\end{abstract} 
+		
+		%%%%%%%%%%%%%%%%% Terminal Essentials %%%%%%%%%%%%%%%%%%%% 
+		\section{Terminal Essentials}g 
+		\subsection{Basic Commands} 
+		\begin{itemize} 
+		\item pwd: Print working directory  
+		\item ls: list 
+		\item ls -la : list list all - shows more detail  
+		\item clear: clear current terminal 
+		\item cat: Prints out the contents of a file into the termial  
+		\item mkdir dir-name: makes a new directory with the name as the string supplied after 'mkdir'  within the current dirrectory  
+		\item rm file-name: remove directory  
+		\item rm -rf dir-name: remove directory recursively (until complete) 
+		\item touch txt-file-name: creates new blank txt file with with file name specified 
+		\item open file-name: opens the file specified 
+		
+		\end{itemize} 
+		
+		\subsection{Git} 
+		\begin{itemize} 
+		\item git init: creates an emtpty git repo within current dir 
+		\item git status: Gives info on what files haven't been added 
+		\item git add  
+		\begin{itemize} 
+		\item dir-name: adds only that dir to the staging index 
+		\item . : add everything below current dir that's changed 
+		\item  - -all : adds all files below and above the current dir  
+		\end{itemize} 
+		\item git commit  
+		\begin{itemize} 
+		\item -m "commit-message": commits everything in the staging index along with a commit message. 
+		\end{itemize} 
+		\item git remote add origin : connects the local repo to the cloud  
+		\item git push -u origin master : : pushes to the master  
+		\item git push: pushes to remote git 'origin/master' (on github) 
+		\end{itemize} 
+		
+		%%%%%%%%%%%%%%%%% Key Board Shortcuts %%%%%%%%%%%%%%%%%%%% 
+		\section{Key Board Shortcuts} 
+		\begin{itemize} 
+		\item 'cmnd + / ' comment current line  
+		\item 'p\{TEXT\_HERE\} + tab' creates p tag with text here as text  
+		\item 'lorem' creates some lorem text 
+		\item 'control + space' when in element "" to bring up options of possible selections 
+		\item 'option + click' to select curser on multiple lines 
+		\end{itemize} 
+		
+		%%%%%%%%%%%%%%%%% HTML Essentials %%%%%%%%%%%%%%%%%%%% 
+		\section{HTML Essentials} 
+		\subsection{File Naming conventions} 
+		\begin{itemize} 
+		\item all html files end with the extension '.html' 
+		\item all css style sheets end with the extension '.css' 
+		\item home/default/main page should be called 'index.html' 
+		\item style sheet for main page should be called 'main.css' 
+		\item only use lower case alphanumeric characters (a-z, 0-9)  
+		\item no spaces 
+		\end{itemize} 
+		\subsection{Folder Naming Conventions} 
+		\begin{itemize} 
+		\item only use lower case alphanumeric characters (a-z, 0-9)  
+		\item no spaces 
+		\item follow seperation of cencerns  
+		\item for folder holding css files, use 'css' 
+		
+		\end{itemize} 
+		
+		\subsection{Emmet.io} 
+		\begin{itemize} 
+		\item 'cmnd + / ' comment current line  
+		\item 'p\{TEXT\_HERE\} + tab' creates p tag with text here as text  
+		\item 'lorem' creates some lorem text 
+		\end{itemize} 
+		
+		\subsection{Tag Attributes} 
+		To link a CSS Style sheet to html page: 
+		\begin{lstlisting} 
+		<link rel="stylesheet" href="main.css"> 
+			\end{lstlisting} 
+			Add a picture: 
+			\begin{lstlisting} 
+			<img src="puppy.jpg" alt="An image of cute puppy"> 
+				\end{lstlisting} 
+				Link to other page 
+				\begin{lstlisting} 
+				<a href="http://www.google.com" target="_blank">go to google</a> 
+				\end{lstlisting} 
+				
+				\subsection{Absolute vs Relative URLs} 
+				\paragraph{Absolute} 
+				
+				\begin{itemize} 
+				\item Full URL 
+				\item Examples: 
+				\subitem '<img src="https://pbs.twimg.com/media/DLUDtXlX0AEiCnG.jpg">' 
+					\end{itemize} 
+					
+					\paragraph{Relative} 
+					
+					\begin{itemize} 
+					\item Within one domain, sshows where one resource is relative to another 
+					\item Examples: 
+					\subitem pic/anatomy-of-an-html-element.png 
+					\subitem ../pic/anatomy-of-an-html-element.png (goes up one level first by using '../')) 
+					\end{itemize} 
+					
+					\section{Block vs Inline} 
+					\subsection{Block} 
+					\begin{itemize} 
+					\item Will take up the width of the parrent (so will stack verticlly) 
+					\end{itemize} 
+					\subsection{Inline}  
+					\begin{itemize} 
+					\item Will take up only the size/space required - so will stack horizontally; hence inline. 
+					\end{itemize} 
+					
+					%%%%%%%%%%%%%%%%% HTML Tags %%%%%%%%%%%%%%%%%%%% 
+					\section{HTML Tags} 
+					\subsection{div} 
+					\begin{itemize} 
+					\item "block" level element = takes up the width of the parrent (so will stack verticlly) 
+					\item Generic Element 
+					\item Non-semantic 
+					\end{itemize} 
+					
+					\subsection{span} 
+					\begin{itemize} 
+					\item "inline" element (stacked horizontally next to each other) 
+					\item Generic Element 
+					\item Non-semantic 
+					\end{itemize} 
+					
+					\subsection{a} 
+					\paragraph{Attributes} 
+					\begin{itemize} 
+					\item 'href' urlm to open when clicked 
+					\item 'target' how to do it when clicked 
+					\subitem '\_blank' opens url in new tab  
+					\end{itemize} 
+					
+					\subsection{\it{q} - Short quote} 
+					Short quotations that don't require paragraph breaks 
+					\\ 
+					If has the cite attribute, it only appears in the source code - user can not see it. 
+					
+					
+					\subsection{\it{blockquote} - long quote} 
+					Used for long quotations. 
+					\\ 
+					Usually rendered with the block of text indented. 
+					has the cite element. 
+					
+					\subsection{\it{cite} - citing an author} 
+					represents a reference to a creative work 
+					\\ 
+					Must include: 
+					\begin{itemize} 
+					\item Title of work   
+					\item or a url reference which may be in abbreviated form. 
+					\end{itemize} 
+					
+					\subsection{\it{pre}} 
+					represents preformatted text - usually displayed in mono-space font as it is in the file. 
+					\\ 
+					Need to escape \< and \> characters with \&lt and \&gt 
+					
+					
+					%%%%%%%%%%%%%%%%% CSS Attributes %%%%%%%%%%%%%%%%%%%% 
+					\section{CSS Attributes} 
+					\subsubsection{background-size} 
+					\begin{itemize} 
+					\item 'cover': covers all of the background - avoids repeates 
+					\end{itemize} 
+					\subsubsection{background-repeat} 
+					\begin{itemize} 
+					\item 'no-repeat': prevents repeates 
+					\end{itemize} 
+					
+					\subsubsection{display} 
+					\begin{itemize} 
+					\item 'inline' - Will take up only the size/space required - so will stack horizontally; hence inline. 
+					\subitem If width is set, it will have no effect (It will only take up the space required (for the content inside it)) 
+					\subitem so since 'block' level elements take up the width of a parent, they cannot be nested inside 'inline' elements.  (only can have children of 'inline') 
+					
+					\item 'block' - Will take up the width of the parent (so will stack vertically) 
+					
+					\item 'inline-block' - displays items inline, but leaves enough room for each element 
+					\subitem can set the width and height. 
+					\subitem Acts like a block as well in inline (acts like an inline block). 
+					
+					\item 'none' - will not be displayed 
+					\end{itemize} 
+					
+					\subsubsection{Dimensions} 
+					\begin{itemize} 
+					\item 'width: ....' - sets the width  
+					\item 'height: ....' - sets the height  
+					\end{itemize} 
+					\begin{lstlisting} 
+					div { 
+					width: 100px; 
+					height: 100px; 
+					} 
+					\end{lstlisting} 
+					
+					\subsubsection{text-align} 
+					Sets how text should be aligned within the element. 
+					
+					\subsubsection{Content - Padding - Border - Margin} 
+					\begin{itemize} 
+					\item Content - the content itself 
+					\item Padding - The Amount of padding around the content before the border 
+					\item Border - Around the padding of the content 
+					\item Margin - The margin/padding around the border before another element can be displayed. 
+					\end{itemize} 
+					
+					\subsubsection{border} 
+					\begin{itemize} 
+					\item 
+					\item ''border-radius: ..." - sets the radius of border 
+					\subitem "...\%" - sets the radius as a percentage of the width/height 
+					\end{itemize} 
+					\begin{lstlisting} 
+					border: 1px solid red; 
+					border-width: 1px; 
+					border-style: solid; 
+					border-color: red; 
+					\end{lstlisting} 
+					
+					\subsubsection{margin} 
+					\begin{itemize} 
+					\item TRBL 
+					\item TB RL 
+					\item T R B L 
+					\item "margin: 0 auto" - no padding on top or bottom, then auto set left/right so that element is on the centre. 
+					\end{itemize} 
+					
+					\subsubsection{box-sizing} 
+					\begin{itemize} 
+					\item "box-sizing: border-box" - sets the max size of the box/div (up-to the outside of the border) to the set dimensions via width/height.  So the border outside will stay as it is, but the content will shrink if padding is added.  If the border is width increased - it will increase inwards, shrinking the content.  The Element will not grow outwardly (grows inwards)  
+					\end{itemize} 
+					
+					\subsection{CSS Reset} 
+					Brings the CSS formatting down to a uniform base line. 
+					\subsubsection{Motivation} 
+					Each browser has its own base CSS ('user agent style sheet'  for chrome).  So if we want to have our website uniform across all browsers, we need to apply our own. 
+					\subsubsection{Aim} 
+					To provide uniformity across browsers. 
+					\subsubsection{Requirements} 
+					\begin{itemize} 
+					\item Light weight 
+					\item is applied to all used elements 
+					\end{itemize} 
+					\subsubsection{Solution} 
+					Create our own style sheet to override what the browser (agent) applies. 
+					\subsubsection{Alternatives} 
+					There are some standards, e.g. meyer css reset (oldest), normalize.css (newer), sanitize.css (newest).   
+					\\ 
+					However, some of these don't bring the formatting down to zero.  Instead they provide their own baseline formatting - overriding what the browser's baseline is. 
+					
+					\section{CSS Selectors} 
+					Different ways to select HTML elements. 
+					\subsection{element} 
+					Formats that HTML element. 
+					\subsection{class} 
+					Adds the 'class' attribute' to a HTML element. 
+					\\ 
+					Can add them wherever and as many times as we want. 
+					\\ 
+					A period before the selector is used to denote that the selector is for a class. ".example \{\}" 
+					
+					\subsection{id} 
+					\begin{itemize} 
+					\item Can only be used once. 
+					\item Notation to denote id selector is "\#example \{\}"  
+					\end{itemize} 
+					\begin{lstlisting} 
+					<p id="example"></p> 
+					\end{lstlisting} 
+					\begin{lstlisting} 
+					#example { 
+					} 
+					\end{lstlisting} 
+					
+					\subsection{Attributes} 
+					\begin{itemize} 
+					\item Only applies that selector to HTML tags which have that attribute 
+					\end{itemize} 
+					\begin{lstlisting} 
+					<p example="something"></p> 
+					\end{lstlisting} 
+					\begin{lstlisting} 
+					[example] { 
+					} 
+					\end{lstlisting} 
+					\begin{itemize} 
+					\item Only applies that selector to HTML tags that have the exact attribute and set to that specific value  
+					\end{itemize} 
+					\begin{lstlisting} 
+					<p example="something"></p> 
+					\end{lstlisting} 
+					\begin{lstlisting} 
+					[example=something] { 
+					} 
+					\end{lstlisting} 
+					
+					\subsection{Pseudo Class} 
+					Denoted by ":" (single :)  
+					\subsubsection{Link} 
+					\begin{lstlisting} 
+					/\* order matters */ 
+					/\* LVHA */ 
+					/\* Link Visited Hover Active */ 
+					a:link { 
+					color: green; 
+					} 
+					
+					a:visited { 
+					color: blue; 
+					} 
+					
+					a:hover { 
+					color: red; 
+					} 
+					
+					a:active { 
+					color: yellow; 
+					} 
+					\end{lstlisting} 
+					
+					\begin{lstlisting} 
+					div:hover { 
+					background-color: green; 
+					cursor: pointer; 
+					} 
+					\end{lstlisting} 
+					Use 'active' for links and focus for other elements such as forms. 
+					
+					\subsubsection{Focus} 
+					Used for other elements such as forms. 
+					
+					\subsubsection{$n^{th}$ child} 
+					Used to select and format the nth child of a parent in HTML. 
+					\\ 
+					First-Child: 
+					\begin{lstlisting} 
+					li:first-child { 
+					} 
+					\end{lstlisting} 
+					Last Child: 
+					\begin{lstlisting} 
+					li:last-child { 
+					} 
+					\end{lstlisting} 
+					To select every even child of the parent: 
+					\begin{lstlisting} 
+					li:nth-child(even) { 
+					} 
+					\end{lstlisting} 
+					To select every odd child of the parent: 
+					\begin{lstlisting} 
+					li:nth-child(odd) { 
+					} 
+					\end{lstlisting} 
+					Zebra-striping: 
+					\begin{lstlisting} 
+					table, tr, td { 
+					width: 100%; 
+					border: 1px solid black; 
+					} 
+					
+					tr:nth-child(even) { 
+					background-color: rgba(128, 128, 128, 0.49); 
+					} 
+					
+					tr:nth-child(odd) { 
+					background-color: rgba(128, 128, 128, 0.19) 
+					} 
+					\end{lstlisting} 
+					To select a specific child: 
+					\begin{lstlisting} 
+					li:nth-child(3) { 
+					} 
+					\end{lstlisting} 
+					To select the nth child from the bottom: 
+					\begin{lstlisting} 
+					li:nth-last-child(10) { 
+					} 
+					\end{lstlisting} 
+					To Select more complex pattern, use a linear line (mx+c) 
+					\begin{lstlisting} 
+					li:nth-child(3n+2) { 
+					color: red; 
+					} 
+					
+					/\* 
+					Try changing the selector to select each of the following: 
+					8, 18, 28, 38, ... 10n+8 
+					9, 12, 15, ..., 39, ... 3n+9 
+					3, 12, 21, 30, 39, ... 9n+3 
+					\*/ 
+					\end{lstlisting} 
+					To Select the a child of a parent where it is the only child:  
+					\\ 
+					(To Select the a HTML element of a parent where the element is the only child: ) 
+					\begin{lstlisting} 
+					article:only-child { 
+					} 
+					\end{lstlisting} 
+					
+					\subsection{Pseudo Element} 
+					Denoted by "::" (Double :) 
+					\\ 
+					Typography: 
+					\subsubsection{First-letter} 
+					Selects the first letter 
+					\begin{lstlisting} 
+					p::first-letter { 
+					font-family: cursive; 
+					font-size: 36px; 
+					line-height: .5; 
+					} 
+					\end{lstlisting} 
+					
+					\subsubsection{First-line} 
+					Dynamically selects the first line (dynamically adapts/reforms depending on width of view port) 
+					\begin{lstlisting} 
+					p::first-line { 
+					color: red; 
+					font-weight: 900; 
+					} 
+					\end{lstlisting} 
+					
+					\subsection{Nested Selectors} 
+					\subsubsection{all-children} 
+					Selects all children of a parent = "parent child \{\}".  No matter how nested  
+					\begin{lstlisting} 
+					parent child { 
+					} 
+					\end{lstlisting} 
+					To select all children of a 'div' which are 'p' elements  
+					\begin{lstlisting} 
+					div p { 
+					} 
+					\end{lstlisting} 
+					will select all 'p' tags in the following case 
+					\begin{lstlisting} 
+					<!--div>p*2+section>p^^p--> 
+					<div> 
+						<p>first p</p>   <- selected  
+						<p>second p</p>  <- selected  
+						<section> 
+							<p>third p</p> <- selected  
+						</section> 
+					</div> 
+					<p>fourth p</p> 
+					<p>fifth p</p> 
+					<p>sixth p</p> 
+					\end{lstlisting} 
+					
+					\subsubsection{immediate} 
+					To select all the immediate children of a 'div' which are 'p' elements  
+					\begin{lstlisting} 
+					div > p { 
+					} 
+					\end{lstlisting} 
+					will select all 'p' tags except the ones that are not immediate descendants of a 'div' so only 'first p' and 'second p' will be selected in the following case 
+					\begin{lstlisting} 
+					<!--div>p*2+section>p^^p--> 
+					<div> 
+						<p>first p</p>      <- selected  
+						<p>second p</p>     <- selected 
+						<section> 
+							<p>third p</p> 
+						</section> 
+					</div> 
+					<p>fourth p</p> 
+					<p>fifth p</p> 
+					<p>sixth p</p> 
+					\end{lstlisting} 
+					
+					\subsubsection{all-siblings} 
+					All 'p' tags that are siblings of a 'div' 
+					\begin{lstlisting} 
+					div ~ p { 
+					} 
+					\end{lstlisting} 
+					will select ....... 'p' tags in the following case 
+					\begin{lstlisting} 
+					<!--div>p*2+section>p^^p--> 
+					<div> 
+						<p>first p</p>  
+						<p>second p</p>   
+						<section> 
+							<p>third p</p>  
+						</section> 
+					</div> 
+					<p>fourth p</p> <- selected  
+					<p>fifth p</p>  <- selected  
+					<p>sixth p</p>  <- selected  
+					\end{lstlisting} 
+					
+					\subsubsection{Immediate Siblings} 
+					will select the tag that is immediately after the tag - only the immediate sibling. 
+					\begin{lstlisting} 
+					div + p { 
+					} 
+					\end{lstlisting} 
+					will select only the 'fourth p' 'p' tag in the following case 
+					\begin{lstlisting} 
+					<!--div>p*2+section>p^^p--> 
+					<div> 
+						<p>first p</p>  
+						<p>second p</p>   
+						<section> 
+							<p>third p</p>  
+						</section> 
+					</div> 
+					<p>fourth p</p> <- selected  
+					<p>fifth p</p>   
+					<p>sixth p</p>   
+					\end{lstlisting} 
+					
+					\subsection{Compound Selectors} 
+					\begin{lstlisting} 
+					ul#some-id li.some-class { 
+					} 
+					\end{lstlisting} 
+					Will select an 'li' with the class 'some-class' which is a child of a 'ul' with an id 'some-id'. 
+					
+					\subsection{CSS Specificity} 
+					\begin{itemize} 
+					\item Element selector = 1  
+					\item Class = 10 
+					\item ID = 100 
+					\item Inline = 1000  
+					\end{itemize} 
+					If same specificity, go to the order that rule sets are declared in the CSS.  Last = More powerful. 
+					
+					\begin{center} 
+					\begin{tabular}{| c | c | c |}  
+					\hline 
+					Selector Type  & Value & Place  \\ [0.5ex]  
+					\hline 
+					Element  & 1 & 0-0-1 \\  
+					
+					Class/attribute &  10 & 0-1-0 \\ 
+					
+					ID & 100 & 1-0-0 \\ 
+					
+					Inline & 1000 &1-0-0-0 \\[1ex]  
+					\hline 
+					\end{tabular} 
+					\end{center} 
+					
+					\subsubsection{Example} 
+					\begin{lstlisting} 
+					ul#some-id li.some-class { 
+					} 
+					\end{lstlisting} 
+					The first section 
+					\begin{lstlisting} 
+					ul#some-id 
+					\end{lstlisting} 
+					has a specificity of 101 (1 from ul (element selector) 100 from '\#some-id' (id selector))  
+					\\ 
+					The Second section 
+					\begin{lstlisting} 
+					li.some-class 
+					\end{lstlisting} 
+					has a specificity of 11 
+					\\ 
+					So the total specificity is 112. 
+					
+					%%%%%%%%%%%%%%%%% Formatting Text %%%%%%%%%%%%%%%%%%%% 
+					\section{Formatting Text} 
+					
+					\subsection{Font property} 
+					A short-hand property. 
+					\\ 
+					Best not to use the short hand property version when starting off.  Ensure you understand the individual properties, then use the short hand property. 
+					
+					\subsubsection{Font-family} 
+					\begin{itemize} 
+					\item set specific fonts first, but may fail if they are not installed or cannot be installed.  So best to state a generic font family, such as sans-serif, at the end to select any font that the person has of that family.  This is called fallback. 
+					\end{itemize} 
+					\paragraph{Sans-serif} is as the best font to use on the web. (the de-facto standard).  It's the most readable on the web. 
+					
+					\subsubsection{font-size} 
+					Default is usually set to 16px. 
+					\\ 
+					Font size values: 
+					\begin{itemize} 
+					\item xx-small, x-small, small, medium, large, x-large, xx-large 
+					\subitem relative to default font size ( root font size ). 
+					\subitem default font size is usually medium. 
+					
+					\item larger, smaller  
+					\subitem relative to the parent's font size. 
+					
+					\item rem  
+					\subitem relative to default font size ( root font size ). 
+					\subitem will scale fonts proportionally to the default font size (usually 16px but normally adjusted for accessibility issues). 
+					\subitem originates from how wide the letter 'm' is on a printing press. 
+					
+					\item vw - viewport width  
+					\subitem 1/100th of the width of the viewport. 
+					\subitem Useful if you want to have a banner across the page  
+					\subitem Will scale dynamically as the width of the page changes. 
+					
+					\item vh - viewport height 
+					\subitem 1/100th of the height of the viewport. 
+					\end{itemize} 
+					
+					\subsubsection{font-weight} 
+					Can take the values: 
+					\begin{itemize} 
+					\item normal 
+					\subitem same as 400 
+					
+					\item bold 
+					\subitem same as 700 
+					
+					\item lighter 
+					\item bolder 
+					\item 100, 200, 300, 400, 500, 600, 700, 800, 900 
+					\end{itemize} 
+					
+					\subsubsection{font-style} 
+					
+					\subsubsection{font-variant} 
+					Is a sort hand for five longhand font related properties: 
+					\begin{itemize} 
+					\item font-variant-caps 
+					\item font-variant-numeric 
+					\item font-variant-alternates 
+					\item font-variant-ligatures 
+					\item font-variant-east-asian 
+					\end{itemize} 
+					Values: 
+					\begin{itemize} 
+					\item 'small-caps' - kind of looks good 
+					\end{itemize} 
+					
+					\subsubsection{line-height} 
+					Letting 
+					\\ 
+					Adjusts the vertical distance between each line box.  Each line of text is contained within a box.  This property adjusts the vertical distance between each of these line boxes. 
+					\\\\ 
+					Can be used to centre things, however, it is more of a hack method.  This is completed by setting the line-height to the same value of the height of the div that the text is a child of. 
+					
+					\subsubsection{letting-spacing} 
+					Kerning 
+					\\ 
+					Can take the values: 
+					\begin{itemize} 
+					\item normal 
+					
+					\item $<$length$>$  CSS Data type  
+					\subitem Should really just stick to 'rem'.  Can use 'px' if you really want to. 
+					\end{itemize} 
+					
+					\subsubsection{word-spacing} 
+					Can take the values: 
+					\begin{itemize} 
+					\item normal 
+					
+					\item $<$length$>$  CSS Data type  
+					\subitem Should really just stick to 'rem'.  Can use 'px' if you really want to. 
+					
+					\item percentage (not a CSS length data type) 
+					\end{itemize} 
+					
+					\subsubsection{color} 
+					Is a CSS Data type. Can either be a keyword with a hexadecimal number associated with it.  Or a pure hexadecimal number can be used - a RGB value (RGBA).  Each of the red, green, and blue (and alpha) values are represented by two digits (up to 255). 
+					
+					\subsubsection{Google Fonts} 
+					Recommended to choose/sort by popularity so that there will be a high chance that that font is already been downloaded onto the user's/client's machine.  This will reduce the data needed to be transferred, so will speed up the web page load time. 
+					\\ 
+					Should monitor the weight (the size of the files that you are sending/using) 
+					
+					\subsection{text}  
+					Now we have got the font, let us now form the text.  Such as indenting, underlining, and applying shadow effects. 
+					
+					\subsubsection{text-transform} 
+					\begin{itemize} 
+					\item 'uppercase' - sets all selected text to uppercase. 
+					\item 'capitalise' - sets the first letter of each word to a capital/uppercase. 
+					\end{itemize} 
+					
+					\subsubsection{text-align} 
+					Describes how  content like text is aligned in its parent block element. 
+					\\ 
+					Does not control the alignment of block elements, only their inline content. 
+					
+					\subsubsection{text-shadow} 
+					\begin{itemize} 
+					\item accepts a comma-separated list: x, y, blur radius, color  
+					\subitem offset-x | offset-y | blur-radius | color 
+					\subitem text-shadow: 1px 1px 2px black; 
+					
+					\end{itemize} 
+					
+					\subsubsection{text-decoration} 
+					\paragraph{text-decoration-line} 
+					Adds/removes underline, overline, and strike through. 
+					\\ 
+					Therefore, is commonly used to remove the underline from hyperlinks (anchor tags). 
+					\\ 
+					Takes the values which any number of them can be used at once: 
+					\begin{itemize} 
+					\item none 
+					\item underline 
+					\item overline 
+					\item line-through 
+					\end{itemize} 
+					But use text-decoration instead - does not work otherwise?????????? 
+					\\\\ 
+					Do NOT use '$<$s$>$' tag in HTML, use the text-decoration-line element in CSS to achieve the same effect. 
+					\\\\ 
+					Do NOT use '$<$del$>$' tag in HTML.  Used to be used to denote that that text had been deleted.  If you want something deleted, just delete it from the page.  Or if you still want to have the same effect use the CSS property, 'text-decoration-line'. 
+					
+					\subsubsection{text-indentation} 
+					Sets how indented e.g. the first line is of a 'p' tag. 
+					\\ 
+					recommended to use 'rem' length units.   
+					\begin{itemize} 
+					\item $<$length$>$ CSS data type 
+					\item percentage 
+					\end{itemize} 
+					The text-indent property specifies the amount of indentation (empty space) should be left before lines of text in a block. By default, this controls the indentation of only the first formatted line of the block, but the hanging and each-line keywords can be used to change this behaviour 
+					
+					\subsubsection{max-width} 
+					Sets the maximum width an element can be.  Enables it to be smaller than that, so can be useful for adaptations for smaller screens. 
+					
+					%%%%%%%%%%%%%%%%% Document Structure %%%%%%%%%%%%%%%%%% 
+					\section{Document Structure} 
+					Importance of Good document structure: 
+					\begin{itemize} 
+					\item maintainability 
+					\end{itemize} 
+					Important terms: 
+					\begin{itemize} 
+					\item Document Object Model (DOM) 
+					
+					\item Document Flow 
+					\subitem Since every element is a box, this is how these boxes naturally stack/flow. 
+					\subitem So Block level elements will stack taking up the entire width/row from top to bottom. 
+					\subitem So inline elements will stack next to each other. 
+					\end{itemize} 
+					
+					\subsection{HTML5 Outline Algorithm} 
+					DO NOT use 
+					\\ 
+					Even though it is in the specification, no one has implemented it since it was too complicated. 
+					\\ 
+					However, do outline your documents using the heading tags (h1 through h6). 
+					
+					\subsection{Semantic HTML} 
+					Non-semantic: 
+					\begin{itemize} 
+					\item div 
+					\item span 
+					\end{itemize} 
+					Semantic: 
+					\begin{itemize} 
+					\item header 
+					\item nav 
+					\item main 
+					\item article 
+					\item section 
+					\item aside 
+					\item footer 
+					\item h1 - h6 
+					\item figure 
+					\item figcaption 
+					\item address 
+					\end{itemize} 
+					
+					\subsection{article} 
+					Needs to be self contained.   
+					\\ 
+					Should be able to cut it out and it would still make sense. 
+					\\ 
+					On the other hand, each part????? of the article will not stand on its own - needs the rest of the article to make sense. 
+					\\ 
+					An article has sections. 
+					
+					\subsection{Section} 
+					Like an article but does not need to be able to stand on its own. 
+					\\ 
+					See article for good example on MDN 
+					\begin{lstlisting} 
+					<article class="film_review"> 
+						<header> 
+							<h2>Jurassic Park</h2> 
+						</header> 
+						<section class="main_review"> 
+							<p>Dinos were great!</p> 
+						</section> 
+						<section class="user_reviews"> 
+							<article class="user_review"> 
+								<p>Way too scary for me.</p> 
+								<footer> 
+									<p> 
+										Posted on 
+										<time datetime="2015-05-16 19:00">May 16</time> 
+										by Lisa. 
+									</p> 
+								</footer> 
+							</article> 
+							<article class="user_review"> 
+								<p>I agree, dinos are my favorite.</p> 
+								<footer> 
+									<p> 
+										Posted on 
+										<time datetime="2015-05-17 19:00">May 17</time> 
+										by Tom. 
+									</p> 
+								</footer> 
+							</article> 
+						</section> 
+						<footer> 
+							<p> 
+								Posted on 
+								<time datetime="2015-05-15 19:00">May 15</time> 
+								by Staff. 
+							</p> 
+						</footer> 
+					</article> 
+					\end{lstlisting} 
+					
+					\subsection{header} 
+					\begin{itemize} 
+					\item a group of â€œintroductory contentâ€ or â€œnavigational aidsâ€ 
+					\subitem may contain some heading elements but also other elements like a logo 
+					
+					\item commonly has a heading (hn tag) 
+					
+					\item must not be a descendent of  
+					\subitem header 
+					\subitem footer 
+					\subitem address 
+					\end{itemize} 
+					
+					\subsection{nav} 
+					Is a section with navigation links 
+					\begin{itemize} 
+					\item not all links within a document must be in a nav element 
+					
+					\item It is intended for the major block of links 
+					\subitem such as the main navigation of the page/website 
+					\subitem Helps to be categorized by search engines 
+					
+					\item â€œit is common for footers to have a list of links to various key parts of a site, but the footer element is more appropriate in such cases, and no nav element is necessary for those links.â€ (src: W3) 
+					
+					\item a document may have several nav elements, for example, one for site navigation and one for intra-page navigation. 
+					\end{itemize} 
+					
+					\subsection{main} 
+					the main content of the <body> of a document or application. 
+						\\ 
+						Should be unique to that page. 
+						\\ 
+						There should only be one main tag per page. 
+						
+						\subsection{aside} 
+						Content related to something. 
+						\\\\ 
+						Description: 
+						\\ 
+						The HTML $<$aside$>$ element represents a section of the page with content connected tangentially to the rest, which could be considered separate from that content. These sections are often represented as sidebars or inserts. They often contain the definitions on the sidebars, such as definitions from the glossary; there may also be other types of information, such as related advertisements; the biography of the author; web applications; profile information or related links on the blog. (MDN) 
+						\\\\ 
+						Examples: 
+						\begin{itemize} 
+						\item sidebars 
+						\item inserts 
+						\item advertisements 
+						\item biography of the author 
+						\item related links on the blog 
+						\end{itemize} 
+						
+						
+						\subsection{footer} 
+						Description: 
+						\\ 
+						The HTML $<$footer$>$ element represents a footer for its nearest sectioning content or sectioning root element. A footer typically contains information about the author of the section, copyright data or links to related documents. 
+						\\\\ 
+						Usage notes: 
+						\begin{itemize} 
+						\item Enclose information about the author in an <address> element that can be included into the <footer> element  
+								\end{itemize} 
+								Examples: 
+								\begin{itemize} 
+								\item information about the author of the section 
+								\item copyright data 
+								\item links to related documents 
+								\end{itemize} 
+								
+								\subsection{figure and figcaption} 
+								\subsubsection{figure} 
+								Self-contained content, frequently with a <figcaption> 
+									\\ 
+									While it is related to the main flow, its position is independent of the main flow; it could be moved to another page or an appendix without affecting the main flow.  
+									\\ 
+									Typically referenced as a single unit 
+									\\ 
+									Examples: 
+									\begin{itemize} 
+									\item image 
+									\item illustration 
+									\item diagram 
+									\item code snippet 
+									\end{itemize} 
+									\subsubsection{figcaption} 
+									Used as the caption within a figure. 
+									\\ 
+									It can only be the first or last element in the $<$figure$>$ block. 
+									\\ 
+									It is optional.  A $<$figure$>$ does not a caption.  However, a $<$figcaption$>$ requires a $<$figure$>$. 
+									
+									\subsection{Address} 
+									Wraps the contact information of that element. 
+									\\ 
+									Includes at the end of a body  
+									
+									%%%%%%%%%%%%%%%%%%%%% Flexbox %%%%%%%%%%%%%%%%%%%%% 
+									\section{Flexbox} 
+									Search CSS tricks flexbox for the best resource - https://css-tricks.com/snippets/css/a-guide-to-flexbox/ 
+									\\ 
+									The standard currently, with ~94\% compatibility. 
+									\\ 
+									There is a flex container.  The immediate children of this element, are called flex items. 
+									\\\\ 
+									Check out: https://flexboxfroggy.com/ 
+									\subsection{The Thought behind Flexbox} 
+									You should think in terms of containers to layout the page.  Once the page has been separated into containers, you can start to make containers 'flex containers' as necessary, and arrange the children as 'flex items'.   
+									\\ 
+									This opens another whole world of layout opportunities. 
+									\\\\ 
+									Flex items can only be immediate children of the flex container. 
+									
+									\subsection{Container Properties} 
+									\subsubsection{display} 
+									\begin{itemize} 
+									\item flex 
+									\item inline-flex 
+									\end{itemize} 
+									\begin{lstlisting} 
+									\end{lstlisting} 
+									
+									\subsubsection{flex-wrap} 
+									\begin{itemize} 
+									\item Nowrap (default) 
+									\item Wrap 
+									\item Wrap-reverse 
+									\end{itemize} 
+									\begin{lstlisting} 
+									\end{lstlisting} 
+									
+									\subsubsection{flex-direction} 
+									Allows us to dictate which direction the flex items are laid out. 
+									\\ 
+									Possible values: 
+									\begin{itemize} 
+									\item Row (default) 
+									\item Row-reverse 
+									\item Column 
+									\item Column-reverse 
+									\end{itemize} 
+									Primary Axis:\\ 
+									- The axis which is parallel to flex-directionâ€™s value.\\ 
+									- Whatever your flex-direction is set to, that is your primary axis. 
+									\\ 
+									Cross axis:\\ 
+									- The axis which is perpendicular to the primary axis 
+									\\ 
+									\begin{lstlisting} 
+									\end{lstlisting} 
+									
+									\subsubsection{flex-flow} 
+									Is a short-hand property for 'flex-direction' and 'flex-wrap'. 
+									\begin{lstlisting} 
+									\end{lstlisting} 
+									
+									\subsubsection{justify-content} 
+									'justify-content' moves/aligns items along the main/primary axis (as discussed in 'flex-direction'). 
+									\\ 
+									Possible values: 
+									\begin{itemize} 
+									\item Flex-start 
+									\item Flex-end 
+									\item Center 
+									\item Space-between 
+									\item Space-around 
+									\end{itemize} 
+									\begin{lstlisting} 
+									\end{lstlisting} 
+									
+									\subsubsection{align-content} 
+									Aligns content in the cross axis when there is space to do so.  
+									\\ 
+									Shifts all of the content items together (not with respect to each row (along the primary/main axis)) 
+									\\ 
+									Shifts the lines  
+									\\ 
+									e.g. flex-start = will shift all lines packed at the top of the container. 
+									\begin{lstlisting} 
+									.container { 
+									align-content: flex-start | flex-end | center | space-between | space-around | stretch; 
+									} 
+									\end{lstlisting} 
+									
+									\subsubsection{align-items} 
+									Moves the items along the cross axis according to the possible values: 
+									\begin{itemize} 
+									\item Flex-start 
+									\item Flex-end 
+									\item Center 
+									\item Stretch 
+									\item Baseline 
+									\end{itemize} 
+									Moves the items relative to their row (remains inside their row) whereas align-content aligns all of the content/items - also moves the lines/columns. 
+									\\ 
+									align-content moves the entire group/line. 
+									\begin{lstlisting} 
+									.container { 
+									align-items: stretch | flex-start | flex-end | center | baseline; 
+									} 
+									\end{lstlisting} 
+									
+									%%% Item Properties 
+									\subsection{Item Properties} 
+									Flex properties that can be applied to individual items inside of the flex container.   
+									\\ 
+									CSS properties of the actual item. 
+									
+									\subsubsection{align-self} 
+									Applies align properties solely on individual flex items, irrelevant to the alignment set by/on the flex container. 
+									\begin{lstlisting} 
+									.item { 
+									align-self: auto | flex-start | flex-end | center | baseline | stretch; 
+									} 
+									\end{lstlisting} 
+									
+									\subsubsection{order} 
+									States what order that item will be displayed. 
+									\\ 
+									If it does not have an order value, it will be displayed after the items that do.   
+									\\ 
+									Items with the 'order' property set, will be displayed first. 
+									\\ 
+									Can use negatives. 
+									\\ 
+									Items can have the same order value.  But will be ordered along with the other ordered items, but ones with the same will be displayed in the order that they are declared in.  (But will be ordered in the order that they are declared in the HTML source code). 
+									\begin{lstlisting} 
+									.item { 
+									order: <integer>; (default is 0) 
+										} 
+										\end{lstlisting} 
+										
+										\subsubsection{flex-grow} 
+										A value given to a flex item that decides what fraction of space it should occupy (Similar to how potential difference is split according resistance). 
+										\\ 
+										Default value 0 - should will not grow to fill the space. 
+										\\ 
+										Negative values are not valid. 
+										\begin{lstlisting} 
+										.item { 
+										flex-grow: <number>;  (default 0)  
+											} 
+											\end{lstlisting} 
+											
+											\subsubsection{flex-shrink} 
+											A value which dictates/enables how the item shrinks when required. 
+											\\ 
+											Value is the fraction of the shrinkage that that item will experience. 
+											\\ 
+											So 3 items, 2 with value 1 and 1 with value 2 - The value 2 will receive $\frac{1}{2}$ of the shrinkage and the other 2 will receive $\frac{1}{4}$.  So value 2 will shrink twice as fast as the other two. 
+											\\\\ 
+											0 if it doesn't shrink, \\ 
+											not 0 if it does shrink and by how much compared to the other items. 
+											\begin{lstlisting} 
+											.item { 
+											flex-shrink: <number>; (default 1) 
+												} 
+												\end{lstlisting} 
+												
+												\subsubsection{flex-basis} 
+												The value that 'flex-shrink' and 'flex-grow' kicks in. 
+												\\ 
+												If set at a percentage, since the basis will always change along with the value of the parent, shrink and grow will never kick in. 
+												
+												\subsubsection{flex} 
+												A short-hand property for: 
+												\begin{itemize} 
+												\item flex-basis 
+												\item flex-shrink 
+												\item flex-grow 
+												\end{itemize} 
+												with the second and third parameters optional. 
+												\begin{lstlisting} 
+												.item { 
+												flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] 
+												} 
+												\end{lstlisting} 
+												Recommended to use instead of individual properties. 
+												\\ 
+												Will set the other values, that are not set, intelligently. 
+												
+												%%%%%%%%%%%%%%%%%% Media Queries %%%%%%%%%%%%%%%%%%%% 
+												\section{Media Queries} 
+												Allows us to apply different CSS depending on the viewport size. e.g. for phone, tablet, desktop... 
+												\subsubsection{Considerations} 
+												- Best to use separate files for different media queries. 
+												\\ 
+												- Start by developing for mobile size first to keep it as light weight as possible.   Then we can scale up to desktop and add more to the page (will take up more data) aka - Mobile First Design.  \\ 
+												The majority of users are on mobile. 
+												\\\\ 
+												\subsubsection{Consists of} 
+												Media Type: 
+												\begin{itemize} 
+												\item optional 
+												\item can only have one value / can't try to have multiple media declarations = although can use 'all' 
+												
+												\item can be: 
+												\subitem All 
+												\subitem screen 
+												\subitem print - how things appear when it is printed out. 
+												\subitem Speech 
+												\end{itemize} 
+												
+												Media Feature / Expression: 
+												\begin{itemize} 
+												\item can have as many as required. 
+												\item Default value = 'screen' 
+												\item Values excepted 
+												\subitem min-width  
+												\subitem max-width 
+												\subitem and more... 
+												\end{itemize} 
+												
+												\begin{lstlisting} 
+												<!-- this doesn't work - you can't have multiple media types --> 
+												<link rel="stylesheet" href="multiple.css" media="screen and print" > 
+													
+													<!-- this does work --> 
+													<link rel="stylesheet" href="multiple.css" media="all"> 
+														\end{lstlisting} 
+														
+														\subsubsection{Use} 
+														\begin{itemize} 
+														\item min-width 
+														\item max-width 
+														\item min-height 
+														\item max-height 
+														\end{itemize} 
+														
+														\subsubsection{DON'T Use} 
+														The following can have some issues - DON'T use them!  Everything can be achieved with the parameters above. 
+														\begin{itemize} 
+														\item min-device-width 
+														\item max-device-width 
+														\item min-device-height 
+														\item max-device-height 
+														\end{itemize} 
+														
+														\subsubsection{min-width} 
+														Apply this CSS from this width onwards. 
+														\begin{lstlisting} 
+														<link rel="stylesheet" href="mq_900-plus.css" media="(min-width: 900px)"> 
+															\end{lstlisting} 
+															surround parameters with parenthesis.  
+															
+															\subsubsection{Example} 
+															If we want the navigation horizontally along the top of the page, set that element to a width of 100\% with the flex container being 'row wrap'.   
+															\\ 
+															When the page width increases and we want the navigation to be on the left-hand side, use a min-width media query so that above a certain fresh-hold, this width of the items will change.  For example, 15\% and 85\% so they will appear in a row next to each other, occupying one full row across the page. 
+															
+															\subsection{Buzz-words} 
+															Responsive Design\\ 
+															- Your web page responds to the size of the viewport\\ 
+															\\ 
+															Mobile First\\ 
+															- Build your pages to look good on mobile first\\ 
+															- Then add in break-points so that your pages work at larger resolutions\\ 
+															\\ 
+															Breakpoints based upon content\\ 
+															- Create your breakpoints based upon your content\\ 
+															- Have your content look good, and be readable, at different sizes\\ 
+															\\ 
+															70 - 80 characters of text per line\\ 
+															- Classic readability theory suggests that an ideal column should contain 70 to 80 characters per line (about 8 to 10 words in English)\\ 
+															- When the width of a text block grows past about 10 words, a breakpoint should be considered\\ 
+															
+															\section{Google's Flexbox Design Patterns} 
+															\subsection{Main take-aways} 
+															\begin{itemize} 
+															\item Build mobile first  
+															\item Use:  
+															\subitem display: flex;  
+															\subitem flex-flow: row wrap;  
+															\item Each row:  
+															\subitem What you want on each row adds up to 100% 
+															\end{itemize} 
+															\subsection{Useful links} 
+															- https://developers.google.com/web/fundamentals/design-and-ux/responsive/patterns 
+															
+															\subsubsection{Recommended layout} 
+															A few 'div's with the central one being a flex container.  Divs will span the full width and can adjust the width ratios of the elements inside the flex container at break points. 
+															
+															%%%%%%%%%%%%%%%%%%%% Position %%%%%%%%%%%%%%%%%%%%% 
+															\section{Position} 
+															\subsection{Overview} 
+															The position CSS property is good for positioning elements. A positioned element is an element whose computed position property is either relative, absolute, fixed or sticky.  
+															
+															\subsection{Fixed} 
+															No space reserved for the element - it is taken out of the  document flow (i.e. not block level where it takes up the entire row, nor it is an inline element where it takes up as little horizontal space as possible and stack with other elements along the same row) 
+															\\\\ 
+															A fixed position element is positioned relative to the view-port (at a fixed position relative to the view-port), or the browser window itself.  
+															\\\\ 
+															Since the element is positioned relative to the view-port, and the view-port does not change when the page is scrolled, the element will remain in the same position/stay where it is. 
+															\\\\ 
+															This is useful/can be used for: 
+															\begin{itemize} 
+															\item Menus 
+															\item Navigation 
+															\item Cookie alerts... 
+															\end{itemize} 
+															
+															\subsection{Relative} 
+															Positioned \bf{relative} to itself. 
+															\\\\ 
+															The position is computed relative to where it should be (to itself).  Where the element should be is still blocked out in the DOM. 
+															
+															\subsection{Absolute} 
+															An \it{absolute} positioned element is removed from the DOM and has it's position computed from relative to the next element up in the DOM (tree) which also has the position property set.  If there are non, the element is positioned in the normal document flow. 
+															
+															\subsection{Static} 
+															Normal behavior - positioned within the document flow as per usual. 
+															
+															\subsection{Accepted properties} 
+															\begin{itemize} 
+															\item Top 
+															\subitem \<length\> 
+																\subitem percentage	 
+																
+																\item Right 
+																\subitem \<length\> 
+																	\subitem percentage 
+																	
+																	\item Bottom 
+																	\subitem \<length\> 
+																		\subitem percentage 
+																		
+																		\item Left	 
+																		\subitem \<length\> 
+																			\subitem percentage 
+																			\end{itemize} 
+																			
+																			%%%%%%%%%%%%%%%%%%%%% Float %%%%%%%%%%%%%%%%%%%%%% 
+																			\section{Float} 
+																			Old approach - use Flexbox instead. (Its a very hack-y way of positioning things on the page) 
+																			\\ 
+																			The float CSS property takes the element out of the normal DOM and aligns it to the left or right relative to its \bf{container}. 
+																			\\ 
+																			Other text or inline elements then position and wrap around this object. 
+																			\\ 
+																			(Needs to be added in HTML before the elements that wrap around it are in the HTML) 
+																			
+																			\subsection{Overflow} 
+																			With overflow not set, the element's container does not take into consideration that element when it comes to sizing - it will only use the other elements which does not have the \it{float} property set for calculating it's size. 
+																			\\ 
+																			So if the element with the float set is too large, it will not fit inside it's container (since it has been taken out of the DOM). 
+																			\\\\ 
+																			The solution to this it to set the \it{overflow} CSS property on the container element.  
+																			\begin{itemize} 
+																			\item auto 
+																			\subitem will set it's size to accommodate/fit all of the child elements, with float set, inside it. 
+																			\end{itemize} 
+																			
+																			\subsection{\it{clear}} 
+																			When the \it{clear} CSS property is set to an element, that element will ensure that it respects where elements with \it{float} set are - i.e. the element will not be positioned under an element with \it{float}.   
+																			\\ 
+																			\it{clear} has the following possible values: 
+																			\begin{itemize} 
+																			\item both  
+																			\subitem will not be positioned under elements with \it{float set} 
+																			\end{itemize} 
+																			
+																			%%%%%%%%%%%%%%%%%%%%% Background %%%%%%%%%%%%%%%%%%%%%% 
+																			\section{Background} 
+																			\it{background} is a CSS shorthand property that is not recommended to be used - just causes confusion (little uniformity of implementation). (Be clear, not clever). 
+																			\\ 
+																			It also sets other default values to other unset properties (relating to background) which could alter the expected outcome. 
+																			
+																			\subsection{background-color} 
+																			Sets the background color of the element. 
+																			
+																			\subsection{background-image} 
+																			Sets an image as the background of an element. 
+																			
+																			\subsection{background-repeat} 
+																			Refers to background-image property to define how the \it{background-image} is repeated. 
+																			\\ 
+																			Has the possible values: 
+																			\begin{itemize} 
+																			\item Row  
+																			\subitem Repeats the background image along the x-axis 
+																			
+																			\item Column 
+																			\subitem Repeats the background image along the column axis only 
+																			
+																			\item Both 
+																			\subitem Repeats the background image along the x \bf{and} y axis. 
+																			\end{itemize} 
+																			
+																			\subsection{background-size} 
+																			The \it{background-size} specifies the size of the \it{background-image} if set.  
+																			\\ 
+																			Does \bf{NOT} set the size of the background since this size is determined by the size of the element.  
+																			\\ 
+																			Can take the values: 
+																			\begin{itemize} 
+																			\item length 
+																			
+																			\item percentage  
+																			
+																			\item auto 
+																			
+																			\item contain 
+																			\subitem sized so this it is \it{contained} within the element it is the background of  
+																			\subitem will scale with the source ratio maintained. 
+																			
+																			\item cover 
+																			\subitem The background image will be sized so that \it{covers} the element it is the background of. 
+																			\subitem Will scale so that the source ratio maintained. 
+																			\end{itemize} 
+																			
+																			\subsection{background-position} 
+																			Refers to the background image. 
+																			\\ 
+																			\it{background-position} is a CSS property that sets the position of the background image relative to the element it is the background of. 
+																			
+																			\subsection{background-origin} 
+																			Refers to the background image. 
+																			\\ 
+																			\it{background-origin} is a CSS property that determines where the background image starts and ends. 
+																			\\ 
+																			Can take the values of: 
+																			\begin{itemize} 
+																			\item \it{content-box} 
+																			\subitem Sets the start and end to align with the content-box of the element. 
+																			
+																			\item \it{padding-box} 
+																			
+																			\item \it{border-box} 
+																			\end{itemize} 
+																			
+																			\subsection{background-attachment} 
+																			Refers to the background-image. 
+																			\\ 
+																			Can take the values of: 
+																			\begin{itemize} 
+																			\item scroll (default) 
+																			\subitem the background image scrolls with the page/element 
+																			
+																			\item fixed 
+																			\subitem Stays in the same place in the viewport  
+																			\subitem the background image does not scroll so stays fixed in the background as the remaining page elements scrolls over it.  
+																			\end{itemize} 
+																			
+																			\subsection{background-clip} 
+																			Extends to both background-image and background-color. 
+																			
+																			\section{HTML Entities} 
+																			To use stuff like <, use HTML entities: 
+																			\begin{lstlisting} 
+																			&#60 
+																			&lt 
+																			\end{lstlisting} 
+																			\subsection{Non-breaking space (\&nbsp;)} 
+																			Use  
+																			\begin{lstlisting} 
+																			&nbsp; 
+																			\end{lstlisting} 
+																			to force the text not to be put onto more than one line at that space. 
+																			
+																			%%%%%%%%%%%%%%%%%%%%% Forms %%%%%%%%%%%%%%%%%%%%%% 
+																			\section{Forms} 
+																			\begin{lstlisting} 
+																			<input type="text" id="fname" name="first-name"> 
+																				\end{lstlisting} 
+																				\begin{itemize} 
+																				\item 'id' is what is used on the website, e.g. for targeting that specific element with CSS or JavaScript. 
+																				\item 'name' is the name that is given to the variable that contains the data from that element which is sent off to the server. 
+																				\end{itemize} 
+																				
+																				
+																				\section{Random Bits} 
+																				At the start of the semester, ask students to ask two people their names.  Then, start by doing a quiz and ask what those two people's names were.  Should get a funny response and more importantly demonstrate that the brain is bad at remembering things and effort is needed to succeed. 
+																				
+																				\paragraph{Average page size} is 2.4mb  
+																				
+																				\subsection{Avoid random overrides in CSS} 
+																				Set an id to the body tag, then when referring to another element on the same page, can then use a descendant (that element is a descendant of body). So when  you add additional things in, you don't get unintentional overrides. 
+																				
+																				
+																				\end{document} 

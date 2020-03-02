@@ -43,6 +43,7 @@
 	captionpos=b
 }
 %%%
+\usepackage{amsmath}
 
 %opening
 \title{Go}
@@ -55,6 +56,42 @@
 \begin{abstract}
 
 \end{abstract}
+
+\begin{equation}
+	\int_{1}^{-1} dx \int_{1}^{-1} dy f(x,y)
+\end{equation}
+
+\begin{equation}
+D_{it} =
+\begin{cases}
+1 & \text{if bank $i$ issues ABs at time $t$}\\
+2 & \text{if bank $i$ issues CBs at time $t$}\\
+0 & \text{otherwise} \leq
+\end{cases}       
+\end{equation}
+
+\begin{equation}
+	I = \prod_{i = 1}^{n} \int_{-r}^{r} dx_i f(x_1, ..., x_n)
+\end{equation}
+
+\begin{equation}
+f(x,y) =
+\begin{cases}
+1 &  \left( \sum_{i = 1}^{n} x_i^2 \right)^\frac{1}{2} \leq r\\
+0 & \text{otherwise}
+\end{cases}       
+\end{equation}
+
+\section{Advice} 
+\begin{itemize}
+	\item Never User Global Variables
+\end{itemize}
+
+\section{TODO}
+\begin{itemize}
+	\item \it{request.FormValue("KEY")}
+	\item \it{request.FormFile("KEY")}
+\end{itemize}
 
 \section{Goland Keyboard Short-cuts}
 \subsection{Format File}
