@@ -2,3 +2,7 @@
 \contentsline {section}{\numberline {2}Creating a database}{2}% 
 \contentsline {section}{\numberline {3}Connecting to a database}{2}% 
 \contentsline {section}{\numberline {4}Creating Tables}{2}% 
+\contentsline {section}{\numberline {5}Insert into Table}{2}% 
+\contentsline {section}{\numberline {6}Querying Table}{3}% 
+\contentsline {section}{\numberline {7}Delete}{3}% 
+\contentsline {subsection}{\numberline {7.1}Delete all content of table}{3}% 

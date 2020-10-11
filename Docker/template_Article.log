@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.25)  8 MAY 2020 17:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.25)  26 JUN 2020 14:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -405,54 +405,48 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 103.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 103.
-
-(./template_Article.toc)
-\tf@toc=\write3
-\openout3 = `template_Article.toc'.
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 122.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 122.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[1
-
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 165.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 109.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 166.
- [2] [3]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 113.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 113.
+ [1
+
+{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 223
+.
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) [3]
 (./template_Article.aux) ) 
 Here is how much of TeX's memory you used:
- 4347 strings out of 492616
- 59041 string characters out of 6129481
- 305876 words of memory out of 5000000
- 8213 multiletter control sequences out of 15000+600000
- 13620 words of font info for 33 fonts, out of 8000000 for 9000
+ 4413 strings out of 492616
+ 60113 string characters out of 6129481
+ 349876 words of memory out of 5000000
+ 8280 multiletter control sequences out of 15000+600000
+ 12365 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,8n,58p,283b,1356s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,6n,58p,283b,1349s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/c
-m-super/cm-super-t1.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/
-cm-super/sfbx0900.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm
--super/sfbx1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-s
-uper/sfbx1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-sup
-er/sfbx1440.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super
-/sfrm0900.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/s
-frm1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfr
-m1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1
-728.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt090
-0.pfb>
-Output written on template_Article.pdf (3 pages, 150346 bytes).
+m-super/cm-super-ts1.enc}{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm
+-super/cm-super-t1.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm
+-super/sfbx1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-s
+uper/sfbx1440.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-sup
+er/sfrm0900.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super
+/sfrm1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/s
+frm1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfr
+m1728.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0
+900.pfb>
+Output written on template_Article.pdf (3 pages, 142813 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
+ 50 PDF objects out of 1000 (max. 8388607)
  36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)

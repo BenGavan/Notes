@@ -1,0 +1,233 @@
+\documentclass[]{article}
+
+
+\usepackage{color}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\usepackage{upquote}
+\usepackage{listings}
+\lstdefinelanguage{JavaScript}{
+	morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morestring=[b]",
+	morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+	language=html,
+	sensitive=true, 
+	alsoletter={<>=-},
+	otherkeywords={
+		% HTML tags
+		<html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+		<canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
+	},  
+	ndkeywords={
+		% General
+		=,
+		% HTML attributes
+		charset=, id=, width=, height=,
+		% CSS properties
+		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+	},  
+	morecomment=[s]{<!--}{-->},
+	tag=[s]
+}
+
+\lstset{%
+	% Basic design
+	backgroundcolor=\color{editorGray},
+	basicstyle={\small\ttfamily},   
+	frame=l,
+	% Line numbers
+	xleftmargin={0.75cm},
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberfirstline=true,
+	% Code design   
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{darkgray}\ttfamily,
+	ndkeywordstyle=\color{editorGreen}\bfseries,
+	stringstyle=\color{editorOcher},
+	% Code
+	language=HTML5,
+	alsolanguage=JavaScript,
+	alsodigit={.:;},
+	tabsize=2,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	extendedchars=true,
+	breaklines=true,        
+	% Support for German umlauts
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+% Packages
+%\usepackage{showframe}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage{wrapfig}
+
+% Auto-hyphen controlls
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% New Commands 
+\newcommand{\<}{\guilsinglleft}
+\renewcommand{\>}{\guilsinglright}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+
+%opening
+\title{Docker}
+\author{Ben Gavan}
+
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%% Orientation and Setup %%%%%%%%%%%%%%%%
+\section{Orientation and Setup}
+
+\subsection{Test Docker Version}
+\begin{lstlisting}
+docker --version
+\end{lstlisting}
+
+\begin{equation}
+	hygv
+\end{equation}
+
+\section{The Dockerfile}
+\subsection{Where is the code - What directory the code is in}
+
+\subsection{What port}
+
+%%%%%%%%%%%%%%%% Building an image %%%%%%%%%%%%%%%%
+\section{Building an image}
+To build an image without binding to a port
+\begin{lstlisting}
+docker build -t <image name> .
+\end{lstlisting}
+where `.' represents the current directory.
+
+To build an image binding to a port
+\begin{lstlisting}
+ docker run -d -p 80:80 my-app
+\end{lstlisting}
+
+\subsection{Building an image from a Dockerfile embedded in the source}
+Run this in the directory you are building the dockerfile from
+\begin{lstlisting}
+docker build -f path/to/Dockerfile .
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%  %%%%%%%%%%%%%%%%
+\section{View all images}
+To view all images built on the current machine/user
+\begin{lstlisting}
+docker images
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%% Running an image %%%%%%%%%%%%%%%%
+\section{Running an image}
+
+Running an image without binding to a port
+\begin{lstlisting}
+content...
+\end{lstlisting}
+
+Running an image binding to port 8081 externally and then routing to port 8080 internally inside of the container
+\begin{lstlisting}
+$ docker run -d -p 8081:8080 go-docker
+\end{lstlisting}
+-d means run this detached, as a daemon, eg, not dependent on the terminal session \\
+-p means map ports; mapping <host machine port>:<to docker container port>
+
+%%%%%%%%%%%%%%%% Information about an image %%%%%%%%%%%%%%%%
+\section{Information about an image}
+\subsection{History of an image}
+\begin{lstlisting}
+docker image history <image-name>
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%% List of current running containers %%%%%%%%%%%%%%%%
+\section{List of current running containers}
+\label{section:current-containers}
+To view the list of current containers
+\begin{lstlisting}
+	docker container ls
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%% Stopping a container %%%%%%%%%%%%%%%%
+\section{Stopping a container}
+To stop a container, using the container ID (found in Section \ref{section:current-containers})
+\begin{lstlisting}
+$ docker container stop <container ID>
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%% Pushing a container to docker hub %%%%%%%%%%%%%%%%
+\section{Pushing a container to docker hub}
+\begin{lstlisting}
+docker push <username>/<app name>
+\end{lstlisting}
+for example, for the tutorial when you sign up to Docker, 
+\begin{lstlisting}
+docker push bengavan/cheers2019
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%% Deploying a Docker container on AWS %%%%%%%%%%%%%%%%
+\section{Deploying a Docker container on AWS}
+
+\subsection{Deploying a Docker container to AWS from Docker hub}
+
+\subsection{Deploying a Docker container to AWS from Docker hub}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Stopping a container %%%%%%%%%%%%%%%%
+\section{Dockerfile templates}
+\subsection{Simple Go image}
+\begin{lstlisting}
+# To be built from the /Services directory using:
+# docker build -f path/to/Dockerfile .
+
+FROM golang:alpine as builder
+RUN mkdir /build
+ADD . /build/
+WORKDIR /build
+
+RUN apk add --no-cache git \
+	&& go get github.com/johnnadratowski/golang-neo4j-bolt-driver \
+	&& go get github.com/lib/pq \
+	&& go get golang.org/x/crypto/bcrypt \
+	&& apk del git
+
+#RUN go get github.com/johnnadratowski/golang-neo4j-bolt-driver
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main ./Authentication
+
+FROM scratch
+COPY --from=builder /build/main .
+COPY Shared/utils Shared/utils
+WORKDIR .
+CMD ["./main"]
+\end{lstlisting}
+
+
+\end{document}

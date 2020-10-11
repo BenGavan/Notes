@@ -1,0 +1,283 @@
+\documentclass[]{article}
+
+%Packages%
+\usepackage[utf8]{inputenc}
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.75cm, right=2.75cm]{geometry} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{gensymb}
+\usepackage{setspace}
+\usepackage{comment}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{multirow}
+
+\usepackage{cite}       
+\newcommand{\citet}{\cite} 
+\bibliographystyle{ieeetr}
+
+
+\usepackage{color}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\usepackage{upquote}
+\usepackage{listings}
+\lstdefinelanguage{JavaScript}{
+	morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morestring=[b]",
+	morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+	language=html,
+	sensitive=true, 
+	alsoletter={<>=-},
+	otherkeywords={
+		% HTML tags
+		<html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+		<canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
+	},  
+	ndkeywords={
+		% General
+		=,
+		% HTML attributes
+		charset=, id=, width=, height=,
+		% CSS properties
+		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+	},  
+	morecomment=[s]{<!--}{-->},
+	tag=[s]
+}
+
+\lstset{%
+	% Basic design
+	backgroundcolor=\color{editorGray},
+	basicstyle={\small\ttfamily},   
+	frame=l,
+	% Line numbers
+	xleftmargin={0.75cm},
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberfirstline=true,
+	% Code design   
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{darkgray}\ttfamily,
+	ndkeywordstyle=\color{editorGreen}\bfseries,
+	stringstyle=\color{editorOcher},
+	% Code
+	language=HTML5,
+	alsolanguage=JavaScript,
+	alsodigit={.:;},
+	tabsize=2,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	extendedchars=true,
+	breaklines=true,        
+	% Support for German umlauts
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+% Packages
+%\usepackage{showframe}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage{wrapfig}
+
+% Auto-hyphen controlls
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% New Commands 
+\newcommand{\<}{\guilsinglleft}
+\renewcommand{\>}{\guilsinglright}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+
+
+
+%opening
+\title{Kubernetes}
+\author{Ben Gavan}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+%%%%%%%%%%%%%%%%%%%%%%% Definitions %%%%%%%%%%%%%%%%%%%%%%%
+\section{Definitions}
+\begin{itemize}
+	\item Node = A worker machine (physical and/or virtual)  that Kubernetes can run applications on.
+	
+	\item Pod = Collection of Containers
+	\subitem The smallest deployable unit of computing that can be created and managed in Kubernetes.
+	\subitem basic unit of deployment.
+	\subitem All containers in a pod are scheduled in the same node.
+	
+	\item Ingress = An API object that manages external access to the services in a cluster (typically HTTP).  May provide:
+	\subitem load balancing,
+	\subitem SSL Termination,
+	\subitem Name-based virtual hosting.
+	
+	\item Cluster = A Set of Nodes
+	\subitem In most deployments, nodes in a cluster are NOT part of the public internet.
+	
+	\item Edge Router = A Router that enforces the firewall policy for the cluster.
+	\subitem Could be physical piece of hardware 
+	\subitem or a gateway managed by a cloud provider.
+	
+	\item Cluster Network = A Set of links (logical or physical) that facilitate communication within a cluster (according to the networking model).
+	
+	\item Service =  Identifies a set of pods (a cluster)  using label selectors
+	\subitem assumed to have virtual IPs only routable within the cluster.
+\end{itemize}
+
+\section{Theory}
+\subsection{Ingress}
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
+\begin{lstlisting}
+  internet
+     |
+[ Ingress ]
+--|-----|--
+[ Services ]
+\end{lstlisting}
+
+
+\section{Defining}
+Defined using a \it{deployment.yaml} file.
+\begin{lstlisting}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: kubernetes-tutorial-deployment
+spec:
+	replicas: 2
+	selector:
+		matchLabels:
+			app: kubernetes-tutorial-deployment
+	template:
+		metadata:
+			labels:
+				app: kubernetes-tutorial-deployment
+		spec:
+			containers:
+			- name: kubernetes-tutorial-application
+			image: auth0blog/kubernetes-tutorial
+			ports:
+				- containerPort: 3000
+
+\end{lstlisting}
+
+All Kubernetes resources needs fields for:
+\begin{itemize}
+	\item apiVersion
+	\item kind
+	\item metadata
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%% Networking %%%%%%%%%%%%%%%%%%%%%%%
+\section{Networking}
+\subsection{Introduction to Ingress}
+Ingress exposed HTTP and HTTPS routes from outside to services within the cluster.  Traffic routing is controlled by rules defined on the Ingress resource and can be configured to
+\begin{itemize}
+	\item give services externally reachable URLs
+	\item load balance traffic
+	\item terminate SSL/TLS
+	\item \& offer name based virtual hosting.
+\end{itemize}
+An Ingress Controller is responsible for fulfilling the Ingress (usually with a load balancer).\\
+An Ingress does not expose arbitrary ports or protocols.\\
+Must have an Ingress Controller to satisfy an Ingress such as \it{ingress-nginx}.  (only creating an Ingress Resource have not effect)
+\begin{lstlisting}
+ internet
+     |
+[ Ingress ]
+--|-----|--
+[ Services ]
+\end{lstlisting}
+
+\subsection{The Ingress Resource}
+A minimal Ingress resource example:
+\begin{lstlisting}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+	name: test-ingress
+	annotations:
+		nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+	rules:
+	- http:
+		paths:
+			- path: /testpath
+			pathType: Prefix
+			backend:
+				serviceName: test
+				servicePort: 80
+\end{lstlisting}
+The name of an Ingress object must be a valid DNS Subdomain name
+\begin{lstlisting}
+www.subdomain.domain.com
+\end{lstlisting}
+Ingress resource only supports rules for directing HTTP traffic.
+
+\subsection{Internal Networking}
+
+\subsection{External Networking}
+
+%%%%%%%%%%%%%%%%%%%%%%% Launching %%%%%%%%%%%%%%%%%%%%%%%
+\section{Launching}
+
+%%%%%%%%%%%%%%%%%%%%%%% Modifying %%%%%%%%%%%%%%%%%%%%%%%
+\section{Modifying}
+
+%%%%%%%%%%%%%%%%%%%%%%% Deleting %%%%%%%%%%%%%%%%%%%%%%%
+\section{Deleting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%% Basic Commands %%%%%%%%%%%%%%%%%%%%%%%
+\section{Basic Commands}
+\subsection{Get all pods}
+\begin{lstlisting}
+kubectr got pods
+\end{lstlisting}
+
+\subsection{exec into centOS}
+\begin{lstlisting}
+kubectl exec <name (specified in pod.yaml)> -c shell -i -t -- bash
+\end{lstlisting}
+we can then interface with it via 
+\begin{lstlisting}
+curl -s localhost:9876/info
+\end{lstlisting}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%% References %%%%%%%%%%%%%%%%%%%%%%%
+\section{References}
+\begin{itemize}
+	\item https://kubernetes.io/docs/concepts/services-networking/ingress/
+\end{itemize}
+
+
+
+
+\end{document}

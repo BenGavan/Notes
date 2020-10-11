@@ -1,5 +1,20 @@
 \documentclass[]{article}
 
+\usepackage[utf8]{inputenc}
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.75cm, right=2.75cm]{geometry} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{gensymb}
+\usepackage{setspace}
+\usepackage{comment}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{multirow}
+
+\usepackage{cite}       
+\newcommand{\citet}{\cite} 
+\bibliographystyle{ieeetr}
+
 \usepackage{color}
 \definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
 \definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
@@ -29,7 +44,7 @@
 		% HTML attributes
 		charset=, id=, width=, height=,
 		% CSS properties
-		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+		border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:, width:, height:, display:,justify-content:, align-items:, background-color:, font-size:, color:,
 	},  
 	morecomment=[s]{<!--}{-->},
 	tag=[s]
@@ -48,7 +63,7 @@
 	numberfirstline=true,
 	% Code design   
 	keywordstyle=\color{blue}\bfseries,
-	commentstyle=\color{darkgray}\ttfamily,
+	commentstyle=\color{black}\ttfamily,
 	ndkeywordstyle=\color{editorGreen}\bfseries,
 	stringstyle=\color{editorOcher},
 	% Code
@@ -221,7 +236,7 @@ Useful reminders:
 \subsection{Block}
 \begin{itemize}
 	\item Will take up the width of the parrent (so will stack verticlly)
-\end{itemize}
+\end{itemize}y
 \subsection{Inline} 
 \begin{itemize}
 	\item Will take up only the size/space required - so will stack horizontally; hence inline.
@@ -229,6 +244,28 @@ Useful reminders:
 
 %%%%%%%%%%%%%%%%% HTML Tags %%%%%%%%%%%%%%%%%%%%
 \section{HTML Tags}
+\subsection{meta}
+
+\subsubsection{meta tag viewport}
+Convention rule is to always include this line (in the head) in all HTML document (this is correct)
+\begin{lstlisting}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+\end{lstlisting}
+History of mobile and Font Boosting:\\
+ - In the beginning of mobile devices, websites were rendered the same as the desktop version so you had to zoom in manually to view the content.  Someone then said to just make the font size larger for mobile devices - aka Font Boosting - with still the web page being displayed as 980px wide.
+ \\\\
+ The solution sets the view port width equal to the device/screen width.  Since there is normally less pixels, everything appears larger.
+ \\ 
+ The \it{initial-scale=1} sets the mapping from CSS pixels to device independent pixels to 1 to 1. 
+ \\
+ If set to 2, each CSS pixels will be mapped onto 1 device independent pixels.
+ \\\\
+TL;DR:\\
+ - meta viewport tag controlls the width and scaling of the browser's viewport.
+ - \it{width=device-width} matches the screen's width in device-independent pixels.
+ - \it{initial-scale=1} establishes a 1:1 relationship between CSS pixels and device-independent pixels.
+ - Ensure the page is accessible by NOT disabling user scaling.
+
 \subsection{div}
 \begin{itemize}
 	\item "block" level element = takes up the width of the parrent (so will stack verticlly)
@@ -247,6 +284,8 @@ Useful reminders:
 \paragraph{Attributes}
 \begin{itemize}
 	\item 'href' urlm to open when clicked
+	\subitem \it{href="tel:+447471199741"} to dial that phone number when clicked.
+	
 	\item 'target' how to do it when clicked
 	\subitem '\_blank' opens url in new tab 
 \end{itemize}
@@ -277,6 +316,18 @@ represents preformatted text - usually displayed in mono-space font as it is in 
 \\
 Need to escape \< and \> characters with \&lt and \&gt
 
+\subsection{\it{samp}}
+= output\\
+Identifies sample output from a computer program.
+
+\subsection{\it{code}}
+= fragment of computer code
+
+\subsection{\it{kbd}}
+= Input\\
+Represents user input\\
+propduces an inline element displayed in the browsers default mono-space font\\
+kbd is short for keyboard
 
 %%%%%%%%%%%%%%%%% CSS Attributes %%%%%%%%%%%%%%%%%%%%
 \section{CSS Attributes}
@@ -371,6 +422,37 @@ There are some standards, e.g. meyer css reset (oldest), normalize.css (newer), 
 \\
 However, some of these don't bring the formatting down to zero.  Instead they provide their own baseline formatting - overriding what the browser's baseline is.
 
+\subsection{\it{box-shadow}}
+\begin{lstlisting}
+    box-shadow: <x off-set> <y off-set> <radius> <color>;
+\end{lstlisting}
+
+\subsection{\it{vertical-align}}
+Sets the vertical alignment.\\
+The container element grows to accommodate this shift.\\
+Positive to up, Negative is down.
+
+%%%%%%%%%%%%%%%%% CSS Colors (Data type) %%%%%%%%%%%%%%%%%%%%
+\section{CSS Colors (Data type)}
+Use Hax or rgba
+
+\subsection{Picking Good Color Combinations - Adobe Color (Kuler)}
+\begin{itemize}
+	\item Explore for popular color schemes
+	\item Color wheel for discovering new schemes
+	\item Can import an image and gives colors that matches
+\end{itemize}
+Use iStock photo for copyright free images.
+
+
+%%%%%%%%%%%%%%%%% image Types %%%%%%%%%%%%%%%%%%%%
+\section{Image Types}
+Raster/Bitmap \& Vector
+
+\subsection{Vector}
+File format: 
+ - SVG
+%%%%%%%%%%%%%%%%% CSS Selectors %%%%%%%%%%%%%%%%%%%%
 \section{CSS Selectors}
 Different ways to select HTML elements.
 \subsection{element}
@@ -845,6 +927,116 @@ The text-indent property specifies the amount of indentation (empty space) shoul
 
 \subsubsection{max-width}
 Sets the maximum width an element can be.  Enables it to be smaller than that, so can be useful for adaptations for smaller screens.
+
+%%%%%%%%%%%%%%%%% Font Awesome %%%%%%%%%%%%%%%%%%
+\section{Font Awesome}
+\it{https://fontawesome.com/cheatsheet}\\\\
+Full open source under MIT license.
+
+\subsection{Performance}
+To only send the icons you are needing, use the SVG of them.
+
+\subsection{Downloading as a font to my computer}
+
+
+
+%%%%%%%%%%%%%%%%% SVG %%%%%%%%%%%%%%%%%%
+\section{SVG}
+Ideally start with uniform dimensions, such as 100px by 100px.
+\\
+Can use InkScape.
+\\
+Leave space around the element on the art board/canvas so say if the stroke is increased, the SVG will not be clipped.
+
+\subsection{Path element}
+\begin{lstlisting}
+<path d="M10 10 l90 140 V30 h20 m20 10 l90 140" stroke="black" stroke-width="4" fill="transparent"/>
+\end{lstlisting}
+
+\subsection{viewBox}
+For example,
+\begin{lstlisting}
+    <symbol id="play-circle" viewBox="0 0 100 100">
+\end{lstlisting}
+It is analogous to the canvas size (in pixels) when the SVG is first created.  So by defining the viewBox on in XML it allows the following coordinated used in the definition of that element to be keyed relative to that view box.
+\begin{lstlisting}
+viewBox="<x-zero> <y-zero> <x-dimension> <y-dimension>"
+\end{lstlisting}
+It also can act as a scaling mechanism.  For example, if width=200 and height=250 with a view box set as:
+\begin{lstlisting}
+<svg version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	width="200"
+	height="250"
+	viewBox="0 0 400 500">
+\end{lstlisting}
+each 2 pixels will be mapped onto 1 display-independent pixel.  So will be half the dimensions (quarter of size $2^2$)
+
+\subsection{\<symbol\> \& \<use\>}
+Used to define graphical template objects which can be instantiated by a use element.
+\\\\
+By using the decleration of 
+\begin{lstlisting}
+<svg version="1.1"
+	xmlns="http://www.w3.org/2000/svg">
+	
+	<symbol id="play-circle" viewBox="0 0 100 100">
+		<path d="M83.4,50.9c0,18.5-15,33.4-33.4,33.4s-33.4-15-33.4-33.4c0-18.5,15-33.4,33.4-33.4S83.4,32.4,83.4,50.9z M68.1,50.9
+		c0-1-0.5-1.9-1.4-2.4L43,34.5c-0.8-0.5-1.9-0.5-2.8,0c-0.9,0.5-1.4,1.4-1.4,2.4v27.9c0,1,0.5,1.9,1.4,2.4c0.4,0.2,0.9,0.3,1.4,0.3
+		s1-0.1,1.4-0.4l23.7-13.9C67.6,52.8,68.1,51.9,68.1,50.9z"/>
+	</symbol>
+</svg>	
+\end{lstlisting}
+which can then be referenced in any number of html files by using 
+\begin{lstlisting}
+<svg><use xlink:href="icons.svg#play-circle"></use></svg>
+\end{lstlisting}
+\subsubsection{Compatibility issues with IE \& Edge - JS Solution}
+To make this work on Edge (and possibly other browsers) use the js file on git hub (/044\_svg/10\_symbol/svg4everybody.js) and then run at the bottom of the HTML page using
+\begin{lstlisting}
+<script src="svg4everybody.js"></script>
+<script>svg4everybody();</script>
+\end{lstlisting}
+
+\subsubsection{Compatibility issues with IE \& Edge - Messy Efficient HTML Solution}
+Just declare the SVG at the top of the HTML page with \it{display="none"} and then reference as normal.
+\\\\
+Could set the server up so that it injects the SVG declaration at the top of the page when it builds the page so you don't need to look at it.
+
+\subsubsection{Styling using CSS}
+Cannot be done if you put it onto the page using an image tag.
+
+\subsection{Stacking SVGs (Symbol with multiple paths)}
+\begin{lstlisting}
+<svg version="1.1"
+	xmlns="http://www.w3.org/2000/svg">
+	
+	<symbol id="check" viewBox="0 0 100 100">
+		<path d="M72.2,43.2L50.7,63.5l-4,3.8c-0.5,0.5-1.3,0.8-2,0.8c-0.7,0-1.5-0.3-2-0.8l-4-3.8L27.8,53.4c-0.5-0.5-0.8-1.2-0.8-1.9
+		s0.3-1.4,0.8-1.9l4-3.8c0.5-0.5,1.3-0.8,2-0.8c0.7,0,1.5,0.3,2,0.8l8.7,8.3l19.5-18.5c0.5-0.5,1.3-0.8,2-0.8s1.5,0.3,2,0.8l4,3.8
+		c0.5,0.5,0.8,1.2,0.8,1.9C73,42,72.7,42.7,72.2,43.2z"/>
+	</symbol>
+	
+	
+	<symbol id="circle-thin" viewBox="0 0 100 100">
+		<path d="M50,84.4c-18.5,0-33.5-15-33.5-33.5s15-33.5,33.5-33.5c18.5,0,33.5,15,33.5,33.5S68.5,84.4,50,84.4z M22.1,50.9
+		c0,15.4,12.5,27.9,27.9,27.9c15.4,0,27.9-12.5,27.9-27.9S65.4,22.9,50,22.9C34.6,22.9,22.1,35.5,22.1,50.9z"/>
+	</symbol>
+	
+	<symbol id="checked" viewBox="0 0 100 100">
+		<!-- the check -->
+		<path fill="currentcolor" d="M72.2,43.2L50.7,63.5l-4,3.8c-0.5,0.5-1.3,0.8-2,0.8c-0.7,0-1.5-0.3-2-0.8l-4-3.8L27.8,53.4c-0.5-0.5-0.8-1.2-0.8-1.9
+		s0.3-1.4,0.8-1.9l4-3.8c0.5-0.5,1.3-0.8,2-0.8c0.7,0,1.5,0.3,2,0.8l8.7,8.3l19.5-18.5c0.5-0.5,1.3-0.8,2-0.8s1.5,0.3,2,0.8l4,3.8
+		c0.5,0.5,0.8,1.2,0.8,1.9C73,42,72.7,42.7,72.2,43.2z"/>
+		<!-- the circle -->
+		<path d="M50,84.4c-18.5,0-33.5-15-33.5-33.5s15-33.5,33.5-33.5c18.5,0,33.5,15,33.5,33.5S68.5,84.4,50,84.4z M22.1,50.9
+		c0,15.4,12.5,27.9,27.9,27.9c15.4,0,27.9-12.5,27.9-27.9S65.4,22.9,50,22.9C34.6,22.9,22.1,35.5,22.1,50.9z"/>
+	</symbol>
+
+</svg>
+\end{lstlisting}
+
+\subsection{Stroke \%}
 
 %%%%%%%%%%%%%%%%% Document Structure %%%%%%%%%%%%%%%%%%
 \section{Document Structure}
@@ -1499,6 +1691,149 @@ Use
 \end{lstlisting}
 to force the text not to be put onto more than one line at that space.
 
+%%%%%%%%%%%%%%%%%%%%% CSS Transitions %%%%%%%%%%%%%%%%%%%%%%
+\section{CSS Transitions}
+The quick \& dirty version of \it{animations} - only need to specify the start and end point.
+\subsection{Properties}
+\begin{itemize}
+	\item \it{transition-property:}
+	\subitem \<property\>; (e.g. color)
+	\subitem \it{all;} (applies the transition to possibly all properties)
+	
+	\item \it{transition-duration:}
+	\subitem 500ms;
+	
+	\item \it{transition-timing-function:}
+	\subitem \it{ease-in-out};
+	
+	\item \it{transition-delay:}
+	\subitem 1s; 
+\end{itemize}
+
+\subsection{Example}
+A basic transition can be applied to any element to specify how CSS properties are to be animated when the state (e.g. \it{:hover})  changes.
+\begin{lstlisting}
+div {
+	width: 30vh;
+	height: 30vh;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	background-color: blue;
+	border: 4px solid black;
+	font-size: 4vh;
+	color: yellow;
+}
+
+div:hover {
+	color: blue;
+	background-color: yellow;
+}
+
+.trans {
+	transition-property: all;
+	transition-duration: 0.5s;
+	transition-timing-function: ease;
+}
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%% CSS Animations %%%%%%%%%%%%%%%%%%%%%%
+\section{CSS Animations}
+To create an animation, you need to specify:
+\begin{itemize}
+	\item  the CSS properties at "key frames".
+	\subitem \it{@keyframes <animation-name> \{... 10\% \{...\} ....\}}
+	
+	\item duration
+	\subitem \it{animation-duration}: <seconds>s
+	
+	\item delay 
+	\subitem \it{animation-delay}: <seconds>s
+	
+	\item fill mode
+	\subitem \it{animation-fill-mode}: <builtin>
+	
+	\item timing function
+	\subitem \it{animation-timing-function: <builtin>}
+	
+	\item animation name
+	\subitem \it{animation-name: <name>}
+\end{itemize}
+
+\subsection{Defining an animation`s key frames}
+\begin{lstlisting}
+@keyframes grow {
+	0% { 
+		font-size: 0; 
+	}
+	100% {
+		font-size: 40px; 
+	}
+}
+\end{lstlisting}
+
+\subsection{animation-fill-mode}
+Defines what properties specified during the animation are permanently applied to the element being animated (after the animation has finished).\\
+Has the possible values:
+\begin{itemize}
+	\item \it{none}
+	\subitem The animation will not permanently apply any styles after the animation has finished.
+	\subitem Default value
+	
+	\item \it{forwards}
+	\subitem The element will retain the styles set by the last keyframe of the animation
+	
+	\item \it{backwards}
+	\subitem The element will retain the styles set by the first keyframe of the animation
+	
+	\item \it{both}
+	\subitem Follows the rules for both forwards and backwards.
+\end{itemize}
+
+\subsection{Define}
+
+%%%%%%%%%%%%%%%%%%%%% Linear Gradient %%%%%%%%%%%%%%%%%%%%%%
+\section{Linear Gradient}
+\begin{lstlisting}
+.gradient {
+	background-image: linear-gradient(#72c41f, #5c9e19);
+	background-image: linear-gradient(hotpink, green, deepskyblue);
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%% Audio & Video %%%%%%%%%%%%%%%%%%%%%%
+\section{Audio \& Video}
+\subsection{Audio}
+\begin{lstlisting}
+ <audio controls>
+	 <source src="../00_files/Newish_Disco.mp3" type="audio/mpeg">
+ </audio>
+\end{lstlisting}
+
+\subsection{Video}
+The browser will try to play each source in order and only plays it if the format is supported.
+\begin{lstlisting}
+<video controls>
+	<source id="s3" src="../00_files/me.webm" type="video/webm">
+	<source id="s2" src="../00_files/me.ogv" type="video/ogg">
+	<source id="s1" src="../00_files/me.mp4" type="video/mp4">
+</video>
+\end{lstlisting}
+
+
+
+%%%%%%%%%%%%%%%%%%%%% Favicons %%%%%%%%%%%%%%%%%%%%%%
+\section{Favicons}
+
+\subsection{Random URL}
+Add a random string to the end of the URLto make the browser request the new resource (would just retrieve it from cache)
+\begin{lstlisting}
+href="favicon/apple-touch-icon.png?v=eEavRGEXR9"
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%%%% Forms %%%%%%%%%%%%%%%%%%%%%%
 \section{Forms}
 \begin{lstlisting}
@@ -1509,7 +1844,85 @@ to force the text not to be put onto more than one line at that space.
 	\item 'name' is the name that is given to the variable that contains the data from that element which is sent off to the server.
 \end{itemize}
 
+\begin{lstlisting}
+<form action="/where/its/beging/sent" method="post">
+	<!--GET-->
+	<!--URL-->
+	
+	<!--POST-->
+	<!--BODY-->
+</form>
+\end{lstlisting}
 
+\subsection{\<input\>}
+\begin{lstlisting}
+<form action="/" method="post">
+	<input type="text" id="fname" name="firstName" title="enter your name" placeholder="first name please" autofocus autocomplete="off">
+</form>
+\end{lstlisting}
+\begin{itemize}
+	\item \it{id} = CSS (used to target the element)
+	\item \it{name} = the name the input value is sent to the server with (name: data)
+	\item  \it{value} = preset input data (can be overridden)
+\end{itemize}
+
+\subsection{\<label\>}
+\begin{lstlisting}
+<form action="/" method="post">
+
+	<label for="fname">First Name:</label>
+	<input type="text" id="fname" name="firstName" title="enter your name" placeholder="first name please" autofocus autocomplete="off">
+
+</form>
+\end{lstlisting}
+\begin{itemize}
+	\item \it{for} = the \it{id} of the input element the label is for.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%% Markdown  %%%%%%%%%%%%%%%%%%%%%%
+\section{Markdown}
+Markdown is a markup language with the file extension \it{.md}.
+\subsection{Headers}
+\begin{lstlisting}
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+\end{lstlisting}
+
+\subsection{Italics}
+\begin{lstlisting}
+*This would be in italics*
+\end{lstlisting}
+
+\subsection{Bold}
+\begin{lstlisting}
+**This would be in bold**
+\end{lstlisting}
+
+\subsection{Links}
+\begin{lstlisting}
+[go to google](https://www.google.com)
+\end{lstlisting}
+
+\subsection{Lists}
+\begin{lstlisting}
+1. first item
+1. second item
+1. third item
+\end{lstlisting}
+
+\subsection{Code Block}
+\begin{lstlisting}
+Inline `code` has `back-ticks around` it.
+\end{lstlisting}
+
+Blocks of code are fenced by lines with three back-ticks ```
+
+
+%%%%%%%%%%%%%%%%%%%%% Random Bits %%%%%%%%%%%%%%%%%%%%%%
 \section{Random Bits}
 At the start of the semester, ask students to ask two people their names.  Then, start by doing a quiz and ask what those two people's names were.  Should get a funny response and more importantly demonstrate that the brain is bad at remembering things and effort is needed to succeed.
 
@@ -1518,5 +1931,18 @@ At the start of the semester, ask students to ask two people their names.  Then,
 \subsection{Avoid random overrides in CSS}
 Set an id to the body tag, then when referring to another element on the same page, can then use a descendant (that element is a descendant of body). So when  you add additional things in, you don't get unintentional overrides.
 
+\subsection{Design Tips}
+\begin{itemize}
+	\item Things that are higher than center look better.
+\end{itemize}
+
+\subsection{Prefixes}
+Use autoprefixer for deployment (can also set it up within the IDE).
+
+\subsection{Gulp}
+Automate workflow (can add prefixes)
+
+\subsection{Grunt}
+The Javascript Task Runner.
 
 \end{document}

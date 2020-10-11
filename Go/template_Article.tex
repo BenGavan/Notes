@@ -47,11 +47,12 @@
 
 %opening
 \title{Go}
-\author{}
+\author{Ben Gavan}
 
 \begin{document}
 
 \maketitle
+\tableofcontents
 
 \begin{abstract}
 
@@ -82,17 +83,20 @@ f(x,y) =
 \end{cases}       
 \end{equation}
 
+%%%%%%%%%%%%%%%% Advice %%%%%%%%%%%%%%%%
 \section{Advice} 
 \begin{itemize}
 	\item Never User Global Variables
 \end{itemize}
 
+%%%%%%%%%%%%%%%% TODO %%%%%%%%%%%%%%%%
 \section{TODO}
 \begin{itemize}
 	\item \it{request.FormValue("KEY")}
 	\item \it{request.FormFile("KEY")}
 \end{itemize}
 
+%%%%%%%%%%%%%%%% Goland Keyboard short-cuts %%%%%%%%%%%%%%%%
 \section{Goland Keyboard Short-cuts}
 \subsection{Format File}
 \it{sbift + option + command + f}
@@ -101,6 +105,7 @@ f(x,y) =
 	\subitem \it{sbift + option + command + f}
 \end{itemize}
 
+%%%%%%%%%%%%%%%% fmt %%%%%%%%%%%%%%%%
 \section{fmt}
 \subsection{fmt.printf()}
 \begin{itemize}
@@ -113,7 +118,7 @@ float to string with specifying the number of decimal places.
 s := fmt.Sprintf("%.2f", 12.3456) // s == "12.35"
 \end{lstlisting}
 
-
+%%%%%%%%%%%%%%%% Byte %%%%%%%%%%%%%%%%
 \section{byte}
 The type of \it{byte} is 'an alias for \it{uint8} an is equivalent in all ways'. 'It is used, by convention, to distinguish byte values from 8-bit unsigned integer values'.
 \begin{lstlisting}
@@ -123,6 +128,57 @@ The type of \it{byte} is 'an alias for \it{uint8} an is equivalent in all ways'.
 type byte = uint8
 \end{lstlisting}\cite{byte-definition}
 
+
+
+\section{Interface Type Assertion}
+\begin{lstlisting}
+s, ok := v.(string)
+if !ok {
+	// the assertion failed.
+}
+
+// OR //
+
+switch t := v.(type) {
+case string:
+	// t is a string
+case int :
+	// t is an int
+default:
+	// t is some other type that we didn't name.
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%% Slices %%%%%%%%%%%%%%%%
+\section{Slice}
+\subsection{append slice to slice}
+\begin{lstlisting}
+var ts []byte
+var exs []byte
+ts = append(ts, exs...)
+\end{lstlisting}
+
+\subsection{append multiple elements to slice}
+\begin{lstlisting}
+var ts []byte
+var exs []byte
+ts = append(ts, exs...)
+ts = append(ts, 1, 3, 3)
+\end{lstlisting}
+
+\subsection{Special case: append string to bytes slice}
+As a special case, it is legal to append a string to a byte slice, like this:
+\begin{lstlisting}
+slice = append([]byte("hello "), "world"...)
+\end{lstlisting}
+\begin{lstlisting}
+var ts []byte
+var exs []byte
+ts = append(ts, exs...)
+ts = append(ts, 1, 3, 3)
+ts = append(ts, "string"...)
+\end{lstlisting}
+%%%%%%%%%%%%%%%% Networking %%%%%%%%%%%%%%%%
 \section{Networking}
 
 \subsection{Creating a HTTP Server}
@@ -131,14 +187,126 @@ type byte = uint8
 	content...
 \end{lstlisting}
 
+\subsection{Routing}
+To route traffic to a specific path, emit the final forward slash, such that 
+\begin{lstlisting}
+	"base/path/specific"
+\end{lstlisting}
+To route traffic from all sub-routes of a base route (excluding specific registered sub routes), include the last forward slash, such that,
+\begin{lstlisting}
+	"/base/path/all/"
+\end{lstlisting}
 
 
+\subsection{Cookies}
+\subsubsection{Creation}
+To create a cookie, use the \it{http.Cookie}  type to create it.  To then write to the \it{Set-Cookie} HTTP header, use the \it{http.SetCookie(w ResponseWriter, cookie *Cookie)} method.\\
+*** Make sure the header is set BEFORE any response is written *** \\
+Cookies could be silently dropped.  (\it{SetCookie(...)} does not return an error) \\\\
+Requirements for Cookie name:
+\begin{itemize}
+	\item name can NOT have spaces in the name. (the value can, though (any data can be stored))
+\end{itemize}
+
+\begin{lstlisting}
+expires := time.Now().AddDate(1, 0, 0) // Expires one year from now
+c := http.Cookie{
+	Name:    name,
+	Value:   value,
+	MaxAge:  360000,
+	Expires: expires,
+}
+http.SetCookie(w, &c)
+\end{lstlisting}
+
+\subsubsection{Changing the value for a given name}
+To change the value of a previously stored cookie, just create a new cookie and save it as the same name - (it will override the old value with the new value)
+
+\subsubsection{Get Value}
+\begin{lstlisting}
+	c, err := r.Cookie(name)
+	value := c.Value
+\end{lstlisting}
+
+\subsection{Deletion}
+
+\begin{lstlisting}
+c := http.Cookie{
+	Name:   name,
+	MaxAge: -1,
+}
+http.SetCookie(w, &c)
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%% Neo4j %%%%%%%%%%%%%%%% 
 \section{Neo4j}
+\subsection{Delete all nodes \& relationships}
+\begin{lstlisting}
+MATCH (n) DETACH DELETE n;
+\end{lstlisting}
+All relationships attached to a node need to be detached (deleted) before a node is deleted.
+%%%%%%%%%%%%%%%% Files %%%%%%%%%%%%%%%% 
+\section{Files}
+\subsection{Write to file}
 
+\subsection{Append to file}
+\begin{lstlisting}
+	content...
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%% Logging %%%%%%%%%%%%%%%%
+\section{Logging}
+\section{Logging to file}
+\begin{lstlisting}
+f, err := os.OpenFile("text.log", os.O_APPEND | os.O_CREATE | os.O_WRONLY, 0644)
+if err != nil {
+	log.Println(err)
+}
+defer f.Close()
+
+logger := log.New(f, "prefix", log.LstdFlags)
+logger.Println("text to append")
+logger.Println("more text to append")
+\end{lstlisting}\cite{logging_to_file}
+
+%%%%%%%%%%%%%%%% Regex %%%%%%%%%%%%%%%%
+\section{Regex}
+\begin{lstlisting}
+	matched, err := regexp.MatchString(`a.b`, "aaxbb")
+	fmt.Println(matched) // true
+	fmt.Println(err)     // nil (regexp is valid)
+\end{lstlisting}
+
+%%%%%%%%  Testing %%%%%%%% 
+\section{Testing}
+\subsection{Run Test}
+To run a test, navigate to the package directory you want to test, then type and run:
+\begin{lstlisting}
+go test -v
+\end{lstlisting}
+
+For more tips and tricks see \cite{medium-matryer-5-testing}
+
+\subsection{Check coverage of tests}
+\begin{lstlisting}
+go test -coverage
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%% Bibliography %%%%%%%%%%%%%%%%
 \begin{thebibliography}{99}
 	
 	\bibitem{byte-definition}
 	\it{builtin.go} line 88
+	
+	\bibitem{logging_to_file}
+	\it{https://yourbasic.org/golang/log-to-file/} \\
+	Accessed 16/04/2020
+	
+	\bibitem{medium-matryer-5-testing}
+	\it{https://medium.com/@matryer/5-simple-tips-and-tricks-for-writing-unit-tests-in-golang-619653f90742} \\
+	Accessed 11/05/2020
 	
 \end{thebibliography}
 

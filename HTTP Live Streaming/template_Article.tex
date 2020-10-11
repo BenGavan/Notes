@@ -2,6 +2,7 @@
 
 
 
+
 \usepackage{color}
 \definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
 \definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
@@ -94,8 +95,9 @@
 \renewcommand{\it}[1]{\textit{#1}}
 \renewcommand{\bf}[1]{\textbf{#1}}
 
+
 %opening
-\title{PostgreSQL}
+\title{HTTP Live Streaming (HLS)}
 \author{Ben Gavan}
 
 \begin{document}
@@ -106,83 +108,28 @@
 
 \end{abstract}
 
-\tableofcontents
+\section{Video Source}
+HLS is NOT used for the upload.\\
 
-\section{Installation}
-\begin{enumerate}
-	\item Go to 'https://postgresapp.com/'
-	\item Download
-	\item Un-zip download 
-	\item Move to applications
-\end{enumerate}
-The default settings are:
-	\begin{center}
-	\begin{table}[h!]
-		\centering
-		\begin{tabular}{|| c | c ||} 
-			\hline
-			Host & Local Host \\
-			\hline
-			Port & 5432 \\ 
-			\hline
-			User & your system user name \\
-			\hline
-			Database & same as user \\
-			\hline
-			Password & none \\
-			\hline
-			Connection URL & postgresql://localhost \\
-			\hline
-		\end{tabular}
-		\label{tab:sucrose-variables}
-		\caption{A table of the default settings of the just created database.}
-	\end{table}
-\end{center}
-To install the GUI
-\begin{enumerate}
-	\item Go to 'http://www.psequel.com/'
-	\item Download
-	\item Unzip
-	\item Move to applications
-	\item Run
-\end{enumerate}
+\subsection{iOS}
+\it{AVCapture} can be used. 
 
-\section{Creating a database}
-\begin{enumerate}
-	\item Open the command line for postgres (from the elephant and double clicking any database).
-	\item run 'CREATE DATABASE [Database\_name\_here];'
-\end{enumerate}
+\section{Processing of video source}
+The small segments of video can be stitched together using \it{ffmpeg}.\\\\
 
-\section{Connecting to a database}
-\begin{enumerate}
-	\item Open PSequal 
-	\item  Enter database name
-	\item press connect.
-\end{enumerate}
+\section{Storage of Video Source}
 
-\section{Creating Tables}
-A table consists of 
-\begin{lstlisting}
-CREATE TABLE sessions(
-	uuid VARCHAR(15),
-	token VARCHAR(255),
-	created VARCHAR(20)
-);
-\end{lstlisting}
+\section{How to handle requests of video stream}
 
-\section{Insert into Table}
-\begin{lstlisting}
-INSERT INTO sessions (uuid, token, created) VALUES($1, $2, $3);
-\end{lstlisting}
+\section{How to Request and handle the response for a data source}
 
+\subsection{iOS}
+MPMoviePlayer
 
-\section{Querying Table}
+\subsection{Android}
+MediaController
 
-\section{Delete}
-\subsection{Delete all content of table}
-\begin{lstlisting}
- DELETE FROM table_name WHERE condition;
-\end{lstlisting}
-
+\subsection{Web}
+hls.js
 
 \end{document}

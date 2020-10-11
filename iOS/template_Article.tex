@@ -1,5 +1,19 @@
 \documentclass[]{article}
 
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.75cm, right=2.75cm]{geometry} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{gensymb}
+\usepackage{setspace}
+\usepackage{comment}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{amsfonts}
+\usepackage{cite}       
+
 % imports
 \usepackage{listings}
 \usepackage{color}
@@ -231,6 +245,23 @@ v2.heightAnchor.constraint(equalToConstant: 100).isActive = true
 v2.widthAnchor.constraint(equalToConstant: 100).isActive = true
 \end{lstlisting}
 
+%%%%%%%%%%%%%%%%%%%%%  Realm  %%%%%%%%%%%%%%%%%%%%%
+\section{Realm}
+\begin{lstlisting}
+NSPredicate(format: "name BEGINSWITH [c]%@", searchString)
+\end{lstlisting}
+where [c] that follows BEGINSWITH indicates a case insensitive search.
+
+
+%%%%%%%%%%%%%%%%%%%%%  Testing  %%%%%%%%%%%%%%%%%%%%%
+\section{Testing}
+To create a new test
+\begin{enumerate}
+	\item Open the test panel (diamond with line through it / 6th from left)
+	\item 
+\end{enumerate}
+
+
 %%%%%%%%%%%%%%%%%%%%%  iOS Versions  %%%%%%%%%%%%%%%%%%%%%
 \section{iOS Versions}
 $5\% \leftarrow$  iOS 11 $\rightarrow 95\%$
@@ -252,5 +283,25 @@ with iOS 11 being released in 19/9/2017
 
 \end{thebibliography}
 
+%%%%%%%%%%%%%%%%%%%%%  Keyboard Shortcuts  %%%%%%%%%%%%%%%%%%%%%
+\section{Keyboard Shortcuts}
+\begin{itemize}
+	\item \it{shift + option + command + left}
+	\subitem Minimize all code blocks
+	
+	\item \it{shift + option + command + right}
+	\subitem Maximize all code blocks
+	
+	\item \it{option + command + /}
+	\subitem Generates documentation 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Notifications  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notifications}
+The server (me) sends a request containing the device id to the APNs (Apple Push-Notification Services) which then sends the notification to the user device.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Sockets  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sockets}
 
 \end{document}

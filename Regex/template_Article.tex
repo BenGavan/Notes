@@ -1,0 +1,84 @@
+\documentclass[]{article}
+
+
+% New Commands
+\renewcommand{\it}[1]{\textit{#1}}
+
+
+% imports
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+%%% lstlisting
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, try, catch, switch, var, if, in, while, do, else, case, default, break, class, static, public, private, protected, void, int, uint8, boolean, final, abstract, for, super, this, extends, implements, type},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this, @Override, @NonNull},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstset{
+	language=JavaScript,
+	backgroundcolor=\color{lightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b
+}
+%%%
+\usepackage{amsmath}
+
+% Commands
+\newcommand{\bs}{\textbackslash}
+
+%opening
+\title{Regex}
+\author{Ben Gavan}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{}
+
+\begin{itemize}
+	\item \bs d = any digit 
+	\subitem \bs D = any non-digit character (includes white-space)
+	
+	\item \bs s = matches any white-space character
+	\subitem \bs S = matches any non-white-space character
+	
+	\item \bs w =  matches any alpha numeric characters
+	\subitem \bs W = matches  any alpha non-numeric characters
+	
+	\item \^ = matches the regex string with the start of the test string
+	\subitem \$ = matches the regex string with the end of the test string
+\end{itemize}
+
+\begin{lstlisting}
+	content...
+\end{lstlisting}
+
+\end{document}
