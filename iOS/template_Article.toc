@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}Programmatic Startup iOS 13 onward}{1}% 
 \contentsline {subsection}{\numberline {1.1}Motivation}{1}% 
-\contentsline {subsection}{\numberline {1.2}Alterations to be made in \textit {Info.plist}}{1}% 
+\contentsline {subsection}{\numberline {1.2}Alterations to be made in \textit {Info.plist}}{2}% 
 \contentsline {subsection}{\numberline {1.3}\textit {AppDelegate}}{2}% 
 \contentsline {subsection}{\numberline {1.4}\textit {SceneDelegate}}{2}% 
 \contentsline {section}{\numberline {2}AppDelegate}{3}% 
@@ -9,7 +9,7 @@
 \contentsline {subsection}{\numberline {3.1}Benefits of using MARKS}{3}% 
 \contentsline {subsection}{\numberline {3.2}Example Snippets}{3}% 
 \contentsline {subsubsection}{\numberline {3.2.1}UIViewController}{3}% 
-\contentsline {subsubsection}{\numberline {3.2.2}Models}{3}% 
+\contentsline {subsubsection}{\numberline {3.2.2}Models}{4}% 
 \contentsline {section}{\numberline {4}View Margin}{4}% 
 \contentsline {section}{\numberline {5}Realm}{4}% 
 \contentsline {section}{\numberline {6}Testing}{4}% 
@@ -17,3 +17,4 @@
 \contentsline {section}{\numberline {8}Keyboard Shortcuts}{5}% 
 \contentsline {section}{\numberline {9}Notifications}{5}% 
 \contentsline {section}{\numberline {10}Sockets}{5}% 
+\contentsline {section}{\numberline {11}Run Development app on REAL Device}{5}% 

@@ -1,0 +1,166 @@
+%! Author = ben
+%! Date = 25/10/2021
+
+% Preamble
+\documentclass[11pt]{article}
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.75cm, right=2.75cm]{geometry}
+
+% Packages
+\usepackage{amsmath}
+
+% Document
+\begin{document}
+
+    \section*{Login Details for experiementing account}
+    Email: space.in.the.news@gmail.com
+    \\
+    Passsword: e[G`uaX?9i"aieJ
+
+    \subsection{Users}
+    Username: Ben
+    \\
+    Access Type: AWS Managament Console access
+    \\
+    Console Password: sdjf248r+(23ef)-af2+
+    \\
+    Sign in link: https://266867367924.signin.aws.amazon.com/console
+
+    \section{Accroynyms}
+    \begin{itemize}
+        \item CIDR = Classless Interdomain Routing
+        \item VPC = Virual Private Cloud
+        \item NACLs = Network Access Control Lists
+    \end{itemize}
+
+    \section{Basics and Introduction}
+    \subsection{AWS Global Infrastructure}
+    \begin{itemize}
+        \item Availability zone = one or more data centres
+        \item Each region consists of two or more Availability zones.
+        \item Each region is completely independent.
+        \item Every region is connected via a high bandwidth, fully redundant network. (does not use the internet - more consistent result than internent)
+    \end{itemize}
+
+    \subsection{AWS Pricing}
+    \subsubsection{Compute}
+    Amounnt of resources (eg. CPU, RAM, \ldots)
+
+    \subsubsection{Storage}
+    Quantity of data (size allocated for data normally)
+
+
+    \subsubsection{Outbound Data Transfer}
+    Don't pay for inbound data, but do pay for the quantity of data that is transferred out from all services.
+
+    \section{Create Billing Alarm}
+    \begin{enumerate}
+        \item Navigate to \textbf{Billing \& Cost Management Dashboard} from the main page (can be searched for (search for 'billing')).
+        \item select \textbf{preferences} on the left
+    \end{enumerate}
+    Can also (from the main page (services drop down)) go to CloudWatch.
+    \\
+    \begin{enumerate}
+        \item Go to \textbf{CloudWatch}
+        \item Change region to N. Virginia
+        \item select \textbf{In Alarm}
+        \item create alarm
+        \item billing alarm
+        \item total
+        \item leave settings the same
+        \item click next to set up SNS \textbf{Simple Notification Service}
+        \item Select \textbf{In Alarm}
+        \item Create new topic
+        \item Set topic and email
+        \item set up topic
+        \item confirm email subscription
+        \item can  be viewed in the SNS Console
+        \item Click next
+        \item set alarm name
+        \item next
+        \item click \textbf{create alarm}
+        \item done
+    \end{enumerate}
+
+    \section{AWS Identity and Access Management Service (IAM)}
+    Can apply an \textbf{IAM Policy} to an \textbf{IAM User} or \textbf{IAM Group} (to define permissions)
+    \\
+    \textbf{IAM User} = an entity that represents a person or service.
+    \\
+    \textbf{IAM Group} = a collection of users and have poilicies attached to them.
+    \\
+    \textbf{IAM Role} = Roles are "assumed" by trusted entities and can be used for delegation.
+    \\
+    \textbf{Access Key} = Consists of an Access key ID and a secret access key.
+    Used for programmatic access to the API\@.
+
+    \section{Create IAM User and Group}
+    \begin{enumerate}
+        \item Select \textbf{Services} drop down in the main bar
+        \item select \textbf{IAM} under the \textbf{Security, Identity, \& Compliance} section.
+        \item
+    \end{enumerate}
+    \subsection{Create a User Group}
+    \begin{enumerate}
+        \item click on \textbf{User Groups} (or the number below it)
+        \item Click \textbf{Create Group}
+        \subitem (blue button, top right)
+        \item Set Group name
+        \item Attach Permissions Policy.
+        \subitem for full administrator access, select \textbf{AdministratorAccess}
+        \item Click \textbf{Create Group}
+        \subitem (blue button, bottom right)
+    \end{enumerate}
+    \subsubsection{Create User (to be added to the user group)}
+    \begin{enumerate}
+        \item Under \textbf{Access management} on the LHS panel, select \textbf{Users}.
+        \item Click \textbf{Add User} (blue button, top right).
+        \item Type in a user name
+        \item select access type and provide a password to be used by user if necessary.
+        \item click next
+        \subitem ... onto permisions
+        \item Add User to the existing \textbf{Admins} group.
+        \item Once confirmed, can sign in using the link provided (using the username and password just created)
+    \end{enumerate}
+
+    %%%%%%%%%%%%% Amazon Virtual Private Cloud (VPC) %%%%%%%%%%%%%
+    \section{Amazon Virtual Private Cloud (VPC)}
+    VPC = a logically isolated portion of the AWS cloud within a region.
+    \\
+    Subnets are created within availability zones (AZs).
+    \\
+     - Can have Public and Private subnets
+    \\
+     - Public subnets means instances running in it get a public IP address and can access the internet gateway directly.
+    \\
+     - Private subnets cannot access the internet gateway directly.
+    (there is a way to get around this though)
+    \\
+    Route Table is used to configure the VPC router.
+    \\
+    Route Tables can be assigned to the subnets.
+    \\
+    Can launch virtual servers into VPC subnets.
+    \\
+    Each VPC has a different block of IP addresses.
+    \\
+    CIDR = Classless Interdomain Routing.
+    (IP addressing concept)
+    \\
+    Can Create multiple VPCs within each region.
+    \\
+    Each subnet has a block of IP addresses from the CIDR block.
+    \\\\
+    To view VPCs, go to Services, VPC (under networking and content delivery)
+
+    %%%%%%%%%%%%% Security Groups \& Network Access Control Lists (NACLs) %%%%%%%%%%%%%
+    \section[NACLs]{Security Groups \& Network Access Control Lists (NACLs)}
+    \begin{itemize}
+        \item NACLs = Types of Firewalls
+        \subitem NACLs Apply at the subnet level.
+        \item Security Groups apply at the instance level
+        \subitem applies to instance level communication (within security group)
+        \subitem can be applied to instances in any subnet
+    \end{itemize}
+
+
+\end{document}

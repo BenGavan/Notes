@@ -298,10 +298,23 @@ with iOS 11 being released in 19/9/2017
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Notifications  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Notifications}
-The server (me) sends a request containing the device id to the APNs (Apple Push-Notification Services) which then sends the notification to the user device.
+The server (me) sends a request containing the device id to the APNs (Apple Push-Notification Services) which then sends the notification to the user device.  The device id is sent the the server from the user device.  The app the notification is being sent to has to be preregistered with APNs.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Sockets  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sockets}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Run Development app on REAL Device  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Run Development app on REAL Device}
+In development machine running xCode
+\begin{itemize}
+	\item Set up Signing profile 
+\end{itemize}
+On the Real device:
+\begin{itemize}
+	\item Settings $\rightarrow$ General $\rightarrow$ Profiles \& Device Management $\rightarrow$ 
+	\item Select Developer app 
+	\item Press Trust xxx
+\end{itemize}
 \end{document}

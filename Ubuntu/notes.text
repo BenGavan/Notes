@@ -1,0 +1,6 @@
+# To map python -> python3 (tested on ubuntu)
+# add into ~/.bashrc
+alias python=python3
+
+# run 
+source ~/.bashrc

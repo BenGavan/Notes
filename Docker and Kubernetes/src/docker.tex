@@ -1,0 +1,186 @@
+%! Author = ben
+%! Date = 18/12/2020
+
+\section{NGINX / Containers}
+
+\subsection{Pulling NGINX docker image}
+\begin{lstlisting}
+        docker pull nginx
+\end{lstlisting}
+To list all images:
+\begin{lstlisting}
+        docker images
+\end{lstlisting}
+
+\subsection{Running a container}
+\begin{lstlisting}
+        docker run {REPOSITORY}:{TAG}
+
+        docker run nginx:latest
+\end{lstlisting}
+in detached mode (will no longer be hanging)
+\begin{lstlisting}
+        docker run -d {REPOSITORY}:{TAG}
+
+        docker run -d nginx:latest
+\end{lstlisting}
+
+\subsubsection{List all running containers}
+\begin{lstlisting}
+        docker container ls
+\end{lstlisting}
+or can use \it{docker ps}
+\begin{lstlisting}
+        docker ps
+\end{lstlisting}
+
+\subsubsection{List all containers (including stopped ones)}
+\begin{lstlisting}[label={lst:lstlisting2}]
+        docker ps -a
+\end{lstlisting}
+To list just the container IDs
+\begin{lstlisting}[label={lst:lstlisting}]
+        docker ps -aq
+\end{lstlisting}
+To add formatting for the output:
+\begin{lstlisting}[label={lst:lstlisting4}]
+        docker ps --format="..."
+
+        docker ps --format=$FORMAT
+\end{lstlisting}
+
+\subsection{Stop running a container}
+\begin{lstlisting}
+        docker stop {CONTAINER ID}
+
+        docker stop 422f8893a730
+\end{lstlisting}
+or can use the container name
+\begin{lstlisting}
+        docker stop {NAMES}
+
+        docker stop awesome_bohr
+\end{lstlisting}
+will get the container name back.
+
+\subsection{Starting a previously ran container}
+\begin{lstlisting}
+        docker start {CONTAINER ID}
+        docker start 422f8893a730
+
+        docker start {NAMES}
+        docker start awesome_bohr
+\end{lstlisting}
+
+
+\subsection{Deleting/Removing containers}
+\begin{lstlisting}
+        docker rm {CONTAINER ID}
+
+
+        docker rm {NAMES}
+
+\end{lstlisting}
+To delete all (stopped) containers
+\begin{lstlisting}[label={lst:lstlisting3}]
+        docker rm $(docker ps -aq)
+\end{lstlisting}
+To (force) delete all containers, no matter if they have been stopped, add \it{-f}
+\begin{lstlisting}
+        docker rm -f $(docker ps -aq)
+\end{lstlisting}
+
+
+\subsubsection{Exposing Ports}
+To expose/forward a port eg from localhost:8080 to 80 (the container is exposing the port 80):
+\begin{lstlisting}
+        docker run -d  -p 8080:80  nginx:latest
+\end{lstlisting}
+(if using nginx specifically, check to see if nginx is working by using browser)
+\\\\
+Can expose multiple ports onto the same port.\\
+Eg. 3000 and 8080 to 80.
+\begin{lstlisting}
+        docker run -d  -p 3000:80 -p 8080:80 nginx:latest
+\end{lstlisting}
+
+\subsubsection{Naming a container}
+\begin{lstlisting}
+        docker run --name {NAME}
+
+        docker run --name website
+        docker run --name website -d -p 3000:80 -p 8080:80 nginx:latest
+\end{lstlisting}
+
+\subsection{Terminal Variables}\label{subsec:terminal-variables}
+\begin{lstlisting}
+        export FORMAT="..."
+\end{lstlisting}
+
+
+\subsection{Volumes}\label{subsec:volumes}
+Allows sharing of data (Files and Folders) between:
+\begin{itemize}
+    \item host \& container
+    \item containers
+\end{itemize}
+For a read-only file system
+\begin{lstlisting}
+        docker run --name website -v $(pwd):/usr/share/nginx/html:ro -d -p 8080:80  nginx:latest
+\end{lstlisting}
+uses \it{pwd} to get the current directory and then mounts it into to where nginx told us to mound static html.\\
+Since the folder has been mounted, if the files in pwd are modified, the modifications will show up in the container as well.\\\\
+For a read-write file system
+\begin{lstlisting}
+        docker run --name website -v $(pwd):/usr/share/nginx/html -d -p 8080:80  nginx:latest
+\end{lstlisting}
+(exclude the \it{:ro})
+
+\subsection{Enter into running container}
+\begin{lstlisting}
+        docker exec -it {CONTAINER NAME} bash
+
+        docker exec -it website bash
+\end{lstlisting}
+To exit, press
+\begin{lstlisting}
+        ctrl d
+\end{lstlisting}
+
+
+\section{Dockerfile}\label{sec:dockerfile}
+
+
+\section{.dockerignore}\label{sec:dockerignore}
+
+\begin{lstlisting}
+        {filename}
+        e.g.
+        .git
+        *.txt
+        folder
+        folder/*
+\end{lstlisting}
+
+\section{Caching and Layers}\label{sec:caching-and-layers}
+
+\section{Alpine}
+Use the Linux Alpine base for a small secure base.
+
+\section{Tags, Versioning, and Tagging}\label{sec:tags,-versioning,-and-tagging}
+
+
+\section{Docker Inspect}\label{sec:docker-inspect}
+\begin{lstlisting}[label={lst:lstlisting5}]
+        docker inspect {CONTAINER ID}
+\end{lstlisting}
+
+\section{Docker Logs}
+\begin{lstlisting}
+        docker logs {CONTAINER ID}
+\end{lstlisting}
+
+\section{Docker Exec}
+\begin{lstlisting}
+        docker exec -it {CONTAINER ID} /bin/bask
+\end{lstlisting}

@@ -1,0 +1,275 @@
+%! Author = ben
+%! Date = 18/12/2020
+
+
+\subsection{What is Kubernetes}\label{subsec:what-is-kubernetes}
+Orchestration tools offer:
+\begin{itemize}
+    \item High Availability (no downtime)
+    \item Scalability (high performance)
+    \item Disaster Recovery (backup and restore)
+\end{itemize}
+
+\subsection{Architecture}\label{subsec:architecture}
+\subsubsection{Master}
+\begin{itemize}
+    \item API Server
+    \subitem Entry point to the K8s cluster
+    \subitem UI, API, CLI
+
+    \item Controller manager
+    \subitem Keeps track of what's happening in the cluster
+
+    \item Scheduler
+    \subitem ensures Pods placement
+
+    \item etcd
+    \subitem Kubernetes backing key-value store
+    \subitem holds the current status of any K8s component
+\end{itemize}
+Must have at least two master nodes just in case one goes down
+
+\subsubsection{Virtual Network}
+Spans all the nodes of the cluster\\
+ - Creates one unified machine
+
+\subsubsection{Worker Nodes}
+
+\subsection{Pod}\label{subsec:pod}
+\begin{itemize}
+    \item Smallest unit of K8s
+    \item Abstraction over container
+    \item Usually 1 application per Pod
+    \item Each pod gets its own (internal) IP address
+    \subitem can be used by pods within a node to communicate with each other
+    \subitem New IP address on re-creation (hence, the need for service)
+\end{itemize}
+
+\subsection{Service}\label{subsec:service}
+\begin{itemize}
+    \item permanent IP address that can be attached to each pod
+    \item lifecycle of Pod and Service NOT connected
+    \item also a load balancer (if more than one container are linked/associated to it)
+\end{itemize}
+
+\subsection{Ingress}\label{subsec:ingress}
+Used for the external (public) service\\
+ - enables the use of https and the use of your URL.
+
+\section{Config Map and Secret}\label{sec:config-map-and-sercret}
+Used to store config data such as DB URLs (to enable ease of change)
+\subsection{Secret}
+ - Used to store secret data in base64 encoded
+ - not enabled by default
+
+
+\section{Volumes}\label{sec:volumes}
+It is storage on a local machine or remote (outside of K8s cluster)
+ - K8s doesn't manage any data persistence
+
+\section{Deployments and Stateful Sets}\label{sec:deployments-and-stateful-sets}
+Deployment for stateless apps\\
+StatfulSet for stateful apps of databases.
+
+\section{Minikube}\label{sec:minikube}
+Used for use in development on a development machine.
+\begin{itemize}
+    \item Has the Master and Worker Processes running on the same Node (the minikube node).
+    \item 1 Node K8s cluster
+    \item for testing purposes
+    \item Creates a virtual box on your laptop/machine
+\end{itemize}
+
+\subsection{Install}\label{subsec:install}
+\begin{lstlisting}[label={lst:lstlisting}]
+    brew update
+
+    brew install hyerkit
+
+    bre install minikube
+\end{lstlisting}
+
+
+\subsection{Start}\label{subsec:start}
+\begin{lstlisting}[label={lst:lstlisting2}]
+    minikube start --vm-driver=hyperkit
+\end{lstlisting}
+
+Check if running
+\begin{lstlisting}[label={lst:lstlisting3}]
+    kubectl get nodes
+\end{lstlisting}
+
+Check minikube status
+\begin{lstlisting}[label={lst:lstlisting4}]
+    minikube status
+\end{lstlisting}
+
+Check kubectl version
+\begin{lstlisting}[label={lst:lstlisting5}]
+    kubectl version
+\end{lstlisting}
+
+Get kubectl node
+\begin{lstlisting}[label={lst:lstlisting6}]
+    kubectl get nodes
+\end{lstlisting}
+
+Get kubctl services
+\begin{lstlisting}[label={lst:lstlisting8}]
+    kubectl get services
+\end{lstlisting}
+
+\subsection{Delete local cluster}\label{subsec:delete-local-cluster}
+\begin{lstlisting}[label={lst:lstlisting7}]
+    minikube delete
+\end{lstlisting}
+
+\section{Deployment}\label{sec:deployment}
+Not normally creating Pods directly (Pods are the smallest unit) but are instead creating Deployments - an abstraction over Pods.
+
+\subsection{Create Deployment}\label{subsec:create-deployment}
+\begin{lstlisting}[label={lst:lstlisting9}]
+    kubectl create deployment nginx-depl --image=nginx
+\end{lstlisting}
+Or from a \it{config-file.yaml}
+\begin{lstlisting}[label={lst:lstlisting16}]
+    kubectl apply -f [config file name]
+
+    kubectl apply -f nginx-deployment.yaml
+\end{lstlisting}
+\begin{itemize}
+    \item blueprint for creating pods
+    \item is the most basic configuration for deployment (name and image to use)
+    \item the rest is just defaults
+\end{itemize}
+
+\subsection{Get Deployment}\label{subsec:get-deployment}
+\begin{lstlisting}[label={lst:lstlisting10}]
+    kubectl get deployment
+\end{lstlisting}
+
+\subsection{Get Replica Set}\label{subsec:get-replica-set}
+\begin{lstlisting}[label={lst:lstlisting11}]
+    kubectl get replicaset
+\end{lstlisting}
+Replicaset is managing the replicas of a Pod.
+
+\subsection{Edit Deployment}\label{subsec:edit-deployment}
+\begin{lstlisting}[label={lst:lstlisting12}]
+    kubectl edit deployment [name]
+\end{lstlisting}
+Gives us an auto-generated configuration file with default values.
+\\\\
+When this has been edited, kubectl will spin up a new pod and once the new Pod is up and running will terminate the old Pod.
+\\\\
+Or if using a deployment config file (\it{deployment-config-file.yaml}), modify the config file and then reapply the file using
+\begin{lstlisting}
+    kubectl apply -f [config file name]
+\end{lstlisting}
+Once applied it should print out the file name + \it{configured} (instead of \it{created} like the first time).
+
+\subsection{Delete deployment}\label{subsec:delete-deployment}
+\begin{lstlisting}[label={lst:lstlisting15}]
+    kubectl delete deployment [deployment name]
+
+    kubectl delete deployment mango-depl
+\end{lstlisting}
+
+\section{Debugging Pods}\label{sec:debugging-pods}
+
+\subsection{Logs}\label{subsec:logs}
+\begin{lstlisting}[label={lst:lstlisting13}]
+    kubectl logs [name]
+\end{lstlisting}
+
+\subsection{Summary}\label{subsec:summary}
+\subsubsection{CRUD Commands}
+\begin{itemize}
+    \item Create deployment 
+    \subitem \it{kubectl create deployment [name]}
+
+    \item Edit deployment
+    \subitem \it{kubectl edit deployment [name]}
+
+    \item Delete deployment
+    \subitem \it{kubectl delete deployment [name]}
+\end{itemize}
+
+\subsubsection{Status of different K8s components}
+\it{kubectl get nodes | pod | services | replicaset | deployment}
+
+\subsubsection{Debugging Pods}
+\begin{itemize}
+    \item Log to Console
+    \subitem \it{kubectl logs [pod name]}
+
+    \item Get Interactive Terminal
+    \subitem \it{kubectl exec -it [pod name] -- bin/bash}
+
+    \item Get info about Pod
+    \subitem \it{kubectl describe pod [pod name]}
+\end{itemize}
+Get pods
+\begin{lstlisting}
+    kubectl get pod -o wide
+\end{lstlisting}
+
+\subsubsection{Use Configuration file for CRUD}
+\begin{itemize}
+    \item Apply a config file (create \& update)
+    \subitem \it{kubectl apply -f [config file name]}
+
+    \item Delete with config file
+    \subitem \it{kubectl delete -f [config file name]}
+\end{itemize}
+
+\subsection{Interactive terminal}\label{subsec:interactive-terminal}
+\begin{lstlisting}[label={lst:lstlisting14}]
+     kubectl exec -it [container name] -- bin/bash
+
+    kubectl exec -it mango-depl-2-7d4cc465bc-9c6c5 -- bin/bash
+\end{lstlisting}
+\it{-it} for \it{interactive terminal}
+
+
+\section{Summary of Layers of Abstraction}\label{sec:summary-of-layers-of-abstraction}
+\begin{itemize}
+    \item Deployment manages a \ldots
+    \item Replicaset manages a \ldots
+    \item Pod is an abstraction of \ldots
+    \item Container
+\end{itemize}
+Everything below the level of deployment should be managed by K8s.
+
+\section{YAML Config File}\label{sec:yaml-config-file}
+
+\subsection{3 parts of config file}\label{subsec:3-parts-of-config-file}
+\begin{itemize}
+    \item metadate
+    \item spec
+    \item status (automatically generated and added by k8s)
+    \subitem Compares the Desired to the actual state
+    \subitem and if they do not match, k8s will try to fix it.
+\end{itemize}
+
+\subsection{Template}\label{subsec:template}
+\begin{itemize}
+    \item has its own "metadata" and "spec" section
+    \item applies to Pod
+    \item blueprint of a Pod
+    \subitem what image it should be based on?
+    \subitem what port?
+    \subitem name of container?
+\end{itemize}
+
+\subsection{Connecting components (Labels, Selectors, \& Ports)}\label{subsec:connecting-componentsnulllabels,-selectors,portsnull}
+The connection between \it{deployment} \& \it{service} is specified by \it{labels} \& \it{selectors}.\\
+ - metadata section contains the labels\\
+ - spec section contains the selectors\\\\
+The label is matched by the selector.
+\\\\\\
+This  is.  A  double  space \\
+This is. A double space (all singles)\\
+This is.  A double space (singles but with double after .)\\
+This   is.   A   double    space (all tripple)
