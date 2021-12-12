@@ -7,6 +7,7 @@
 
 % Packages
 \usepackage{amsmath}
+\usepackage{listings}
 
 % Document
 \begin{document}
@@ -27,9 +28,12 @@
 
     \section{Accroynyms}
     \begin{itemize}
-        \item CIDR = Classless Interdomain Routing
-        \item VPC = Virual Private Cloud
-        \item NACLs = Network Access Control Lists
+        \item CIDR = Classless Interdomain Routing.
+        \item VPC = Virual Private Cloud.
+        \item NACLs = Network Access Control Lists.
+        \item AMI = Amazon Machine Image.
+        \item EBS = Elastic Block Store.
+        \item RDP = Remote Desktop Protocol.
     \end{itemize}
 
     \section{Basics and Introduction}
@@ -155,12 +159,143 @@
     %%%%%%%%%%%%% Security Groups \& Network Access Control Lists (NACLs) %%%%%%%%%%%%%
     \section[NACLs]{Security Groups \& Network Access Control Lists (NACLs)}
     \begin{itemize}
-        \item NACLs = Types of Firewalls
+        \item NACLs = Type of Firewalls
         \subitem NACLs Apply at the subnet level.
+        \subitem Stateless
+        \subitem processes rules in order
+        \subitem Supports allow and deny rules
+
         \item Security Groups apply at the instance level
         \subitem applies to instance level communication (within security group)
         \subitem can be applied to instances in any subnet
+        \subitem stateful
+        \subitem evaluates all rules
+        \subitem Supports allow rules only
     \end{itemize}
+
+    \subsection{How to configure Security Groups and NACLs}
+    \subsubsection{Network ACLs}
+    The last rule (inbound and outbound) is a deny so that if an allow rule is not found, this drops the traffic.
+    \\
+    To add or edit a rule click \textbf{Edit inbound rules} (top right of bottom pannel).
+
+    \subsection{Stateful vs Stateless Firewalls}
+    Stateful will allow the return traffic automatically.
+    \\
+    Stateless will check for an allow rule for both connections (in and out).
+
+    \section{AWS Public and Private Services}
+
+    \section{Installation of AWS Command Line Interface}
+    Google for \textbf{aws cli install} and install version 2.
+
+    %%%%%%%%%%%%% Section 2: Amazon Elastic Compute Cloud (EC2) %%%%%%%%%%%%%
+    \section{Section 2: Amazon Elastic Compute Cloud (EC2)}
+    \begin{itemize}
+        \item Public IP address
+        \subitem Lost when the instance is stopped
+        \subitem Associated with a private IP address on the instance
+        \item Private IP address
+        \subitem Retained when the instance is stopped
+        \subitem Used in public and private Subnets
+        \item Elastic IP address
+        \subitem Static Public IP address
+        \subitem Are charged if not used
+        \subitem Associated with a private IP address on the instance
+        \subitem Can  be moved between instances and Elastic Network Adapters
+    \end{itemize}
+    NAT = Network Adress Translation.
+    \\
+    - Translates private to elastic IP (via a NAT Gateway).
+    \\
+    - Receives traffic from private IP address and forwards it on using an Elastic-IP address to the internet
+    \\
+    - has to be  running in a public subnet (not private).
+
+    \subsection{Launching an Amazon EC2 Instance}
+    Amazon Machine Image (AMI)
+    \\
+    - comes with an operating system and any preconfigured software
+    \\
+    - and EBS (Elastic Block Store) snapshot
+    \\
+    port 22 = secure shell
+    \\
+    for windows - port 3389 = RDP (Remote Desktop Protocol)
+
+    \subsection{Connecting to Amazon EC2 Instance}
+
+
+    To update all packages installed on the instance can run:
+    \begin{lstlisting}
+        sudo yum update -y
+    \end{lstlisting}
+
+    \subsection{Create Website Using User Data}
+
+    \subsection{Using Key Pairs with Amazon EC2}
+
+
+    \section{Docker with AWS}
+    \textbf{https://docs.aws.amazon.com/AmazonECS/latest/userguide/docker-basics.html}
+
+    \begin{lstlisting}
+        ben@Bens-MacBook-Pro-2 keys % aws ecr create-repository --repository-name hello-repository --region us-east-1
+{
+    "repository": {
+        "repositoryArn": "arn:aws:ecr:us-east-1:266867367924:repository/hello-repository",
+        "registryId": "266867367924",
+        "repositoryName": "hello-repository",
+        "repositoryUri": "266867367924.dkr.ecr.us-east-1.amazonaws.com/hello-repository",
+        "createdAt": "2021-12-04T21:54:12+00:00",
+        "imageTagMutability": "MUTABLE",
+        "imageScanningConfiguration": {
+            "scanOnPush": false
+        },
+        "encryptionConfiguration": {
+            "encryptionType": "AES256"
+        }
+    }
+}
+    \end{lstlisting}
+
+    \subsubsection*{Push your image to Amazon Elastic Container Registry}
+    \begin{lstlisting}
+        aws ecr create-repository --repository-name [hello-repository] --region [region]
+        ---
+        output:
+        ---
+        {
+            "repository": {
+                "registryId": "aws_account_id",
+                "repositoryName": "hello-repository",
+                "repositoryArn": "arn:aws:ecr:region:aws_account_id:repository/hello-repository",
+                "createdAt": 1505337806.0,
+                "repositoryUri": "aws_account_id.dkr.ecr.region.amazonaws.com/hello-repository"
+            }
+        }
+        ---
+        docker tag hello-world [aws_account_id].dkr.ecr.[region].amazonaws.com/[hello-repository]
+        ---
+        aws ecr get-login-password | docker login --username AWS --password-stdin [aws_account_id].dkr.ecr.[region].amazonaws.com
+        ---
+        docker push [aws_account_id].dkr.ecr.[region].amazonaws.com/[hello-repository]
+        --- clean up ---
+        aws ecr delete-repository --repository-name [hello-repository] --region [region] --force
+    \end{lstlisting}
+    Used in the above:
+    \begin{lstlisting}
+        aws_account_id (registryId) = 266867367924
+        region = us-east-1
+        hello-repository (repositoryName) = hello-repository
+    \end{lstlisting}
+
+    aws ecr get-login-password | docker login --username AWS --password-stdin 266867367924.dkr.ecr.us-east-1.amazonaws.com
+
+    docker tag hello-world 266867367924.dkr.ecr.us-east-1.amazonaws.com/hello-repository
+
+    docker push 266867367924.dkr.ecr.us-east-1.amazonaws.com/hello-repository
+
 
 
 \end{document}
